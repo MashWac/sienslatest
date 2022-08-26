@@ -9,6 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!----fonts---->
+    <link rel="icon" href="{{ url('/staticimg/fav.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -97,6 +97,6 @@ class ProductController extends Controller
             }
         }
         $product->delete();
-        return redirect('categories')->with('status','Product Deleted Successfully.');
+        return redirect()->back()->with('status','Product Deleted Successfully.');
     }
 }
