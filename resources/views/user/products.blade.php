@@ -6,11 +6,15 @@
             <hr>
             <div id="filterbar">
                 <ul id="filters">
-                    <li class="filteropts"><a href="#" >All</a></li>
-                    <li class="filteropts"><a href="#" >Supplements</a></li>
-                    <li class="filteropts"><a href="#" >BioEnergy</a></li>
-                    <li class="filteropts"><a href="#" >BioHerbs</a></li>
-                    <li class="filteropts"><ion-icon name="funnel"></ion-icon></li>
+                <li class="filteropts"><a href="{{url('prodpage')}}" >All</a></li>
+                @foreach($data['categories'] as $things)
+                    <li class="filteropts"><a href="{{url('filterbycate/'.$things->category_id)}}" >{{$things->category_name}}</a></li>
+                @endforeach
+                    <li class="filteropts">  <div class="search-box">
+                        <button class="btn-search"><i class="fas fa-search"></i></button>
+                        <input type="text" class="input-search" placeholder="Type to Search...">
+                        </div>
+                    </li>
                 </ul>     
             </div>
 

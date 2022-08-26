@@ -40,7 +40,7 @@ Route::get('deletefromcart/{id}',[FrontController::class,'deletefromcart']);
 Route::get('viewprofile',[FrontController::class,'viewprofile']);
 Route::post('subquery',[FrontController::class,'submitquery']);
 Route::post('updateaccount',[FrontController::class,'updateuserprofile']);
-
+Route::get('filterbycate/{id}',[FrontController::class,'filterprodcategory']);
 
 
 Route::post('pesapal/iframe',[PaymentController::class,'store']) ->name('payment.store')->middleware('config');

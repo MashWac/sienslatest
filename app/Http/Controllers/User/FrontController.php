@@ -24,6 +24,7 @@ class FrontController extends Controller
         return view('user/homepage');
     }
     public function products(){
+        $data['categories']=Category::all();
         $data['products']=Product::join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(6);
         return view('user/products',compact('data'));
     }
@@ -56,6 +57,11 @@ class FrontController extends Controller
         session(['payment_total' => $request->input('amount')]);
 
         return view('user/checkout',compact('productcart','transaction_code'));
+    }
+    public function filterprodcategory($id){
+        $data['products']=Product::join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id', $id)->paginate(6);
+        return view('user/products',compact('data'));
+
     }
     public function viewproduct($id){
         $product=Product::find($id);
