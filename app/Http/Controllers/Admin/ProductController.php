@@ -95,7 +95,7 @@ class ProductController extends Controller
     public function delete(Request $request,$id){
         $product=Product::find($id);
         if($product->prodimage){
-            $filepath='public/assets/uploads/products/'.$product->product_image;
+            $filepath=$product->product_image;
             if(Storage::disk('s3')->exists($filepath)){
                 Storage::disk('s3')->delete($filepath);
             }
