@@ -68,18 +68,19 @@ class ProductController extends Controller
         ]);
         $product=Product::find($id);
         if($request->hasFile('prodimage')){
-            $path='assets/uploads/products/'.$product->product_image;
-            if(File::exists($path)){
-                File::delete($path);
+
+            $filepath='public/assets/uploads/products/'.$product->product_image;
+
+            if(Storage::disk('s3')->exists($filepath)){
+                Storage::disk('s3')->delete($filepath);
             }
             $file=$request->file('prodimage');
             $ext=$file->getClientOriginalExtension();
             $filename= time().'.'.$ext;
-            $filepath='public/assets/uploads/products/';
+            $filepath='public/assets/uploads/products/'.$filename;
             $newpath=$request->file('prodimage')->storeAs($filepath,$filename);
-            $file->move('assets/uploads/products/',$filename);
-            $path = Storage::disk('s3')->put('images', $file);
-            $path = Storage::disk('s3')->url($path);
+            $path = Storage::disk('s3')->put($filepath,file_get_contents($file));
+            $path = Storage::disk('s3')->url($filepath);
             $product->product_image=$path;
         }
         $product->product_name=$request->input('prodname');
@@ -94,9 +95,9 @@ class ProductController extends Controller
     public function delete(Request $request,$id){
         $product=Product::find($id);
         if($product->prodimage){
-            $path='assets/uploads/products/'.$product->product_image;
-            if(File::exists($path)){
-                File::delete($path);
+            $filepath='public/assets/uploads/products/'.$product->product_image;
+            if(Storage::disk('s3')->exists($filepath)){
+                Storage::disk('s3')->delete($filepath);
             }
         }
         $product->delete();
