@@ -40,7 +40,7 @@ class ProductController extends Controller
             $newpath=$request->file('prodimage')->storeAs($filepath,$filename);
             $file->move('assets/uploads/products/',$filename);
             $filePath = 'images/' . $filename;
-            $path = Storage::disk('s3')->put(file_get_contents($filename));
+            $path = Storage::disk('local')->put($newpath,file_get_contents($file));
             $path = Storage::disk('s3')->url($path);
 
             $product->product_image=$path;
