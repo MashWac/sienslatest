@@ -39,9 +39,11 @@ class ProductController extends Controller
             $filepath='public/assets/uploads/products/';
             $newpath=$request->file('prodimage')->storeAs($filepath,$filename);
             $file->move('assets/uploads/products/',$filename);
+            if(file_exists($file)){
             $path = Storage::disk('s3')->put('images',file_get_contents($file));
             $path = Storage::disk('s3')->url($path);
             $product->product_image=$path;
+            }
         }
         $product->product_name=$request->input('prodname');
         $product->product_description=$request->input('proddescr');
