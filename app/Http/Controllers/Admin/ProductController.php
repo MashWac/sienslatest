@@ -33,13 +33,13 @@ class ProductController extends Controller
         $category= new Category;
         $product=new Product();
         if($request->hasFile('prodimage')){
-            $file=$request->file('prodimage')->toMediaCollection();
+            $file=$request->file('prodimage');
             $ext=$file->getClientOriginalExtension();
             $filename= time().'.'.$ext;
             $filepath='public/assets/uploads/products/';
             $newpath=$request->file('prodimage')->storeAs($filepath,$filename);
             $file->move('assets/uploads/products/',$filename);
-            $path = Storage::disk('s3')->put('images',$file);
+            $path = Storage::disk('s3')->put('images',$request->file('prodimage'));
             $path = Storage::disk('s3')->url($path);
             $product->product_image=$path;
         }
