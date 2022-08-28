@@ -33,7 +33,7 @@ class ProductController extends Controller
         $category= new Category;
         $product=new Product();
         if($request->hasFile('prodimage')){
-            $file=$request->file('prodimage');
+            $file=$request->file('prodimage')->toMediaCollection();
             $ext=$file->getClientOriginalExtension();
             $filename= time().'.'.$ext;
             $filepath='public/assets/uploads/products/';
