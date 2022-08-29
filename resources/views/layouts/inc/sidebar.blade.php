@@ -36,8 +36,8 @@
                            <p>Products</p>
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="">
+                    <li  class="nav-item {{ \Illuminate\Support\Facades\Request::is('orders') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{url('orders')}}">
                             <ion-icon name="bicycle"></ion-icon>
                             <p>Orders</p>
                         </a>

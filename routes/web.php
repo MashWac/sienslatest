@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\FrontendController;
@@ -109,6 +110,9 @@ Route::get('edit-user/{id}', [UserController::class,'edit']);
 Route::post('insert-user',  [UserController::class,'insert']);
 Route::put('update-user/{id}', [UserController::class,'update']);
 Route::get('delete-user/{id}', [UserController::class,'delete']);
+
+
+Route::get('orders', [OrderController::class,'orderlist']);
 
 
 // Route::group(['namespace' => 'User'], function(){
