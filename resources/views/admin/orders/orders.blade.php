@@ -36,6 +36,9 @@
                             <a href="{{url('view-orderdetails/'.$item->order_id)}}">
                                 <button type="submit" class="btn btn-success">View</button>
                             </a>
+                            <a href="{{url('edit-order/'.$item->order_id)}}">
+                                <button type="submit" class="btn btn-primary">Mark as Processing</button>
+                            </a>
                         </td>
                     </tr>
                     @endif
@@ -55,10 +58,9 @@
                         <th>Order ID</th>
                         <th>Client</th>
                         <th>order_amount</th>
-                        <th>Payment</th>
+                        <th>Payment Method</th>
                         <th>Order Status</th>
                         <th>Order date</th>
-                        <th>Last updated</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -69,12 +71,15 @@
                         <td>{{$item->order_id}}</td>
                         <td>{{$item->firstname}} {{$item->surname}}</td>
                         <td>{{$item->order_amount}}</td>
-                        <td>{{$item->reference}}</td>
+                        <td>{{$item->payment_method}}</td>
                         <td>{{$item->order_status}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>
                             <a href="{{url('view-orderdetails/'.$item->order_id)}}">
                                 <button type="submit" class="btn btn-success">View</button>
+                            </a>
+                            <a href="{{url('complete-order/'.$item->order_id)}}">
+                                <button type="submit" class="btn btn-primary">Mark as Completed</button>
                             </a>
                         </td>
                     </tr>
@@ -98,7 +103,6 @@
                         <th>Payment</th>
                         <th>Order Status</th>
                         <th>Order date</th>
-                        <th>Last updated</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
