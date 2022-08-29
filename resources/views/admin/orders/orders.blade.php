@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                 @foreach($data['orders'] as $item)
-                    if($item['order_status']=='PENDING')
+                    @if($item['order_status']=='PENDING')
                     <tr>
                         <td>{{$item->order_id}}</td>
                         <td>{{$item->firstname}} {{$item->surname}}</td>
@@ -64,7 +64,7 @@
                 </thead>
                 <tbody>
                 @foreach($data['orders'] as $item)
-                    if($item['order_status']=='PROCESSING')
+                    @if($item['order_status']=='PROCESSING')
                     <tr>
                         <td>{{$item->order_id}}</td>
                         <td>{{$item->firstname}} {{$item->surname}}</td>
@@ -104,7 +104,7 @@
                 </thead>
                 <tbody>
                 @foreach($data['orders'] as $item)
-                    if($item['order_status']=='COMPLETE')
+                    @if($item['order_status']=='COMPLETE')
                     <tr>
                         <td>{{$item->order_id}}</td>
                         <td>{{$item->firstname}} {{$item->surname}}</td>
