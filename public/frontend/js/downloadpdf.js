@@ -10,6 +10,6 @@ window.onload =function(){
             html2canvas:{scale:2},
             jsPDF:{unit: 'in',format:'letter',orientation:'portrait'}
         };
-        html2pdf().from(invoice).set(opt).save();
+        html2pdf().from(invoice).save();
     })
 }
