@@ -4,12 +4,12 @@ window.onload =function(){
         console.log(invoice);
         console.log(window);
         var opt={
-            margin:1,
+            margin:0.8,
             filename:'siensafricainvoice.pdf',
             image:{type:'jpeg',quality: 0.98},
             html2canvas:{scale:1},
             jsPDF:{unit: 'in',format:'letter',orientation:'portrait'}
         }
-        html2pdf().set(opt).from(invoice).save();
+        html2pdf(invoice).set(opt).save();
     })
 }
