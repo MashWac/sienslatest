@@ -7,7 +7,6 @@ window.onload =function(){
             margin:0.2,
             filename:'siensafricainvoice.pdf',
             image:{type:'jpeg',quality: 0.98},
-            html2canvas:{scale:2},
             jsPDF:{unit: 'cm',format:'letter',orientation:'portrait'}
         };
         html2pdf().from(invoice).set(opt).save();
