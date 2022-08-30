@@ -1,7 +1,6 @@
 @extends('layouts.user')
 @section('content')
 <div id='invoice'>
-    <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding" id='invoice'>
         <div class="card"  id='invoice'>
             <div class="card-header p-4">
                     <div id="aboutlogo"> 
@@ -73,9 +72,7 @@
             </div>
          
         </div>
-     
-    </div>
-    <div class="card-footer bg-white">
+         <div class="card-footer bg-white">
             <p class="mb-0"><button class="btn btn-primary" id="downloadbtn"> Download Invoice</button>
             </p>
         </div>
