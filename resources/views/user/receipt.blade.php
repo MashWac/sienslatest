@@ -1,8 +1,8 @@
 @extends('layouts.user')
 @section('content')
-<div id='invoice'>
+<div >
     <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
-        <div class="card" >
+        <div class="card" id='invoice' >
             <div class="card-header p-4">
                     <div id="aboutlogo"> 
                         <img src="/staticimg/sienslogo2.png/" class="pagelogo" alt="logo" height="30%" width="40%">
