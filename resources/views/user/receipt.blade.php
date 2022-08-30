@@ -34,7 +34,7 @@
                                 <th>Item</th>
                                 <th class="right">Price</th>
                                 <th class="center">Qty</th>
-                                <th class="right">Total</th>
+                                <th class="right">Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>

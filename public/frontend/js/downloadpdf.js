@@ -1,3 +1,5 @@
+const { fromPairs } = require("lodash");
+
 window.onload =function(){
     document.getElementById('downloadbtn').addEventListener("click",()=>{
         const invoice=this.document.getElementById('invoice');
@@ -7,6 +9,6 @@ window.onload =function(){
             margin:0.8,
             filename:'siensafricainvoice.pdf'
         };
-        html2pdf().set(opt).save();
+        html2pdf().from(invoice).set(opt).save();
     })
 }
