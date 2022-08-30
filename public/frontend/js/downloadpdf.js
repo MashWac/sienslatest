@@ -1,4 +1,3 @@
-const { fromPairs } = require("lodash");
 
 window.onload =function(){
     document.getElementById('downloadbtn').addEventListener("click",()=>{
