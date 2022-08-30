@@ -34,8 +34,12 @@
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
-<div>
-        <div class="card"  id='invoice'>
+<div class="card-footer bg-white">
+            <p class="mb-0"><button class="btn btn-primary" id="downloadbtn"> Download Invoice</button>
+            </p>
+        </div>
+<div class="py-5" id='invoice'>
+        <div class="card"  >
             <div class="card-header p-4">
                     <div id="aboutlogo"> 
                         <img src="/staticimg/sienslogo2.png/" class="pagelogo" alt="logo" height="30%" width="40%">
@@ -106,10 +110,7 @@
             </div>
          
         </div>
-         <div class="card-footer bg-white">
-            <p class="mb-0"><button class="btn btn-primary" id="downloadbtn"> Download Invoice</button>
-            </p>
-        </div>
+   
 </div>
 
 
