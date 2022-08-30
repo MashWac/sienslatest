@@ -1,13 +1,13 @@
 @extends('layouts.user')
 @section('content')
-<div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
+<div id="invoice" class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
     <div class="card">
         <div class="card-header p-4">
             <div id="aboutlogo"> 
                 <img src="/staticimg/sienslogo2.png/" class="pagelogo" alt="logo" height="30%" width="40%">
             </div>      
-            <div class="float-right"> <h3 class="mb-0">Invoice #BBB10234</h3>
-                Date: 12 Jun,2019
+            <div class="float-right"> <h3 class="mb-0">Invoice: #Siens22{{$data['order']->order_id}}</h3>
+                Date of Purchase: {{$data['order']->created_at}}
             </div>
         </div>
 <div class="card-body">
@@ -61,7 +61,7 @@ Thika: (+254)728010172, (+254)705055983.</div>
 <strong class="text-dark">Total</strong>
  </td>
 <td class="right">
-<strong class="text-dark"><!---put-->
+<strong class="text-dark">{{$data['user']->order_amount}} KES
 </strong>
 </td>
 </tr>
@@ -71,7 +71,8 @@ Thika: (+254)728010172, (+254)705055983.</div>
 </div>
 </div>
 <div class="card-footer bg-white">
-<p class="mb-0">Siens Africa</p>
+<p class="mb-0"><button class="btn btn-primary" id="downloadbtn"> Download Invoice</button>
+</p>
 </div>
 </div>
 </div>

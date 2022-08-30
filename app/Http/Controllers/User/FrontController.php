@@ -139,6 +139,7 @@ class FrontController extends Controller
         $orderdets= new Orderdetails();
         $user_id=session('user_id');
         $data['user']= User::find($user_id);
+        $data['order']=Orders::find($id);
         $data['orderdets']=$order->where('orders.order_id',$id)->join('orderdetails', 'orders.order_id','=','orderdetails.order_id')->join('tbl_products', 'orderdetails.product_id','=','tbl_products.product_id')->join('delivery','orders.order_id','=','delivery.order_id')->get();
 
         return view('user/receipt', compact('data'));

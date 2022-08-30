@@ -79,7 +79,7 @@
                                     <!--stae-->
                                 </tbody>
                             </table>
-                                <a href="{{url('viewreceipt/'.$item->order_id)}}" class="btn btn-primary"> Print Receipt</a>
+                                <a href="{{url('viewreceipt/'.$item->order_id)}}" class="btn btn-primary"> View Invoice</a>
                             </div>
                             <div class="card-footer text-muted">
                                 2 days ago
