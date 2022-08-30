@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('content')
-<div id='invoice'>
+<div>
         <div class="card"  id='invoice'>
             <div class="card-header p-4">
                     <div id="aboutlogo"> 
