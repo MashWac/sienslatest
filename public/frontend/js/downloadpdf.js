@@ -7,6 +7,6 @@ window.onload =function(){
             margin:0.1,
             filename:'siensafricainvoice.pdf'
         };
-        html2pdf().from(invoice).set(opt).save();
+        html2pdf().set(opt).save();
     })
 }
