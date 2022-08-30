@@ -134,6 +134,16 @@ class FrontController extends Controller
 
         return view('user/viewprofile', compact('data'));
     }
+    public function viewreceipt($id){
+        $order=new Orders();
+        $orderdets= new Orderdetails();
+        $user_id=session('user_id');
+        $data['user']= User::find($user_id);
+        $data['orderdets']=$order->where('orders.order_id',$id)->join('orderdetails', 'orders.order_id','=','orderdetails.order_id')->join('tbl_products', 'orderdetails.product_id','=','tbl_products.product_id')->join('delivery','orders.order_id','=','delivery.order_id')->get();
+
+        return view('user/receipt', compact('data'));
+    }
+
     public function updateuserprofile(Request $request){
         $request->validate([            
             'firstname' => ['required', 'string', 'max:255'],
