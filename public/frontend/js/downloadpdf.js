@@ -1,4 +1,4 @@
-window.onload =function(){
+function printdoc(){
     document.getElementById('downloadbtn').addEventListener("click",()=>{
         const invoice=this.document.getElementById('invoice');
         console.log(invoice);
