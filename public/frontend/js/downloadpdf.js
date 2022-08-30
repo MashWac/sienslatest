@@ -4,7 +4,7 @@ window.onload =function(){
         console.log(invoice);
         console.log(window);
         var opt={
-            margin:0,
+            margin:0.8,
             filename:'siensafricainvoice.pdf',
             image:{type:'png',quality: 0.98},
             html2canvas:{scale:3},
