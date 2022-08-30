@@ -79,6 +79,6 @@
    
 </div>
 <div class="card-footer bg-white">
-            <p class="mb-0"><a href="{{url('viewprofile')}}" class="btn btn-warning "id="btnpurch" style="color:white;"> Back</a></p>
+            <p class="mb-0"><a href="{{url('viewprofile')}}" class="btn btn-primary"> Back</a></p>
         </div>
 @endsection  
