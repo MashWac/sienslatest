@@ -107,7 +107,7 @@
          
         </div>
          <div class="card-footer bg-white">
-            <p class="mb-0"><button class="btn btn-primary" id="downloadbtn" onclick="printdoc()"> Download Invoice</button>
+            <p class="mb-0"><button class="btn btn-primary" id="downloadbtn"> Download Invoice</button>
             </p>
         </div>
 </div>
