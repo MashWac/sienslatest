@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('content')
-<div  >
+<div id='invoice'>
     <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
         <div class="card" >
             <div class="card-header p-4">
@@ -11,7 +11,7 @@
                         Date of Purchase: {{$data['order']->created_at}}
                     </div>
             </div>
-            <div class="card-body" id='invoice'>
+            <div class="card-body">
                 <div class="row mb-4">
                     <div class="col-sm-6">
                         <h5 class="mb-3">From:</h5>
