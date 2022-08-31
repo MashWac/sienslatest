@@ -128,7 +128,9 @@
                         </div>
                     </div>
                 </div>
+                <a href="{{url('prodpage')}}">
                 <div class="card productsprofile" style="width: 11rem; margin-top:15%;">
+                
                     <div>
                         <h3 class="callactmore">VIEW MORE</h3>
                     </div>
@@ -136,6 +138,7 @@
                     <ion-icon id="arrowcall" name="arrow-round-forward"></ion-icon>
                     </div>
                 </div>
+                </a>
             </div>
         </div>
     </div>

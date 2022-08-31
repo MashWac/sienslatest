@@ -95,8 +95,6 @@ color: black;
 .firstcont{
   background-color: rgb(233, 233, 233);
   width: 100%;
-  display:grid;
-  justify-content: center;
   padding-bottom: 30px;
   
 }
