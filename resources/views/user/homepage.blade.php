@@ -42,7 +42,7 @@
                 </button>
             </div>
         </div>
-        <div class="container-fluid firstcont">
+        <div class="firstcont">
             <div>
                 <h1 id="welcome">WELCOME TO <span id="companyname">SIENS&nbsp;&nbsp;<span class="logowel"><img src="/staticimg/fav.png" class="img-fluid" style="width:15% ; height:auto;"></span> AFRICA</span></h1>
                 <p id="researc"> A platform of well researched food supplements.</p>
@@ -52,7 +52,7 @@
                 
                 <div class="valuez">
                     <div class="imgpart">
-                        <img src="/staticimg/fitness.png" class="img-fluid" style="width:15% ; height:auto;">
+                        <img src="/staticimg/fitness.png" class="img-fluid" style="width:100% ; height:auto;">
                     </div>
                     <div class="valdesc">
                         <p>FITNESS</p>
