@@ -42,9 +42,9 @@
                 </button>
             </div>
         </div>
-        <div class="firstcont">
-            <div>
-                <h1 id="welcome">WELCOME TO <span id="companyname">SIENS&nbsp;&nbsp;<span class="logowel"><img src="/staticimg/fav.png" height="80px"></span> AFRICA</span></h1>
+        <div class="firstcont ">
+            <div class="container-fluid">
+                <h1 id="welcome">WELCOME TO <span id="companyname">SIENS&nbsp;&nbsp;<span class="logowel"><img src="/staticimg/fav.png" height="30%"></span> AFRICA</span></h1>
                 <p id="researc"> A platform of well researched food supplements.</p>
                 <h4>OUR VALUES</h4>
             </div>
