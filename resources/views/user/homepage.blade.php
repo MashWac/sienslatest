@@ -48,7 +48,7 @@
                 <p id="researc"> A platform of well researched food supplements.</p>
                 <h4>OUR VALUES</h4>
             </div>
-            <div id="ourvalues">
+            <div class="container-fluid" id="ourvalues">
                 
                 <div class="valuez">
                     <div class="imgpart">
