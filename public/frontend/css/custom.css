@@ -129,7 +129,7 @@ color: black;
 .valuez{
  float: left;
   margin: 1%;
-  width: 30%;
+  width: fit-content;
 }
 #supplements{
   width: fit-content;
