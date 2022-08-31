@@ -60,7 +60,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/health.png" class="img-fluid"  style="width:15% ; height:auto;">
+                    <img src="/staticimg/health.png" class="img-fluid"  style="width:100% ; height:auto;">
                     </div>
                     <div class="valdesc">
                         <p>GOOD HEALTH</p>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/strength.png" class="img-fluid"  style="width:15% ; height:auto;">
+                    <img src="/staticimg/strength.png" class="img-fluid"  style="width:100% ; height:auto;">
                     </div>
                     <div class="valdesc">
                         <p>STRENGTH</p>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/organic.png" class="img-fluid"  style="width:15% ; height:auto;">
+                    <img src="/staticimg/organic.png" class="img-fluid"  style="width:100% ; height:auto;">
                     </div>
                     <div class="valdesc">
                         <p>NATURAL</p>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/beauty.png" class="img-fluid"  style="width:15% ; height:auto;" >
+                    <img src="/staticimg/beauty.png" class="img-fluid"  style="width:100% ; height:auto;" >
                     </div>
                     <div class="valdesc">
                         <p>BEAUTY</p>
