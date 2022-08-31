@@ -13,21 +13,21 @@
                     <img src="/staticimg/home1.png" class="d-block w-100" height="20%" alt="...">
                     <div class="carousel-caption">
                         <p class="proddesc">HEAL AND RELIEVE BODY ACHES AND FATIGUE.</p>
-                        <a href="{{url('prodpage')}}" class="btn btn-warning "id="btnpurch" style="color:white;"> View Products</a>
+                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> View Products</a>
                     </div>
                     </div>
                     <div class="carousel-item">
                     <img src="/staticimg/home3.png" class="d-block w-100" height="20%"alt="...">
                     <div class="carousel-caption" id="on-de-right" >
                         <p class="proddesc">REJUVINATE AND ENHANCE VITAL MINERALS.</p>
-                        <a href="{{url('prodpage')}}" class="btn btn-warning "id="btnpurch" style="color:white;"> View Product</a>
+                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> View Product</a>
                     </div>
                     </div>
                     <div class="carousel-item">
                     <img src="/staticimg/home5.png"  class="d-block w-100" height="20%"alt="...">
                     <div class="carousel-caption" id="on-de-right">
                         <p class="proddesc">GREAT NATURAL DETOXIFICATION.</p>
-                        <a href="{{url('prodpage')}}" class="btn btn-warning "id="btnpurch" style="color:white;"> View Products</a>
+                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> View Products</a>
 
                     </div>
                     </div>
@@ -44,7 +44,7 @@
         </div>
         <div class="firstcont ">
             <div class="container-fluid">
-                <h1 id="welcome">WELCOME TO <span id="companyname">SIENS&nbsp;&nbsp;<span class="logowel"><img src="/staticimg/fav.png" height="10%"></span> AFRICA</span></h1>
+                <h1 id="welcome">WELCOME TO <span id="companyname">SIENS&nbsp;&nbsp;<span class="logowel"><img src="/staticimg/fav.png" class="img-fluid" height="10%"></span> AFRICA</span></h1>
                 <p id="researc"> A platform of well researched food supplements.</p>
                 <h4>OUR VALUES</h4>
             </div>
@@ -52,7 +52,7 @@
                 
                 <div class="valuez">
                     <div class="imgpart">
-                        <img src="/staticimg/fitness.png" height="10%">
+                        <img src="/staticimg/fitness.png" class="img-fluid"  height="10%">
                     </div>
                     <div class="valdesc">
                         <p>FITNESS</p>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/health.png" height="10%" >
+                    <img src="/staticimg/health.png" class="img-fluid" height="10%" >
                     </div>
                     <div class="valdesc">
                         <p>GOOD HEALTH</p>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/strength.png" height="10%" >
+                    <img src="/staticimg/strength.png" class="img-fluid" height="10%" >
                     </div>
                     <div class="valdesc">
                         <p>STRENGTH</p>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/organic.png" height="10%" >
+                    <img src="/staticimg/organic.png" class="img-fluid" height="10%" >
                     </div>
                     <div class="valdesc">
                         <p>NATURAL</p>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/beauty.png" height="10%" >
+                    <img src="/staticimg/beauty.png" class="img-fluid" height="10%" >
                     </div>
                     <div class="valdesc">
                         <p>BEAUTY</p>
@@ -104,7 +104,7 @@
                         <h5 class="card-title">Siens Garlic Oil</h5>
                         <div id=buttonprodhome>
                             <a href="#" class="btn btn-primary">Add To Cart</a>
-                            <a href="#" class="btn btn-warning "id="btnpurch" style="color:white;"> Purchase</a>
+                            <a href="#" class="btn btn-warning " style="color:white;"> Purchase</a>
                         </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                         <h5 class="card-title">Siens Omega 3</h5>
                         <div id=buttonprodhome>
                             <a href="#" class="btn btn-primary">Add To Cart</a>
-                            <a href="#" class="btn btn-warning "id="btnpurch" style="color:white;"> Purchase</a>
+                            <a href="#" class="btn btn-warning " style="color:white;"> Purchase</a>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         <h5 class="card-title">Siens Evening Primose</h5>
                         <div id=buttonprodhome>
                             <a href="#" class="btn btn-primary">Add To Cart</a>
-                            <a href="#" class="btn btn-warning "id="btnpurch" style="color:white;"> Purchase</a>
+                            <a href="#" class="btn btn-warning " style="color:white;"> Purchase</a>
                         </div>
                     </div>
                 </div>
