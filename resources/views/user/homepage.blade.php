@@ -42,11 +42,12 @@
                 </button>
             </div>
         </div>
-        <div class="firstcont ">
+        <div class="firstcont">
             <div class="container-fluid">
                 <h1 id="welcome">WELCOME TO <span id="companyname">SIENS&nbsp;&nbsp;<span class="logowel"><img src="/staticimg/fav.png" class="img-fluid" style="width:15% ; height:auto;"></span> AFRICA</span></h1>
                 <p id="researc"> A platform of well researched food supplements.</p>
                 <h4>OUR VALUES</h4>
+            </div>
             </div>
             <div id="ourvalues">
                 
