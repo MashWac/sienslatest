@@ -98,7 +98,7 @@
             <h2 id="productttitleend">OUR PRODUCTS</h2>
             <hr>
             <div id="supplements">
-                <div class="card productsprofile" style="width: 18rem;">
+                <div class="card productsprofile" style="width: 30%;">
                     <img src="/staticimg/products/supplements/garlicoil.jpg"  class="card-img-top" height="10%" width="200px" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Siens Garlic Oil</h5>
