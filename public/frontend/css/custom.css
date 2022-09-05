@@ -126,10 +126,13 @@ color: black;
   box-shadow:5px 5px 5px 5px rgb(195, 202, 204);
   border-radius: 0.5rem;
   width: fit-content;
+  
 }
 .valuez{
  float: left;
   margin: 20px;
+  display: flex;
+  align-items:center;
 }
 #supplements{
   width: fit-content;
