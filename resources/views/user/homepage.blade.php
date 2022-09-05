@@ -13,21 +13,21 @@
                     <img src="/staticimg/home1.png" class="d-block w-100" height="20%" alt="...">
                     <div class="carousel-caption">
                         <p class="proddesc">HEAL AND RELIEVE BODY ACHES AND FATIGUE.</p>
-                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> Products</a>
+                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> View Products</a>
                     </div>
                     </div>
                     <div class="carousel-item">
                     <img src="/staticimg/home3.png" class="d-block w-100" height="20%"alt="...">
                     <div class="carousel-caption" id="on-de-right" >
                         <p class="proddesc">REJUVINATE AND ENHANCE VITAL MINERALS.</p>
-                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> Products</a>
+                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> View Products</a>
                     </div>
                     </div>
                     <div class="carousel-item">
                     <img src="/staticimg/home5.png"  class="d-block w-100" height="20%"alt="...">
                     <div class="carousel-caption" id="on-de-right">
                         <p class="proddesc">GREAT NATURAL DETOXIFICATION.</p>
-                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> Products</a>
+                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;">View Products</a>
 
                     </div>
                     </div>
@@ -100,7 +100,7 @@
             <div id="supplements">
                 @foreach($data['topprods'] as $item)
                 <div class="card productsprofile h-100 " style="width: 18rem; " >
-                    <img src="{{ $item['product_image']}}"  class="card-img-top" height="300px"alt="...">
+                    <img src="{{ $item['product_image']}}"  class="card-img-top" height="10%" width="200px" alt="...">
                     <div class="card-body details" style="position: relative; height: 150px; ">
 
                         <h5 class="card-title">{{$item->product_name}}</h5>
