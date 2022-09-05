@@ -10,7 +10,7 @@
                     <legend style="float:right">Contact Us:</legend>
                     <p>Ask any questions or queries you may have and you will receive a response in the next 24-48hrs.</p>
                     <label for="Query" class="contactlabels">Questions/Suggestions:</label>
-                    <textarea class="form-control @error('proddescr') is-invalid @enderror" name="proddescr" id="descript"autocomplete="proddescr" autofocus> </textarea>
+                    <textarea rows="7" class="form-control @error('subquest') is-invalid @enderror" name="subquest" id="descript"autocomplete="subquest" autofocus> </textarea>
                     <br><br>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </fieldset> 
