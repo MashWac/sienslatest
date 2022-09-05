@@ -30,7 +30,7 @@
                         <input type="text" class="form-control @error('prodcate') is-invalid @enderror" name="prodcate" id="product-category" list="categoryselect" value="{{ old('prodcate')}}">
                                 <datalist id="categoryselect">
                                     @foreach($data['category'] as $item)
-                                    <option value="<?=$item['category_id']?>"><?="category-".$item['category_name']?><option>
+                                    <option value="<?=$item['category_name']?>"><?="category-".$item['category_name']?><option>
                                     @endforeach
                                 </datalist>
                                 <span class="invalid-feedback" role="alert">

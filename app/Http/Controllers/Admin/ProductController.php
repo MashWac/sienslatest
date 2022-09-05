@@ -28,11 +28,14 @@ class ProductController extends Controller
             'prodprice' => ['required','min:0','gt:0' ],
             'prodquan' => ['required','min:0','gt:0'],
             'prodpriority' => ['required'],
-            'prodcate'=>['exists:App\Models\Category,category_id'],
+            'prodcate'=>['exists:App\Models\Category,category_name'],
             'prodimage'=>['required','image']
 
         ]);
         $category= new Category;
+        $cate=$request->input('prodcate');
+        $cateinfo=$category->where('category_name',$cate);
+        $cateid=$cateinfo->category_id;
         $product=new Product();
         if($request->hasFile('prodimage')){
             $file=$request->file('prodimage');
@@ -46,7 +49,7 @@ class ProductController extends Controller
         }
         $product->product_name=$request->input('prodname');
         $product->product_description=$request->input('proddescr');
-        $product->category=$request->input('prodcate');
+        $product->category=$cateid;
         $product->unit_price=$request->input('prodprice');
         $product->stock_available=$request->input('prodquan');
         $product->prodpriority=$request->input('prodpriority');
