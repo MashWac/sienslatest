@@ -133,7 +133,7 @@ color: black;
 .valuez{
  float: left;
   margin: 20px;
-
+  display: flex;
 }
 #supplements{
   width: fit-content;
