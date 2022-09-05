@@ -152,11 +152,11 @@
                     <div class="col-md-6">
                         <label for="prodpriority">Product Priority:</label>
                         <select type="number" class="form-control @error('prodpriority') is-invalid @enderror" name="prodpriority">
-                            <option value="1" <?=$data['prodpriority']==1 ? ' selected="selected"' : '';?> >1</option>
-                            <option value="2" <?=$data['prodpriority']==2 ? ' selected="selected"' : '';?> >2</option>
-                            <option value="3" <?=$data['prodpriority']==3 ? ' selected="selected"' : '';?> >3</option>
-                            <option value="4" <?=$data['prodpriority']==4 ? ' selected="selected"' : '';?> >4</option>
-                            <option value="5" <?=$data['prodpriority']==5 ? ' selected="selected"' : '';?> >5</option>
+                            <option value="1" <?=$data['product']['prodpriority']==1 ? ' selected="selected"' : '';?> >1</option>
+                            <option value="2" <?=$data['product']['prodpriority']==2 ? ' selected="selected"' : '';?> >2</option>
+                            <option value="3" <?=$data['product']['prodpriority']==3 ? ' selected="selected"' : '';?> >3</option>
+                            <option value="4" <?=$data['product']['prodpriority']==4 ? ' selected="selected"' : '';?> >4</option>
+                            <option value="5" <?=$data['product']['prodpriority']==5 ? ' selected="selected"' : '';?> >5</option>
                         </select>
                         <span class="invalid-feedback" role="alert">
                         @error('prodpriority')
