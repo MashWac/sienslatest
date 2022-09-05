@@ -136,12 +136,12 @@ color: black;
  float: left;
   margin: 18px;
   text-align: center;
-  
+  display:grid;
+  justify-content: center;
 }
 #supplements{
   width: fit-content;
   justify-content: center;
-  margin: auto;
   
 }
 #productshome{
