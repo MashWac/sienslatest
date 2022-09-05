@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\File;
 class FrontController extends Controller
 {
     public function index(){
-        return view('user/homepage');
+
+        $data['topprods']=Product::orderby('prodpriority','DESC')->take(3);
+        return view('user/homepage', compact('data'));
     }
     public function products(){
         $data['categories']=Category::all();
