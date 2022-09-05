@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('unit_price');
             $table->integer('category');
             $table->integer('stock_available');
+            $table->integer('prodpriority');
             $table->string('product_image');
             $table->timestamp('created_at');
             $table->dateTime('updated_at');

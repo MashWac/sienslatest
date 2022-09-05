@@ -58,6 +58,22 @@
                         </span>  
                     </div>
 
+                    <div class="col-md-6">
+                        <label for="prodpriority">Product Priority:</label>
+                        <select type="number" class="form-control @error('prodpriority') is-invalid @enderror" name="prodpriority">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <span class="invalid-feedback" role="alert">
+                        @error('prodpriority')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </span>  
+                    </div>
+
                     <div class="col-md-12">
                         <label for="prodimage">Product Image:</label>
                         <input type="file" class="form-control @error('prodimage') is-invalid @enderror" id="img"  name="prodimage">
@@ -106,7 +122,7 @@
                         <input type="text" class="form-control @error('prodcate') is-invalid @enderror" name="prodcate" id="product-category" list="categoryselect" value="{{$data['product']->category}}">
                                 <datalist id="categoryselect">
                                     @foreach($data['category'] as $item)
-                                    <option value="<?=$item['category_id']?>"><?="category-".$item['category_name']?><option>
+                                    <option value="<?=$item['category_name']?>"><?="category-".$item['category_name']?><option>
                                     @endforeach
                                 </datalist>
                                 <span class="invalid-feedback" role="alert">
@@ -129,6 +145,21 @@
                         <input type="number" class="form-control @error('prodquan') is-invalid @enderror" name="prodquan" value="{{$data['product']->stock_available}}">
                         <span class="invalid-feedback" role="alert">
                         @error('prodquan')
+                            <strong>{{ $message }}</strong>
+                            @enderror
+                        </span>  
+                    </div>
+                    <div class="col-md-6">
+                        <label for="prodpriority">Product Priority:</label>
+                        <select type="number" class="form-control @error('prodpriority') is-invalid @enderror" name="prodpriority">
+                            <option value="1" <?=$data['prodpriority']==1 ? ' selected="selected"' : '';?> >1</option>
+                            <option value="2" <?=$data['prodpriority']==2 ? ' selected="selected"' : '';?> >2</option>
+                            <option value="3" <?=$data['prodpriority']==3 ? ' selected="selected"' : '';?> >3</option>
+                            <option value="4" <?=$data['prodpriority']==4 ? ' selected="selected"' : '';?> >4</option>
+                            <option value="5" <?=$data['prodpriority']==5 ? ' selected="selected"' : '';?> >5</option>
+                        </select>
+                        <span class="invalid-feedback" role="alert">
+                        @error('prodpriority')
                             <strong>{{ $message }}</strong>
                             @enderror
                         </span>  

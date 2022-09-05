@@ -27,8 +27,10 @@ class ProductController extends Controller
             'proddescr' => ['required', 'string', 'max:255'],
             'prodprice' => ['required','min:0','gt:0' ],
             'prodquan' => ['required','min:0','gt:0'],
+            'prodpriority' => ['required'],
             'prodcate'=>['exists:App\Models\Category,category_id'],
             'prodimage'=>['required','image']
+
         ]);
         $category= new Category;
         $product=new Product();
@@ -47,6 +49,8 @@ class ProductController extends Controller
         $product->category=$request->input('prodcate');
         $product->unit_price=$request->input('prodprice');
         $product->stock_available=$request->input('prodquan');
+        $product->prodpriority=$request->input('prodpriority');
+
 
         $product->save();
         return redirect('products')->with('status','Product Added Successfully.');
@@ -64,6 +68,7 @@ class ProductController extends Controller
             'proddescr' => ['required', 'string', 'max:255'],
             'prodprice' => ['required','min:0','gt:0' ],
             'prodquan' => ['required','min:0','gt:0'],
+            'prodpriority' => ['required'],
             'prodcate'=>['exists:App\Models\Category,category_id'],
         ]);
         $product=Product::find($id);
@@ -88,6 +93,8 @@ class ProductController extends Controller
         $product->category=$request->input('prodcate');
         $product->unit_price=$request->input('prodprice');
         $product->stock_available=$request->input('prodquan');
+        $product->prodpriority=$request->input('prodpriority');
+
 
         $product->update();
         return redirect('products')->with('status','Product Updated Successfully.');

@@ -10,8 +10,8 @@
                     <legend style="float:right">Contact Us:</legend>
                     <p>Ask any questions or queries you may have and you will receive a response in the next 24-48hrs.</p>
                     <label for="Query" class="contactlabels">Questions/Suggestions:</label>
-                    <textarea name="subquest" rows="7" max-width="100%" class="contactinputs" placeholder="Enter any query you may have (Optional)">
-                    </textarea><br><br>
+                    <textarea class="form-control @error('proddescr') is-invalid @enderror" name="proddescr" id="descript"autocomplete="proddescr" autofocus>{{ $data['product']->product_description }} </textarea>
+                    <br><br>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </fieldset> 
             </form>

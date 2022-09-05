@@ -19,11 +19,11 @@
 							<form action="authenticate-user" method="POST" class="signin-form">
                                 @csrf
 			      		<div class="form-group mb-3">
-			      			<label class="label" for="name">Email:</label>
+			      			<label class="label" for="name">Email or phone:</label>
                               <div class="col-md-12">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="userlog" type="userlog" class="form-control @error('userlog') is-invalid @enderror" name="userlog" value="{{ old('userlog') }}" required autocomplete="userlog" placeholder="email or phone 7XXXXXXXX" autofocus>
 
-                                @error('email')
+                                @error('userlog')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
