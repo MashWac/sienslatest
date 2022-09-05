@@ -62,23 +62,27 @@ class Registration extends Controller
 
         $userlogin = $request->input('userlog');
         $password =$request->input('password');
-        $data_email = $user->where('email', $userlogin)->first();
-        $data_phone = $user->where('telephone', $userlogin)->first();
+        if (is_numeric($userlogin)){
+            $data_user = $user->where('telephone', $userlogin)->first();
+        }else{
+            $data_user = $user->where('email', $userlogin)->first();
+        }          
+        
 
 
 
-        if ($data_email && $data_email['is_deleted']==0) {
+        if ($data_user && $data_user['is_deleted']==0) {
 
-            if (Hash::check($password,$data_email['password'])) {
+            if (Hash::check($password,$data_user['password'])) {
 
-                if($data_email['role_as']==1){
+                if($data_user['role_as']==1){
                     $sessionData = [
-                        'user_id' => $data_email['user_id'],
-                        'email' => $data_email['email'],
-                        'firstname'  => $data_email['firstname'],
-                        'surname'  => $data_email['surname'],
-                        'phone'=> $data_email['telephone'],
-                        'role'  => $data_email['role_as'],
+                        'user_id' => $data_user['user_id'],
+                        'email' => $data_user['email'],
+                        'firstname'  => $data_user['firstname'],
+                        'surname'  => $data_user['surname'],
+                        'phone'=> $data_user['telephone'],
+                        'role'  => $data_user['role_as'],
                         'logged' => TRUE,
     
                     ];
@@ -89,54 +93,13 @@ class Registration extends Controller
 
                 }else{
                     $sessionData = [
-                        'user_id' => $data_email['user_id'],
-                        'email' => $data_email['email'],
-                        'firstname'  => $data_email['firstname'],
-                        'surname'  => $data_email['surname'],
-                        'country'  => $data_email['country'],
-                        'phone'  => $data_email['telephone'],
-                        'role'  => $data_email['role_as'],
-                        'logged' => TRUE,
-                        'purchase'=>false
-    
-                    ];
-                    session($sessionData);
-                    return redirect('home')->with('status','Logged In Successfully.');
-                }
-               
-            } 
-            else {
-                return redirect('login')->with('status','Wrong password. Please enter correct password');
-            }
-        }
-        else if (($data_phone && $data_phone['is_deleted']==0)) {
-             if ((Hash::check($password,$data_phone['password']))) {
-
-                if($data_phone['role_as']==1){
-                    $sessionData = [
-                        'user_id' => $data_phone['user_id'],
-                        'email' => $data_phone['email'],
-                        'firstname'  => $data_phone['firstname'],
-                        'surname'  => $data_phone['surname'],
-                        'phone'=> $data_phone['telephone'],
-                        'role'  => $data_phone['role_as'],
-                        'logged' => TRUE,
-    
-                    ];
-                    session($sessionData);
-
-                    return redirect('/dashboard')->with('status','Logged In Successfully.');
-
-
-                }else{
-                    $sessionData = [
-                        'user_id' => $data_phone['user_id'],
-                        'email' => $data_phone['email'],
-                        'firstname'  => $data_phone['firstname'],
-                        'surname'  => $data_phone['surname'],
-                        'country'  => $data_phone['country'],
-                        'phone'  => $data_phone['telephone'],
-                        'role'  => $data_phone['role_as'],
+                        'user_id' => $data_user['user_id'],
+                        'email' => $data_user['email'],
+                        'firstname'  => $data_user['firstname'],
+                        'surname'  => $data_user['surname'],
+                        'country'  => $data_user['country'],
+                        'phone'  => $data_user['telephone'],
+                        'role'  => $data_user['role_as'],
                         'logged' => TRUE,
                         'purchase'=>false
     
