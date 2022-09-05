@@ -22,7 +22,7 @@ class FrontController extends Controller
 {
     public function index(){
 
-        $data['topprods']=Product::orderby('prodpriority','DESC')->take(3);
+        $data['topprods']=Product::orderby('prodpriority','DESC')->get();
         return view('user/homepage', compact('data'));
     }
     public function products(){
