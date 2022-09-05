@@ -100,6 +100,8 @@ color: black;
   padding-bottom: 30px;
   padding-left: 5%;
   text-align: center;
+  padding-right: 5%;
+
 
 }
 #welcome{
@@ -127,11 +129,12 @@ color: black;
   box-shadow:5px 5px 5px 5px rgb(195, 202, 204);
   border-radius: 0.5rem;
   width: fit-content;
+
   
 }
 .valuez{
  float: left;
-  margin: 18px;
+  margin: 1%;
   
 }
 #supplements{
