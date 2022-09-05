@@ -34,7 +34,7 @@ class ProductController extends Controller
         ]);
         $category= new Category;
         $cate=$request->input('prodcate');
-        $cateinfo=$category->where('category_name',$cate);
+        $cateinfo=$category->where('category_name',$cate)->first();
         $cateid=$cateinfo->category_id;
         $product=new Product();
         if($request->hasFile('prodimage')){
@@ -74,6 +74,10 @@ class ProductController extends Controller
             'prodpriority' => ['required'],
             'prodcate'=>['exists:App\Models\Category,category_id'],
         ]);
+        $category= new Category;
+        $cate=$request->input('prodcate');
+        $cateinfo=$category->where('category_name',$cate)->first();
+        $cateid=$cateinfo->category_id;
         $product=Product::find($id);
         if($request->hasFile('prodimage')){
 
@@ -93,7 +97,7 @@ class ProductController extends Controller
         }
         $product->product_name=$request->input('prodname');
         $product->product_description=$request->input('proddescr');
-        $product->category=$request->input('prodcate');
+        $product->category=$cateid;
         $product->unit_price=$request->input('prodprice');
         $product->stock_available=$request->input('prodquan');
         $product->prodpriority=$request->input('prodpriority');
