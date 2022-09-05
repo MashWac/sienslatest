@@ -172,7 +172,7 @@
                     <div class="col-md-6">
                         <h4>Current Image</h4> 
                         @if($data['product']->product_image)
-                        <img src="{{asset('storage/assets/uploads/products/'.$data['product']->product_image) }}" alt="Product Image" height='400px' width='350px'>
+                        <img src="{{$data['product']['product_image']}}" alt="Product Image" height='400px' width='350px'>
                         @endif
                     </div>
                     <div class="col-md-6" >
