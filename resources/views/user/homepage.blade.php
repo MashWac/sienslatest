@@ -44,15 +44,15 @@
         </div>
         <div class="firstcont">
             <div>
-                <h1 id="welcome">WELCOME TO <span id="companyname">SIENS&nbsp;&nbsp;<span class="logowel"><img src="/staticimg/fav.png" class="img-fluid" style="width:15% ; height:50%;"></span> AFRICA</span></h1>
+                <h1 id="welcome">WELCOME TO <span id="companyname">SIENS&nbsp;&nbsp;<span class="logowel"><img src="/staticimg/fav.png" height="80px"></span> AFRICA</span></h1>
                 <p id="researc"> A platform of well researched food supplements.</p>
                 <h4>OUR VALUES</h4>
             </div>
-            <div class="container-fluid" id="ourvalues">
+            <div id="ourvalues">
                 
                 <div class="valuez">
                     <div class="imgpart">
-                        <img src="/staticimg/fitness.png" class="img-fluid" style="width:50% ;  height:50%;">
+                        <img src="/staticimg/fitness.png" height="100px">
                     </div>
                     <div class="valdesc">
                         <p>FITNESS</p>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/health.png" class="img-fluid"  style="width:50% ; height:50%;">
+                    <img src="/staticimg/health.png" height="100px" >
                     </div>
                     <div class="valdesc">
                         <p>GOOD HEALTH</p>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/strength.png" class="img-fluid"  style="width:50% ; height:50%;">
+                    <img src="/staticimg/strength.png" height="100px" >
                     </div>
                     <div class="valdesc">
                         <p>STRENGTH</p>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/organic.png" class="img-fluid"  style="width:50% ; height:50%;">
+                    <img src="/staticimg/organic.png" height="100px" >
                     </div>
                     <div class="valdesc">
                         <p>NATURAL</p>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="valuez">
                     <div class="imgpart">
-                    <img src="/staticimg/beauty.png" class="img-fluid"  style="width:50% ; height:50%;" >
+                    <img src="/staticimg/beauty.png" height="100px" >
                     </div>
                     <div class="valdesc">
                         <p>BEAUTY</p>
