@@ -46,12 +46,10 @@
                             <a href="{{url('edit-prod/'.$item->product_id)}}">
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </a>
-                            <td>
-                                <form method="GET" action="{{url('delete-prod/'.$item->product_id)}}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'>Delete</button>
-                                </form>
-                            </td>
+                            <form method="GET" action="{{url('delete-prod/'.$item->product_id)}}">
+                                @csrf
+                                <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'>Delete</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

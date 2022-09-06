@@ -47,9 +47,10 @@
                             <a href="{{url('edit-user/'.$item->user_id)}}">
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </a>
-                            <a href="{{url('delete-user/'.$item->user_id)}}">
-                                <button class="btn btn-danger">Delete</button>
-                            </a>
+                            <form method="GET" action="{{url('delete-user/'.$item->user_id)}}">
+                                @csrf
+                                <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'>Delete</button>
+                            </form>
                             
                         </td>
                     </tr>

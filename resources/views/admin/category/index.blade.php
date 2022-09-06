@@ -28,9 +28,10 @@
                             <a href="{{url('edit-category/'.$item->category_id)}}">
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </a>
-                            <a href="{{url('delete-category/'.$item->category_id)}}">
-                                <button class="btn btn-danger">Delete</button>
-                            </a>
+                            <form method="GET" action="{{url('delete-category/'.$item->category_id)}}">
+                                @csrf
+                                <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'>Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>
