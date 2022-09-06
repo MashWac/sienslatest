@@ -80,7 +80,7 @@ Route::get('logout',[Registration::class,'logout']);
 
 
 
-Route::get('/dashboard',[FrontendController::class,'index']);
+Route::get('/dashboard',[FrontendController::class,'index'])->middleware('conAdmin');
 
 
 
@@ -120,18 +120,6 @@ Route::get('view-orderdetails/{id}', [OrderController::class,'vieworder']);
 Route::get('complete-order/{id}', [OrderController::class,'updateorder']);
 
 
-// Route::group(['namespace' => 'User'], function(){
-
-//     Route::post('pesapal/iframe', 'PaymentController@store')
-//         ->name('payment.store')
-//         ->middleware('config');
-
-//     Route::get('pesapal/iframe', 'PaymentController@store')
-//         ->name('payment.store.get')
-//         ->middleware('config');
-// });
-
-// Auth::routes();
 
 // Route::middleware(['auth','isAdmin'])->group(function(){
 //     Route::get('/dashboard','Admin\FrontendController@index');
