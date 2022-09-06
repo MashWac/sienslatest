@@ -62,7 +62,7 @@
                 </thead>
                 <tbody>
                 @foreach($data['orders'] as $item)
-                    @if($item['order_status']=='COMPLETE')
+                    @if($item['order_status']=='DELIVERED')
                     <tr>
                         <td>{{$item->order_id}}</td>
                         <td>{{$item->firstname}} {{$item->surname}}</td>
