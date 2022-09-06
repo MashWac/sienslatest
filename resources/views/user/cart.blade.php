@@ -76,10 +76,10 @@
                                 </select>
                             </div>
                             <div class="col-md-12" id="fieldnairobi" style="display:none;">
-                                <label for="address">Location:</label>
-                                <input type="text" name="nairobiadd" value="{{ old('nairobiadd') }}" class="form-control @error('nairobiadd') is-invalid @enderror">
+                                <label for="nairobi-location">Location:</label>
+                                <input type="text" name="nairobi-location" value="{{ old('nairobi-location') }}" class="form-control @error('nairobi-location') is-invalid @enderror">
                                 <span class="invalid-feedback" role="alert">
-                                    @error('nairobiadd')
+                                    @error('nairobi-location')
                                         <strong>{{ $message }}</strong>
                                         @enderror
                                 </span>
@@ -97,11 +97,11 @@
                                 </span>
             
                                 
-                                <label for="address">Location:</label>
-                                <input type="text" name="outsideadd" value="{{ old('outsideadd') }}" class="form-control @error('outsideadd') is-invalid @enderror">
+                                <label for="outskirt-location">Location:</label>
+                                <input type="text" name="outskirt-location" value="{{ old('outskirt-location') }}" class="form-control @error('outskirt-location') is-invalid @enderror">
                                 
                                 <span class="invalid-feedback" role="alert">
-                                    @error('outsideadd')
+                                    @error('outskirt-location')
                                         <strong>{{ $message }}</strong>
                                         @enderror
                                 </span>

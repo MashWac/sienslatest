@@ -41,8 +41,8 @@ class FrontController extends Controller
     }
     public function checkout(Request $request){
         $request->validate([            
-            "nairobiadd" => ["required_if:regionselected,==,nairobi"],
-            'outsideadd' => ["required_if:regionselected,==,outsidenairobi"],
+            "nairobi-location" => ["required_if:regionselected,==,nairobi"],
+            'outskirt-location' => ["required_if:regionselected,==,outsidenairobi"],
             'town' => ["required_if:regionselected,==,outsidenairobi"]
         ]);
 
@@ -54,11 +54,11 @@ class FrontController extends Controller
         }
 
         if($request->input('regionselected')=='nairobi'){
-            $item_array=array('town'=>'Nairobi','address'=>$request->input('nairobiadd'));
+            $item_array=array('town'=>'Nairobi','address'=>$request->input('nairobi-location'));
             Session::push('delivery', $item_array);
 
         }else{
-            $item_array=array('town'=>$request->input('town'),'address'=>$request->input('outsideadd'));
+            $item_array=array('town'=>$request->input('town'),'address'=>$request->input('outskirt-location'));
             Session::push('delivery', $item_array);
         }
         $transaction_code=uniqid('SIEA-',FALSE);
