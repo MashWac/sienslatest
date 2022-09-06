@@ -9,8 +9,8 @@ $('.show_confirm').click(function(event) {
         buttons: true,
         dangerMode: true,
     })
-    .then((willDelete) => {
-      if (willDelete) {
+    .then((isConfirm) => {
+      if (isConfirm) {
         form.submit();
       }
     });
