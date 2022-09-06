@@ -121,7 +121,7 @@
                         <label for="prodcate">Category:</label>
                         @foreach($data['category'] as $item)
                             @if($item['category_id']== $data['product']->category)
-                            <input type="text" class="form-control @error('prodcate') is-invalid @enderror" name="prodcate" id="product-category" list="categoryselect" value="{{$data['product']->category_name}}">
+                            <input type="text" class="form-control @error('prodcate') is-invalid @enderror" name="prodcate" id="product-category" list="categoryselect" value="{{$item->category_name}}">
                             @endif
                          @endforeach
 
