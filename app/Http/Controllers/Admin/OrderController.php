@@ -31,6 +31,8 @@ class OrderController extends Controller
         $delivery=Deliveries::where('order_id',$id)->first();
         $order->order_status='DELIVERED';
         $delivery->delivery_status='DELIVERED';
+        $order->update();
+        $delivery->update();
         return redirect('orders')->with('status','Order Status Has Been Updated.');
     }
 }
