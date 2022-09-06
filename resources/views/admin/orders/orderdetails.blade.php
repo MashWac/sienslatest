@@ -6,15 +6,15 @@
         <div class="card-header">
             <div class="card text-center">
             <div class="card-header">
-                {{$things->firstname}}  {{$things->surname}}
+                USERNAME: {{$things->firstname}}  {{$things->surname}}
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{$things->town}}, {{$things->address}}</h5>
-                <h5 class="card-title">{{$things->order_amount}}</h5>
+                <h5 class="card-title">DELIVERY DETAILS: {{$things->town}}, {{$things->address}}</h5>
+                <h5 class="card-title">ORDER AMOUNT: {{$things->order_amount}} KES</h5>
                 <a href="{{url('complete-order/'.$things->order_id)}}" class="btn btn-primary">Mark Delivered</a>
             </div>
             <div class="card-footer text-muted">
-                {{$things->created_at}}
+                DATE OF PURCHASE: {{$things->created_at}}
             </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                         <td>{{$item->product_name}}</td>
                         <td>{{$item->order_quantity}}</td>
                         <td>{{$item->product_price}}</td>
-                        <td>{{$item->subtotal}}</td>
+                        <td>{{$item->order_subtotal}}</td>
                     </tr>
                     @endforeach
 

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Orders;
 use App\Models\PaymentModel;
 use App\Models\Orderdetails;
+use App\Models\Deliveries;
 
 class OrderController extends Controller
 {
@@ -25,7 +26,11 @@ class OrderController extends Controller
 
         return view('admin.orders.orderdetails', compact('data'));
     }
-    public function updateorder(){
-
+    public function updateorder($id){
+        $order=Orders::find($id);
+        $delivery=Deliveries::where('order_id',$id)->first();
+        $order->order_status='DELIVERED';
+        $delivery->delivery_status='DELIVERED';
+        return redirect('orders')->with('status','Order Status Has Been Updated.');
     }
 }
