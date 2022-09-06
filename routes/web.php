@@ -80,46 +80,42 @@ Route::get('logout',[Registration::class,'logout']);
 
 
 
-Route::get('/dashboard',[FrontendController::class,'index'])->middleware('conAdmin');
+
+Route::middleware(['conAdmin'])->group(function(){
+    Route::get('/dashboard',[FrontendController::class,'index']);
 
 
-
-
-
-Route::get('categories',[CategoryController::class,'index']);
-Route::get('add-category', [CategoryController::class,'add']);
-Route::post('insert-cate', [CategoryController::class,'insert']);
-Route::get('edit-category/{id}', [CategoryController::class,'edit']);
-Route::put('update-category/{id}', [CategoryController::class,'update']);
-Route::get('delete-category/{id}', [CategoryController::class,'delete']);
-Route::get('view-category/{id}',[CategoryController::class,'view']);
-
-
-Route::get('products',[ProductController::class,'index']);
-Route::get('add-Product', [ProductController::class,'add']);
-Route::get('edit-prod/{id}', [ProductController::class,'edit']);
-Route::post('insert-prod', [ProductController::class,'insert']);
-Route::put('update-prod/{id}', [ProductController::class,'update']);
-Route::get('delete-prod/{id}', [ProductController::class,'delete']);
-
-
-
-
-
-Route::get('users', [UserController::class,'index']);
-Route::get('add-User', [UserController::class,'add']);
-Route::get('edit-user/{id}', [UserController::class,'edit']);
-Route::get('view-user/{id}', [UserController::class,'viewuser']);
-Route::post('insert-user',  [UserController::class,'insert']);
-Route::put('update-user/{id}', [UserController::class,'update']);
-Route::get('delete-user/{id}', [UserController::class,'delete']);
-
-
-Route::get('orders', [OrderController::class,'orderlist']);
-Route::get('view-orderdetails/{id}', [OrderController::class,'vieworder']);
-Route::get('complete-order/{id}', [OrderController::class,'updateorder']);
-
-
+    Route::get('categories',[CategoryController::class,'index']);
+    Route::get('add-category', [CategoryController::class,'add']);
+    Route::post('insert-cate', [CategoryController::class,'insert']);
+    Route::get('edit-category/{id}', [CategoryController::class,'edit']);
+    Route::put('update-category/{id}', [CategoryController::class,'update']);
+    Route::get('delete-category/{id}', [CategoryController::class,'delete']);
+    Route::get('view-category/{id}',[CategoryController::class,'view']);
+    
+    
+    Route::get('products',[ProductController::class,'index']);
+    Route::get('add-Product', [ProductController::class,'add']);
+    Route::get('edit-prod/{id}', [ProductController::class,'edit']);
+    Route::post('insert-prod', [ProductController::class,'insert']);
+    Route::put('update-prod/{id}', [ProductController::class,'update']);
+    Route::get('delete-prod/{id}', [ProductController::class,'delete']);
+    
+    
+    Route::get('users', [UserController::class,'index']);
+    Route::get('add-User', [UserController::class,'add']);
+    Route::get('edit-user/{id}', [UserController::class,'edit']);
+    Route::get('view-user/{id}', [UserController::class,'viewuser']);
+    Route::post('insert-user',  [UserController::class,'insert']);
+    Route::put('update-user/{id}', [UserController::class,'update']);
+    Route::get('delete-user/{id}', [UserController::class,'delete']);
+    
+    
+    Route::get('orders', [OrderController::class,'orderlist']);
+    Route::get('view-orderdetails/{id}', [OrderController::class,'vieworder']);
+    Route::get('complete-order/{id}', [OrderController::class,'updateorder']);
+    
+});
 
 // Route::middleware(['auth','isAdmin'])->group(function(){
 //     Route::get('/dashboard','Admin\FrontendController@index');
