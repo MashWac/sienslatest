@@ -67,7 +67,7 @@
                         <td>{{$item->order_id}}</td>
                         <td>{{$item->firstname}} {{$item->surname}}</td>
                         <td>{{$item->order_amount}}</td>
-                        <td>{{$item->reference}}</td>
+                        <td>{{$item->payment_method}}</td>
                         <td>{{$item->order_status}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>
