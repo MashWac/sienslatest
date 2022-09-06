@@ -46,6 +46,14 @@
                             <a href="{{url('edit-prod/'.$item->product_id)}}">
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </a>
+                            <td>
+                                <form method="POST" action="{{url('delete-prod/'.$item->product_id)}}">
+                                    @csrf
+                                    <input name="_method" type="hidden" value="DELETE">
+                                    <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'>Delete</button>
+                                </form>
+                            </td>
+
                             <a href="{{url('delete-prod/'.$item->product_id)}}">
                                 <button class="btn btn-danger">Delete</button>
                             </a>

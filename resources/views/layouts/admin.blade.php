@@ -37,6 +37,7 @@
     <script src="{{ asset('admin_assets/js/core/popper.min.js') }}" defer></script>
     <script src="{{ asset('admin_assets/js/core/bootstrap.min.js') }}" defer></script>
     <script src="{{ asset('admin_assets/js/core/demo.js') }}" defer></script>
+    <script src="{{ asset('admin_assets/js/core/deletemessage.js') }}" defer></script>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
