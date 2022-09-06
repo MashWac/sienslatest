@@ -8,7 +8,7 @@
                     <div class="carousel-item active">
                     <img src="/staticimg/home2.png" class="d-block w-100" height="20%" alt="...">
                     <div class="carousel-caption">
-                        <p class="proddesc">HEAL AND RELIEVE BODY ACHES AND FATIGUE.</p>
+                        <p class="proddesc">JOIN THE HEALTHY LIFESTYLE.</p>
                         <a href="{{url('login')}}" class="btn btn-warning "id="btnpurch" style="color:white;"> LOGIN</a>
                     </div>
                     </div>

@@ -12,21 +12,21 @@
                     <div class="carousel-item active">
                     <img src="/staticimg/home1.png" class="d-block w-100" height="20%" alt="...">
                     <div class="carousel-caption">
-                        <p class="proddesc">HEAL AND RELIEVE BODY ACHES AND FATIGUE.</p>
+                        <p class="proddesc">WELCOME TO OUR HEALTHY LIFESTYLE PLATFORM.</p>
                         <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> View Products</a>
                     </div>
                     </div>
                     <div class="carousel-item">
                     <img src="/staticimg/home3.png" class="d-block w-100" height="20%"alt="...">
                     <div class="carousel-caption" id="on-de-right" >
-                        <p class="proddesc">REJUVINATE AND ENHANCE VITAL MINERALS.</p>
+                        <p class="proddesc">GREAT NATURAL DETOXIFIER.</p>
                         <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> View Products</a>
                     </div>
                     </div>
                     <div class="carousel-item">
                     <img src="/staticimg/home5.png"  class="d-block w-100" height="20%"alt="...">
                     <div class="carousel-caption" id="on-de-right">
-                        <p class="proddesc">GREAT NATURAL DETOXIFICATION.</p>
+                        <p class="proddesc">REJUVINATE AND ENHANCE VITAL MINERALS AND OIL.</p>
                         <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;">View Products</a>
 
                     </div>
