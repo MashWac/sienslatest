@@ -68,11 +68,11 @@ Route::get('terms', function(){
     return view('user/termsandconditions');
 });
 
-Route::get('register',[Registration::class,'registration']);
-Route::get('login',[Registration::class,'login']);
+Route::get('register',[Registration::class,'registration'])->middleware('alreadylogged');
+Route::get('login',[Registration::class,'login'])->middleware('alreadylogged');
 Route::post('reg-user',[Registration::class,'storeuser']);
 Route::post('authenticate-user',[Registration::class,'signin']);
-Route::get('/',[Registration::class,'landingpage']);
+Route::get('/',[Registration::class,'landingpage'])->middleware('alreadylogged');
 Route::get('logout',[Registration::class,'logout']);
 
 

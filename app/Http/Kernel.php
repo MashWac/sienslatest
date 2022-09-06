@@ -4,6 +4,7 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use App\Http\Middleware\adminonly;
+use App\Http\Middleware\AlreadyLogged;
 
 class Kernel extends HttpKernel
 {
@@ -66,6 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isAdmin' => \App\Http\Middleware\AdminMiddleware::class, //check if it is admin login
         'conAdmin'=> adminonly::class,
+        'alreadylogged'=>AlreadyLogged::class,
         
     ];
 }
