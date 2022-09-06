@@ -2,19 +2,18 @@
 @extends('layouts.admin')
 @section('content')
 <div class="card">
-    @foreach($data['user'] as $things)
         <div class="card-header">
             <div class="card text-center">
             <div class="card-header">
-                Username: {{$things->firstname}}  {{$things->surname}}
+                Username: {{$data['user']->firstname}}  {{$data['user']->surname}}
             </div>
             <div class="card-body">
-                <h5 class="card-title">Email: {{$things->email}}</h5>
-                <h5 class="card-title">Phone: {{$things->telephone}} KES</h5>
+                <h5 class="card-title">Email: {{$data['user']->email}}</h5>
+                <h5 class="card-title">Phone: {{$data['user']->telephone}}</h5>
                 <a href="{{url('users')}}" class="btn btn-primary">Back</a>
             </div>
             <div class="card-footer text-muted">
-                Date of creation: {{$things->created_at}}
+                Date of creation: {{$data['user']->created_at}}
             </div>
             </div>
         </div>

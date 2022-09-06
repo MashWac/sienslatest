@@ -39,9 +39,11 @@
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
                         <td>
+                            @if($item->role_as==2)
                             <a href="{{url('view-user/'.$item->user_id)}}">
                                 <button type="submit" class="btn btn-success">View</button>
                             </a>
+                            @endif
                             <a href="{{url('edit-user/'.$item->user_id)}}">
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </a>
