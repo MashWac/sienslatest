@@ -49,14 +49,14 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Telephone:') }}</label>
+                            <label for="telephone" class="col-md-4 col-form-label text-md-end">{{ __('Telephone:') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}">
+                                <input id="telephone" type="number" class="form-control @error('telephone') is-invalid @enderror" name="telephone" value="{{ old('telephone') }}">
 
                                
                                     <span class="invalid-feedback" role="alert">
-                                    @error('phone')
+                                    @error('telephone')
                                         <strong>{{ $message }}</strong>
                                         @enderror
                                     </span>

@@ -32,13 +32,13 @@ class Registration extends Controller
             'firstname' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'country'=>['required','exists:App\Models\Countries,name'],
-            'phone' => ['required', 'max:10','min:10','unique:users'],
+            'telephone' => ['required', 'max:10','min:10','unique:users'],
             'email' => ['string', 'email', 'max:255', 'unique:users'],
             'password' => ['required','min:6','max:12','required_with:password_confirm','same:password_confirm']]);
         $user->firstname=$request->input('firstname');
         $user->surname=$request->input('surname');
         $user->email=$request->input('email');
-        $user->telephone=$request->input('phone');
+        $user->telephone=$request->input('telephone');
         $user->role_as=2;
         $user->country=$request->input('country');
         $user->password=Hash::make($request->input('password'));
