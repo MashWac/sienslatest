@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
     public function index(){
-        $product=Product::all();
+        $product=Product::where('is_deleted',0)->get();;
         return view('admin.product.index',compact('product'));
     }
     public function add(){
-        $data['category']= Category::all();
+        $data['category']= Category::where('is_deleted',0)->get();;
         $data['formtype']="add";
 
         return view('admin.product.add',compact('data'));
@@ -114,7 +114,8 @@ class ProductController extends Controller
                 Storage::disk('s3')->delete($filepath);
             }
         }
-        $product->delete();
+        $product->is_deleted=1;
+        $product->update();
         return redirect()->back()->with('status','Product Deleted Successfully.');
     }
 }
