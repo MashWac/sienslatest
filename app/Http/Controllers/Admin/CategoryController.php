@@ -46,6 +46,10 @@ class CategoryController extends Controller
     }
     public function delete(Request $request,$id){
         $category=Category::find($id);
+        $products=Product::where('category', $id)->get();
+        foreach($products as $item){
+            $item->delete();
+        }
         $category->delete();
         return redirect('categories')->with('status','Category Deleted Successfully.');
     }
