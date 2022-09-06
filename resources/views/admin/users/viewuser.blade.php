@@ -34,7 +34,6 @@
                 </thead>
                 <tbody>
                 @foreach($data['orders'] as $item)
-                    @if($item['order_status']=='DELIVERED')
                     <tr>
                         <td>{{$item->order_id}}</td>
                         <td>{{$item->order_amount}}</td>
@@ -47,7 +46,6 @@
                             </a>
                         </td>
                     </tr>
-                    @endif
                     @endforeach
                 </tbody>
                 </table>
