@@ -40,6 +40,12 @@ class FrontController extends Controller
         return view('user/cart',compact('productcart'));
     }
     public function checkout(Request $request){
+        $request->validate([            
+            "nairobiadd" => ["required_if:regionselected,==,nairobi"],
+            'outsideadd' => ["required_if:regionselected,==,outsidenairobi"],
+            'town' => ["required_if:regionselected,==,outsidenairobi"]
+        ]);
+
         $productcart=[];
         if(Session::has('cart')){
             foreach(session('cart') as $item){

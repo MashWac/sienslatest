@@ -76,14 +76,35 @@
                                 </select>
                             </div>
                             <div class="col-md-12" id="fieldnairobi" style="display:none;">
-                                <label for="address">Address:</label>
-                                <input type="text" name="nairobiadd" value="{{ old('nairobiadd') }}"class="form-control">
+                                <label for="address">Location:</label>
+                                <input type="text" name="nairobiadd" value="{{ old('nairobiadd') }}" class="form-control @error('nairobiadd') is-invalid @enderror">
+                                <span class="invalid-feedback" role="alert">
+                                    @error('nairobiadd')
+                                        <strong>{{ $message }}</strong>
+                                        @enderror
+                                </span>
                             </div>
                             <div class="col-md-12" id="fieldoutside" style="display:none;">
+                                
+                            
                                 <label for="address">Town:</label>
-                                <input type="text" name="town" value="{{ old('town') }}"class="form-control">
-                                <label for="address">Address:</label>
-                                <input type="text" name="outsideadd" value="{{ old('outsideadd') }}" class="form-control">
+                                <input type="text" name="town" value="{{ old('town') }}" class="form-control @error('town') is-invalid @enderror">
+                                
+                                <span class="invalid-feedback" role="alert">
+                                    @error('town')
+                                        <strong>{{ $message }}</strong>
+                                        @enderror
+                                </span>
+            
+                                
+                                <label for="address">Location:</label>
+                                <input type="text" name="outsideadd" value="{{ old('outsideadd') }}" class="form-control @error('outsideadd') is-invalid @enderror">
+                                
+                                <span class="invalid-feedback" role="alert">
+                                    @error('outsideadd')
+                                        <strong>{{ $message }}</strong>
+                                        @enderror
+                                </span>
                             </div>
                             <input type="number" class="form-control" id="totalpay" name="amount" hidden>
                         <div class="col-md-12">
