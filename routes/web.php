@@ -26,23 +26,40 @@ use Bryceandy\Laravel_Pesapal\Payment;
 |
 */
 
+Route::middleware(['mustbelogged'])->group(function(){
+    Route::get('home',[FrontController::class,'index']);
+    Route::get('prodpage',[FrontController::class,'products']);
+    Route::get('cart',[FrontController::class,'cartpage']);
+    Route::post('checkout',[FrontController::class,'checkout']);
 
-Route::get('home',[FrontController::class,'index']);
+    Route::get('addtocart/{id}',[FrontController::class,'addtocart']);
+    Route::get('viewproduct/{id}',[FrontController::class,'viewproduct']);
+    Route::post('updatecart',[FrontController::class,'updatequantity']);
+    Route::get('deletefromcart/{id}',[FrontController::class,'deletefromcart']);
+    Route::get('viewprofile',[FrontController::class,'viewprofile']);
+    Route::post('subquery',[FrontController::class,'submitquery']);
+    Route::post('updateaccount',[FrontController::class,'updateuserprofile']);
+    Route::get('filterbycate/{id}',[FrontController::class,'filterprodcategory']);
+    Route::get('viewreceipt/{id}',[FrontController::class,'viewreceipt']);
 
 
-Route::get('prodpage',[FrontController::class,'products']);
-Route::get('cart',[FrontController::class,'cartpage']);
-Route::post('checkout',[FrontController::class,'checkout']);
+    Route::get('aboutus', function(){
+        return view('user/aboutus');
+    });
+    Route::get('contacts', function(){
+        return view('user/contact');
+    });
+    Route::get('return', function(){
+        return view('user/return');
+    });
+    Route::get('shipping', function(){
+        return view('user/shipping');
+    });
+    Route::get('terms', function(){
+        return view('user/termsandconditions');
+    });
 
-Route::get('addtocart/{id}',[FrontController::class,'addtocart']);
-Route::get('viewproduct/{id}',[FrontController::class,'viewproduct']);
-Route::post('updatecart',[FrontController::class,'updatequantity']);
-Route::get('deletefromcart/{id}',[FrontController::class,'deletefromcart']);
-Route::get('viewprofile',[FrontController::class,'viewprofile']);
-Route::post('subquery',[FrontController::class,'submitquery']);
-Route::post('updateaccount',[FrontController::class,'updateuserprofile']);
-Route::get('filterbycate/{id}',[FrontController::class,'filterprodcategory']);
-Route::get('viewreceipt/{id}',[FrontController::class,'viewreceipt']);
+});
 
 
 
@@ -52,21 +69,7 @@ Route::get('pesapal-ipn-listener', IpnController::class,'__invoke');
 
 
 
-Route::get('aboutus', function(){
-    return view('user/aboutus');
-});
-Route::get('contacts', function(){
-    return view('user/contact');
-});
-Route::get('return', function(){
-    return view('user/return');
-});
-Route::get('shipping', function(){
-    return view('user/shipping');
-});
-Route::get('terms', function(){
-    return view('user/termsandconditions');
-});
+
 
 Route::get('register',[Registration::class,'registration'])->middleware('alreadylogged');
 Route::get('login',[Registration::class,'login'])->middleware('alreadylogged');
@@ -117,36 +120,5 @@ Route::middleware(['conAdmin'])->group(function(){
     
 });
 
-// Route::middleware(['auth','isAdmin'])->group(function(){
-//     Route::get('/dashboard','Admin\FrontendController@index');
 
-
-//     Route::get('categories','Admin\CategoryController@index');
-//     Route::get('add-category', 'Admin\CategoryController@add');
-//     Route::post('insert-cate', 'Admin\CategoryController@insert');
-//     Route::get('edit-category/{id}', [CategoryController::class,'edit']);
-//     Route::put('update-category/{id}', [CategoryController::class,'update']);
-//     Route::get('delete-category/{id}', [CategoryController::class,'delete']);
-//     Route::get('view-category/{id}','Admin\CategoryController@view');
-
-   
-//     Route::get('products','Admin\ProductController@index');
-//     Route::get('add-Product', 'Admin\ProductController@add');
-//     Route::get('edit-prod/{id}', [ProductController::class,'edit']);
-//     Route::post('insert-prod', 'Admin\ProductController@insert');
-//     Route::put('update-prod/{id}', [ProductController::class,'update']);
-//     Route::get('delete-prod/{id}', [ProductController::class,'delete']);
-
-    
-
-    
-    
-//     Route::get('users','Admin\UserController@index');
-//     Route::get('add-User', 'Admin\UserController@add');
-//     Route::get('edit-user/{id}', [UserController::class,'edit']);
-//     Route::post('insert-user', 'Admin\UserController@insert');
-//     Route::put('update-user/{id}', [UserController::class,'update']);
-//     Route::get('delete-user/{id}', [UserController::class,'delete']);
-
-// });
  
