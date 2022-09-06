@@ -47,9 +47,9 @@
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </a>
                             <td>
-                                <form method="POST" action="{{url('delete-prod/'.$item->product_id)}}">
+                                <form method="GET" action="{{url('delete-prod/'.$item->product_id)}}">
                                     @csrf
-                                    <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'>Delete</button>
+                                    <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'>Delete</button>
                                 </form>
                             </td>
                         </td>
