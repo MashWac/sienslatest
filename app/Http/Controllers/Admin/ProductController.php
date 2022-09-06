@@ -72,7 +72,7 @@ class ProductController extends Controller
             'prodprice' => ['required','min:0','gt:0' ],
             'prodquan' => ['required','min:0','gt:0'],
             'prodpriority' => ['required'],
-            'prodcate'=>['exists:App\Models\Category,category_id'],
+            'prodcate'=>['exists:App\Models\Category,category_name'],
         ]);
         $category= new Category;
         $cate=$request->input('prodcate');
