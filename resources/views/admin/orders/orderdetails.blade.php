@@ -2,21 +2,23 @@
 
 @section('content')
 <div class="card">
+    @foreach($data['order'] as $things)
         <div class="card-header">
             <div class="card text-center">
             <div class="card-header">
-                {{$data['order']->firstname}}  {{$data['order']->surname}}
+                {{$things->firstname}}  {{$things->surname}}
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{$data['order']->town}}, {{$data['order']->address}}</h5>
-                <h5 class="card-title">{{$data['order']->order_amount}}</h5>
-                <a href="{{url('complete-order/'.$data['order']->order_id)}}" class="btn btn-primary">Mark Delivered</a>
+                <h5 class="card-title">{{$things->town}}, {{$things->address}}</h5>
+                <h5 class="card-title">{{$things->order_amount}}</h5>
+                <a href="{{url('complete-order/'.$things->order_id)}}" class="btn btn-primary">Mark Delivered</a>
             </div>
             <div class="card-footer text-muted">
-                {{$data['order']->created_at}}
+                {{$things->created_at}}
             </div>
             </div>
         </div>
+        @endforeach
     </div>
     <div class="card">
         <div class="card-body">
