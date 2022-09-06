@@ -18,7 +18,12 @@ class OrderController extends Controller
         return view('admin.orders.orders', compact('data'));
     }
     public function vieworder($id){
+        $order=new Orders();
+        $orderdets= new Orderdetails();
+        $data['order']=$order->where('orders.order_id', $id)->join('users','orders.user_id','=','users.user_id')->join('delivery','orders.order_id','=','delivery.order_id')->get();
+        $data['orderdets']=$order->where('orders.order_id',$id)->join('orderdetails', 'orders.order_id','=','orderdetails.order_id')->join('tbl_products', 'orderdetails.product_id','=','tbl_products.product_id')->get();
 
+        return view('admin.orders.orderdetails', compact('data'));
     }
     public function updateorder(){
 

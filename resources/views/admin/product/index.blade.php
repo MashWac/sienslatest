@@ -36,7 +36,7 @@
                         <td>{{$item->product_description}}</td>
                         <td>{{$item->category}}</td>
                         <td>{{$item->unit_price}}</td>
-                        <td>{{$item->available_stock}}</td>
+                        <td>{{$item->stock_available}}</td>
                         <td><img src="{{$item['product_image']}}" height="130px" width="100px" alt='image here'>
                         </td>
                         <td>

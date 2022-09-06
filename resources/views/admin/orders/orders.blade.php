@@ -35,9 +35,6 @@
                             <a href="{{url('view-orderdetails/'.$item->order_id)}}">
                                 <button type="submit" class="btn btn-success">View</button>
                             </a>
-                            <a href="{{url('complete-order/'.$item->order_id)}}">
-                                <button type="submit" class="btn btn-primary">Mark as Completed</button>
-                            </a>
                         </td>
                     </tr>
                     @endif

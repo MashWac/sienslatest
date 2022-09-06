@@ -115,6 +115,7 @@ Route::get('delete-user/{id}', [UserController::class,'delete']);
 
 
 Route::get('orders', [OrderController::class,'orderlist']);
+Route::get('view-orderdetails/{id}', [OrderController::class,'vieworder']);
 
 
 // Route::group(['namespace' => 'User'], function(){
