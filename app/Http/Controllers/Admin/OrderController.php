@@ -14,7 +14,8 @@ class OrderController extends Controller
 {
     public function orderlist(){
         $order= new Orders();
-        $data['orders']=$order->join('users','orders.user_id','=','users.user_id')->join('pesapal_payments','orders.payment_id','=','pesapal_payments.id')->join('delivery','orders.order_id','=','delivery.order_id')->orderBy('orders.created_at','DESC')->paginate(1);
+        $data['orders']=$order->join('users','orders.user_id','=','users.user_id')->join('pesapal_payments','orders.payment_id','=','pesapal_payments.id')->join('delivery','orders.order_id','=','delivery.order_id')->orderBy('orders.created_at','DESC')->paginate(10);
+        $data['orderstwo']=$order->join('users','orders.user_id','=','users.user_id')->join('pesapal_payments','orders.payment_id','=','pesapal_payments.id')->join('delivery','orders.order_id','=','delivery.order_id')->orderBy('orders.created_at','DESC')->paginate(10);
 
         return view('admin.orders.orders', compact('data'));
     }

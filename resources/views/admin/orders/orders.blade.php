@@ -22,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($data['orders'] as $item)
+                @foreach($data['orderstwo'] as $item)
                     @if($item['order_status']=='PROCESSING')
                     <tr>
                         <td>{{$item->order_id}}</td>
@@ -45,7 +45,7 @@
           
         </div>
         <div class="text-center d-flex justify-content-center">
-            {{ $data['orders']->links('pagination::bootstrap-4') }}
+            {{ $data['orderstwo']->links('pagination::bootstrap-4') }}
         </div>
     </div>
     <div class="card">

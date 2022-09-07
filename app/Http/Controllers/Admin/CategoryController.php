@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\File;
 class CategoryController extends Controller
 {
     public function index(){
-        $category= Category::where('is_deleted',0)->get();
+        $category= Category::where('is_deleted',0)->paginate(5);
         return view('admin.category.index',compact('category'));
     }
     public function add(){
@@ -56,7 +56,7 @@ class CategoryController extends Controller
         return redirect('categories')->with('status','Category Deleted Successfully.');
     }
     public function view(Request $request,$id){
-        $products=Product::all()->where('category',$id);
+        $products=Product::where('category',$id)->paginate(10);
         return view('admin.category.view',compact('products'));
     }
 }

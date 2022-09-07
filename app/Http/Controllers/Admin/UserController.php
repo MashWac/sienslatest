@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function index(){
         $users=new User();
-        $data['users']=$users->where('users.is_deleted',0)->join('tbl_roles','users.role_as','=','tbl_roles.role_id')->paginate(1);
+        $data['users']=$users->where('users.is_deleted',0)->join('tbl_roles','users.role_as','=','tbl_roles.role_id')->paginate(10);
         return view('admin.users.index',compact('data'));
     }
     public function add(){
@@ -54,7 +54,7 @@ class UserController extends Controller
     public function viewuser($id){
         $data['user']=User::find($id);
         $order= new Orders();
-        $data['orders']=$order->where('orders.user_id',$id)->join('users','orders.user_id','=','users.user_id')->join('pesapal_payments','orders.payment_id','=','pesapal_payments.id')->join('delivery','orders.order_id','=','delivery.order_id')->paginate(1);
+        $data['orders']=$order->where('orders.user_id',$id)->join('users','orders.user_id','=','users.user_id')->join('pesapal_payments','orders.payment_id','=','pesapal_payments.id')->join('delivery','orders.order_id','=','delivery.order_id')->paginate(10);
 
         return view('admin.users.viewuser',compact('data'));
     }
