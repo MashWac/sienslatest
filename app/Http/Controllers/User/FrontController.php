@@ -170,8 +170,12 @@ class FrontController extends Controller
         $user->country=$request->input('country');
         $user->telephone=$request->input('phone');
         if($request->input('password')){
-            if($request->input('password')==$request->input('confirmpassword'))
-        $user->password=Hash::make($request->input('password'));
+            if($request->input('password')==$request->input('confirmpassword')){
+                $user->password=Hash::make($request->input('password'));
+            }else{
+                return back()->with('status','Passwords do not match.');   
+            }
+            
         }
         $user->update();
         return redirect('viewprofile')->with('status','Acount Updated Successfully.');

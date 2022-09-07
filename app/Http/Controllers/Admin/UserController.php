@@ -29,7 +29,7 @@ class UserController extends Controller
             'firstname' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'max:10','min:10'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['string', 'email', 'max:255', 'unique:users'],
             'role'=>['exists:App\Models\Role,role_id'] 
         ]);
 
@@ -63,7 +63,7 @@ class UserController extends Controller
             'firstname' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'max:10','min:9'],
-            'email' => ['required', 'string', 'email', 'max:255',],
+            'email' => ['string', 'email', 'max:255',],
             'role'=>['exists:App\Models\Role,role_id'] 
         ]);
         $user=User::find($id);
@@ -94,7 +94,7 @@ class UserController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'country'=>['required','exists:App\Models\Countries,name'],
             'phone' => ['required', 'max:10','min:9'],
-            'email' => ['required', 'string', 'email', 'max:255',],
+            'email' => ['string', 'email', 'max:255',],
             'role'=>['exists:App\Models\Role,role_id'] 
         ]);
         $id=session('user_id');
@@ -105,10 +105,11 @@ class UserController extends Controller
         $user->country=$request->input('country');
         $user->telephone=$request->input('phone');
         if($request->input('password')){
-            if($request->input('password')==$request->input('confirmpassword'))
-            $user->password=Hash::make($request->input('password'));
-        }else{
-            return back()->with('status','Passwords do not match.');   
+            if($request->input('password')==$request->input('confirmpassword')){
+                $user->password=Hash::make($request->input('password'));
+            }else{
+                return back()->with('status','Passwords do not match.');   
+            }
         }
         $user->update();
         return redirect('users')->with('status','Acount Updated Successfully.');
