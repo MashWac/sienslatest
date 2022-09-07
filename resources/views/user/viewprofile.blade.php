@@ -27,10 +27,10 @@
                                 </datalist></div>
                     <div class="col-md-12"><label class="labels">Phone Number</label><input type="number" class="form-control" name="phone" placeholder="Phone" value="{{$data['user']->telephone}}"></div>
                     <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control" placeholder="Password" value=""></div>
-                    <div class="col-md-12"><label class="labels">Confirm Password</label><input type="text" class="form-control" name="confirmpassword" placeholder="Confirm Password" value=""></div>
+                    <div class="col-md-12"><label class="labels">Confirm Password</label><input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password" value=""></div>
                     <div class="col-md-12"><label class="labels">Last Update</label><input readonly type="datetime-local" class="form-control" placeholder="enter address line 2" value="{{$data['user']->updated_at}}"></div>
                 </div>
-                    <button type="submit" class="btn btn-warning">Update Profile</button>
+                    <button type="submit" class="btn btn-warning "id="btnpurch" style="color:white;">Update Profile</button>
                     </form>
             </div>
         </div>
