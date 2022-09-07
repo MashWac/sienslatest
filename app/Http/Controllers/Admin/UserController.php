@@ -106,7 +106,9 @@ class UserController extends Controller
         $user->telephone=$request->input('phone');
         if($request->input('password')){
             if($request->input('password')==$request->input('confirmpassword'))
-        $user->password=Hash::make($request->input('password'));
+            $user->password=Hash::make($request->input('password'));
+        }else{
+            return back()->with('status','Passwords do not match.');   
         }
         $user->update();
         return redirect('users')->with('status','Acount Updated Successfully.');
