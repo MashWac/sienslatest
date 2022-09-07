@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
     public function index(){
-        $product=Product::where('is_deleted',0)->get();;
+        $product=Product::where('is_deleted',0)->paginate(1);
         return view('admin.product.index',compact('product'));
     }
     public function add(){

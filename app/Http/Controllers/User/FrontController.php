@@ -138,7 +138,7 @@ class FrontController extends Controller
         $data['countries']=Countries::all();
         $data['user']= User::find($user_id);
         $data['orders']=$order->where('orders.user_id',$user_id)->paginate(5);
-        $data['orderdets']=$order->where('orders.user_id',$user_id)->join('orderdetails', 'orders.order_id','=','orderdetails.order_id')->join('tbl_products', 'orderdetails.product_id','=','tbl_products.product_id')->join('delivery','orders.order_id','=','delivery.order_id')->get();
+        $data['orderdets']=$order->where('orders.user_id',$user_id)->join('orderdetails', 'orders.order_id','=','orderdetails.order_id')->join('tbl_products', 'orderdetails.product_id','=','tbl_products.product_id')->join('delivery','orders.order_id','=','delivery.order_id')->orderBy('orders.created_at','DESC')->get();
 
         return view('user/viewprofile', compact('data'));
     }
@@ -148,7 +148,7 @@ class FrontController extends Controller
         $user_id=session('user_id');
         $data['user']= User::find($user_id);
         $data['order']=Orders::find($id);
-        $data['orderdets']=$order->where('orders.order_id',$id)->join('orderdetails', 'orders.order_id','=','orderdetails.order_id')->join('tbl_products', 'orderdetails.product_id','=','tbl_products.product_id')->join('delivery','orders.order_id','=','delivery.order_id')->orderBy('orders.created_at','DESC')->get();
+        $data['orderdets']=$order->where('orders.order_id',$id)->join('orderdetails', 'orders.order_id','=','orderdetails.order_id')->join('tbl_products', 'orderdetails.product_id','=','tbl_products.product_id')->join('delivery','orders.order_id','=','delivery.order_id')->get();
 
         return view('user/receipt', compact('data'));
     }
