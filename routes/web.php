@@ -26,7 +26,7 @@ use Bryceandy\Laravel_Pesapal\Payment;
 |
 */
 
-Route::middleware(['mustbelogged'])->group(function(){
+Route::middleware(['mustbelogged', 'trustednet'])->group(function(){
     Route::get('home',[FrontController::class,'index']);
     Route::get('prodpage',[FrontController::class,'products']);
     Route::get('cart',[FrontController::class,'cartpage']);
@@ -71,11 +71,11 @@ Route::get('pesapal-ipn-listener', IpnController::class,'__invoke');
 
 
 
-Route::get('register',[Registration::class,'registration'])->middleware('alreadylogged');
-Route::get('login',[Registration::class,'login'])->middleware('alreadylogged');
+Route::get('register',[Registration::class,'registration'])->middleware('alreadylogged','trustednet');
+Route::get('login',[Registration::class,'login'])->middleware('alreadylogged','trustednet');
 Route::post('reg-user',[Registration::class,'storeuser']);
 Route::post('authenticate-user',[Registration::class,'signin']);
-Route::get('/',[Registration::class,'landingpage'])->middleware('alreadylogged');
+Route::get('/',[Registration::class,'landingpage'])->middleware('alreadylogged','trustednet');
 Route::get('logout',[Registration::class,'logout']);
 
 
@@ -84,7 +84,7 @@ Route::get('logout',[Registration::class,'logout']);
 
 
 
-Route::middleware(['conAdmin'])->group(function(){
+Route::middleware(['conAdmin','trustednet'])->group(function(){
     Route::get('/dashboard',[FrontendController::class,'index']);
 
 

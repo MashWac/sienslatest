@@ -70,6 +70,8 @@ class Kernel extends HttpKernel
         'conAdmin'=> adminonly::class,
         'alreadylogged'=>AlreadyLogged::class,
         'mustbelogged'=>MustbeLogged::class,
+        'trustednet'=>MustbeLogged::class,
+
         
     ];
 }
