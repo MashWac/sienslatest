@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use App\Models\Orders;
+use App\Models\Countries;
 
 class UserController extends Controller
 {
@@ -80,5 +81,35 @@ class UserController extends Controller
         $user->update();
         return redirect('users')->with('status','User Deleted Successfully.');
     }
-    
+    public function viewprofile(){
+        $user_id=session('user_id');
+        $data['countries']=Countries::all();
+        $data['user']= User::find($user_id);
+
+        return view('admin/users/adminprofile', compact('data'));
+    }
+    public function updateuserprofile(Request $request){
+        $request->validate([            
+            'firstname' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'country'=>['required','exists:App\Models\Countries,name'],
+            'phone' => ['required', 'max:10','min:9'],
+            'email' => ['required', 'string', 'email', 'max:255',],
+            'role'=>['exists:App\Models\Role,role_id'] 
+        ]);
+        $id=session('user_id');
+        $user=User::find($id);
+        $user->firstname=$request->input('firstname');
+        $user->surname=$request->input('surname');
+        $user->email=$request->input('email');
+        $user->country=$request->input('country');
+        $user->telephone=$request->input('phone');
+        if($request->input('password')){
+            if($request->input('password')==$request->input('confirmpassword'))
+        $user->password=Hash::make($request->input('password'));
+        }
+        $user->update();
+        return redirect('users')->with('status','Acount Updated Successfully.');
+    }
+
 }

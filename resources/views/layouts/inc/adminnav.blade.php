@@ -25,7 +25,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-navbar">
-                                    <li class="nav-link"><a href="{{url('organiserprofile')}}" class="nav-item dropdown-item">Profile</a></li>
+                                    <li class="nav-link"><a href="{{url('adminprofile')}}" class="nav-item dropdown-item">Profile</a></li>
                                     <li class="dropdown-divider"></li>
                                     <li class="nav-link"><a href="{{url('logout')}}" class="nav-item dropdown-item">Log out</a></li>
                                     </ul>

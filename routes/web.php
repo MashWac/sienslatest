@@ -109,6 +109,8 @@ Route::middleware(['conAdmin'])->group(function(){
     Route::get('add-User', [UserController::class,'add']);
     Route::get('edit-user/{id}', [UserController::class,'edit']);
     Route::get('view-user/{id}', [UserController::class,'viewuser']);
+    Route::get('adminprofile', [UserController::class,'viewprofile']);
+    Route::get('adminprofileupdate', [UserController::class,'updateuserprofile']);
     Route::post('insert-user',  [UserController::class,'insert']);
     Route::put('update-user/{id}', [UserController::class,'update']);
     Route::get('delete-user/{id}', [UserController::class,'delete']);
