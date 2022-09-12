@@ -99,8 +99,8 @@
             <hr>
             <div id="supplements">
                 @foreach($data['topprods'] as $item)
-                <div class="card productsprofile h-100 " style="width: 18rem; " >
-                    <img src="{{ $item['product_image']}}"  class="card-img-top"  height="300px" alt="...">
+                <div class="card productsprofile " style="width: 18rem; " >
+                    <img src="{{ $item['product_image']}}"  class="card-img-top"  height="10%" width="200px" alt="...">
                     <div class="card-body details" style="position: relative; height: 150px; ">
 
                         <h5 class="card-title">{{$item->product_name}}</h5>
