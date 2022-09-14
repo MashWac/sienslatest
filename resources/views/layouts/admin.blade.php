@@ -41,7 +41,8 @@
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.tiny.cloud/1/ww6ndjh5cphj6gljw4ajf646p4vtwmaryyf8yd00aa3ttu2k/tinymce/6/plugins.min.js" referrerpolicy="origin"></script>    <script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
         tinymce.init({
             selector: 'textarea#descript', // Replace this CSS selector to match the placeholder element for TinyMCE
             plugins: 'powerpaste advcode table lists checklist casechange wordcount',
