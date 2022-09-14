@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function insert(Request $request){
         $request->validate([            
             'prodname' => ['required', 'string', 'max:255'],
-            'proddescr' => ['required', 'string', 'max:255'],
+            'proddescr' => ['required', 'string', 'max:2000'],
             'prodprice' => ['required','min:0','gt:0' ],
             'prodquan' => ['required','min:0','gt:0'],
             'prodpriority' => ['required'],
@@ -68,7 +68,7 @@ class ProductController extends Controller
     public function update(Request $request,$id){
         $request->validate([            
             'prodname' => ['required', 'string', 'max:255'],
-            'proddescr' => ['required', 'string', 'max:255'],
+            'proddescr' => ['required', 'string', 'max:2000'],
             'prodprice' => ['required','min:0','gt:0' ],
             'prodquan' => ['required','min:0','gt:0'],
             'prodpriority' => ['required'],
