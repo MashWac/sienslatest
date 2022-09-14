@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="proddescr">Product Description:</label>
-                        <textarea class="form-control @error('proddescr') is-invalid @enderror" name="proddescr" id="descript"autocomplete="proddescr" autofocus>{{ $data['product']->product_description }} </textarea>
+                        <textarea class="form-control @error('proddescr') is-invalid @enderror" name="proddescr" id="descript"autocomplete="proddescr" autofocus>{!! $data['product']->product_description !!} </textarea>
                         <span class="invalid-feedback" role="alert">
                         @error('proddescr')<strong>{{ $message }}</strong>@enderror
                         </span>
