@@ -43,7 +43,6 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
-        <script>
         tinymce.init({
             selector: 'textarea#descript', // Replace this CSS selector to match the placeholder element for TinyMCE
             plugins: 'powerpaste advcode table lists checklist casechange wordcount',
