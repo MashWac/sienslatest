@@ -33,7 +33,7 @@
                     @foreach($product as $item)
                     <tr>
                         <td>{{$item->product_name}}</td>
-                        <td>{{$item->product_description}}</td>
+                        <td>{!!$item->product_description!!}</td>
                         <td>{{$item->category}}</td>
                         <td>{{$item->unit_price}}</td>
                         <td>{{$item->stock_available}}</td>
