@@ -48,6 +48,6 @@
 
         </div>
         <div class="text-center d-flex justify-content-center">
-                {{ $data['products']->links() }}
+                {{ $data['products']->links('pagination::bootstrap-4') }}
         </div>
 @endsection  
