@@ -35,7 +35,6 @@
 </head>
 @include('layouts.nav')
 <body>
-<body>
     <div class="mainbody">
     @yield('content')
 
