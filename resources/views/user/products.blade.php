@@ -13,52 +13,35 @@
 
 
                     <li class="filteropts">
-                        <div class="container">
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Click on Me
-                                <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                </ul>
-                            </div>
+                    <!-- Example single danger button -->
+                        <div class="btn-group">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Action
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
                         </div>
                     </li>
-
-
-                    <li class="filteropts">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown button</button>                       
-                        <div class="dropdown-menu pre-scrollable" aria-labelledby="dropdownMenuButton">                                                           
-                        <a class="dropdown-item" href="#">Foo</a>                                  
-                        <a class="dropdown-item" href="#">Thing</a>                          
-                        <a class="dropdown-item" href="#">Something</a>
-                        <a class="dropdown-item" href="#">Dudes</a>
-                        <a class="dropdown-item" href="#">Birds</a>
-                        <a class="dropdown-item" href="#">Nikes</a>
-                        <a class="dropdown-item" href="#">Marsh mellows</a>
-                        <a class="dropdown-item" href="#">Apples</a>
-                        <a class="dropdown-item" href="#">Dingles</a>
-                        <a class="dropdown-item" href="#">Berries</a>
-                        <a class="dropdown-item" href="#">What not</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>                     
-                    </div>   
-                    </li>
-
-
-
 
                     <li class="filteropts">  <div class="search-box">
                         <button class="btn-search"><i class="fas fa-search"></i></button>
