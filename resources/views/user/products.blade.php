@@ -13,28 +13,16 @@
 
 
                     <li class="filteropts">
-                    <!-- Example single danger button -->
-                        <div class="btn-group">
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" list="categoricallist">
-                            Action
-                        </button>
-                        <datalist id="categoricallist">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                            <option value="Something">
-                        </datalist>
-                        </div>
+                    <select name="Select1" size="1" id="ddlCars">
+                        <option value="">- Please select a name -</option>
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="ford">Ford</option>
+                        <option value="toyota">Toyota</option>
+                        <option value="aston">Aston Martin</option>
+                        <option value="alfa">Alfa Romeo</option>
+                    </select>
+                            
                     </li>
 
                     <li class="filteropts">  <div class="search-box">
