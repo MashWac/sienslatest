@@ -67,7 +67,7 @@ class FrontController extends Controller
         return view('user/checkout',compact('productcart','transaction_code'));
     }
     public function filterprodcategory($id){
-        $data['categories']=Category::where('is_deleted',0)->orderBy('created_at')->take(3);
+        $data['categories']=Category::where('is_deleted',0)->take(3);
         $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id', $id)->paginate(6);
         return view('user/products',compact('data'));
 
