@@ -759,3 +759,7 @@ margin: 20%;
   max-height: 280px;
     overflow-y: auto;
 }
+.dropdown-menu {
+  max-height: 100px;
+  overflow-y: scroll;
+}
