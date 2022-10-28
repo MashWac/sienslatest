@@ -14,7 +14,7 @@
 
                     <li class="filteropts">
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 More Categories
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -23,11 +23,12 @@
                                 <li><button class="dropdown-item" type="button">Something else here</button></li>
                             </ul>
                         </div>
-                                </li>
+                    </li>
 
 
                     <li class="filteropts">
-                        <div class="dropdown">                                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expande  d="false">                                                                             Dropdown button                                                                   </button>                       
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Dropdown button</button>                       
                         <div class="dropdown-menu pre-scrollable" aria-labelledby="dropdownMenuButton">                                                           
                         <a class="dropdown-item" href="#">Foo</a>                                  
                         <a class="dropdown-item" href="#">Thing</a>                          
@@ -35,7 +36,15 @@
                         <a class="dropdown-item" href="#">Dudes</a>
                         <a class="dropdown-item" href="#">Birds</a>
                         <a class="dropdown-item" href="#">Nikes</a>
-                        <a class="dropdown-item" href="#">Marsh mellows</a>                                        <a class="dropdown-item" href="#">Apples</a>                                                <a class="dropdown-item" href="#">Dingles</a>                                              <a class="dropdown-item" href="#">Berries</a>                                              <a class="dropdown-item" href="#">What not</a>                                              <a class="dropdown-item" href="#">Something else here</a>                                  <a class="dropdown-item" href="#">Action</a>                                                <a class="dropdown-item" href="#">Another action</a>                                        <a class="dropdown-item" href="#">Something else here</a>                     
+                        <a class="dropdown-item" href="#">Marsh mellows</a>
+                        <a class="dropdown-item" href="#">Apples</a>
+                        <a class="dropdown-item" href="#">Dingles</a>
+                        <a class="dropdown-item" href="#">Berries</a>
+                        <a class="dropdown-item" href="#">What not</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>                     
                     </div>   
                     </li>
 
