@@ -113,19 +113,6 @@
                                 </div>
                             </div>
 
-                <!-- <div class="card productsprofile " style="width: 18rem; " >
-                    <img src="{{ $item['product_image']}}"  class="card-img-top"  height="10%" width="200px" alt="...">
-                    <div class="card-body details" style="position: relative; height: 150px; ">
-
-                        <h5 class="card-title">{{$item->product_name}}</h5>
-                        
-                        <div class="d-grid gap-2 d-md-block" style="position: absolute; bottom: 10%; height: 150px;">
-                            <h6 class="text-center pricetext">{{$item->unit_price}} KSH<h6>
-                            <a href="{{url('viewproduct/'.$item->product_id)}}" class="btn btn-warning "id="btnpurch" style="color:white;"> View Details</a>
-                            <a href="{{url('addtocart/'.$item->product_id)}}" class="btn btn-primary"> Add To Cart</a>
-                        </div>
-                    </div>
-                </div> -->
                 @endforeach
                 <a href="{{url('prodpage')}}">
                 <div class="card productsprofile" style="width: 11rem; margin-top:15%;">
