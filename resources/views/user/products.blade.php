@@ -7,17 +7,33 @@
             <div id="filterbar">
                 <ul id="filters">
                 <li class="filteropts"><a href="{{url('prodpage')}}" >All</a></li>
-                @if($data['categories'])
                     @foreach($data['categories'] as $things)
                         <li class="filteropts"><a href="{{url('filterbycate/'.$things->category_id)}}" >{{$things->category_name}}</a></li>
                     @endforeach
-                @else
-                    <li class="filteropts"><a href="{{url('filterbycate/'.$data['category']->category_id)}}" >{{$data['category']->category_name}}</a></li>
-                @endif
-
                     <li class="filteropts">  <div class="search-box">
                         <button class="btn-search"><i class="fas fa-search"></i></button>
                         <input type="text" class="input-search" placeholder="Search Product...">
+                        </div>
+                    </li>
+                    <li class="filteropts">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">More Categories <span class="caret"></span></button>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                            </ul>
                         </div>
                     </li>
                     <li class="filteropts"><ion-icon name="funnel"></ion-icon></li>
