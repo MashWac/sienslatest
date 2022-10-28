@@ -40,7 +40,7 @@
 
 
             <div class="card-body">
-                <div class="row gy-3 "> 
+                <div class="row"> 
                     @foreach($data['products'] as $item)
                         <div class="col">
                             <div class="card productsprofile h-100 " style="width: 16rem; " >
