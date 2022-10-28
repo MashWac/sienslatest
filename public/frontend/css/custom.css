@@ -759,8 +759,8 @@ margin: 20%;
   height: 280px;
   overflow-y: auto;
 }
-@media(max-width:500px){.dropdown-menu {
+.dropdown-menu {
   height: 100px;
   overflow-y:auto;
 }
-}
+
