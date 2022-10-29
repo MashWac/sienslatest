@@ -40,7 +40,7 @@ class DiscountController extends Controller
             'discountcode' => ['required', 'string', 'max:30'],
             'discountpercentage' => ['required', 'min:0','gt:0']
         ]);
-        $discount= new Discounts;
+        $discount= Discounts::find($id);
         $discount->discount_code=$request->input('discountcode');
         $discount->discount_percentage=$request->input('discountpercentage');
         $discount->update();
