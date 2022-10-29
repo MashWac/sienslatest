@@ -53,9 +53,11 @@ class UserController extends Controller
     }
     public function viewuser($id){
         $data['user']=User::find($id);
-        $order= new Orders();
-        $data['orders']=$order->where('orders.user_id',$id)->join('users','orders.user_id','=','users.user_id')->join('pesapal_payments','orders.payment_id','=','pesapal_payments.id')->join('delivery','orders.order_id','=','delivery.order_id')->paginate(10);
+        // $order= new Orders();
+        // $data['orders']=$order->where('orders.user_id',$id)->join('users','orders.user_id','=','users.user_id')->join('pesapal_payments','orders.payment_id','=','pesapal_payments.id')->join('delivery','orders.order_id','=','delivery.order_id')->paginate(10);
 
+        $user=User::find($id);
+        $data['orders']=$user->where('users.user_id',$id)->join('orders','orders.user_id','=','users.user_id')->join('pesapal_payments','orders.payment_id','=','pesapal_payments.id')->join('delivery','orders.order_id','=','delivery.order_id')->paginate(10);
         return view('admin.users.viewuser',compact('data'));
     }
     public function update(Request $request,$id){
