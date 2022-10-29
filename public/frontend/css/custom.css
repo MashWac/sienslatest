@@ -163,9 +163,8 @@ margin-right: 8%;
 }
 .prodsectionprodpage{
   display: block;
-  overflow: auto;
+  /* overflow: auto; */
   width:100%;
-  min-height: fit-content;
 }
 .productsprofile:hover{
   background-color: rgb(233, 233, 233);  
