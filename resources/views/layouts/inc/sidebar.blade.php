@@ -42,6 +42,12 @@
                             <p>Orders</p>
                         </a>
                     </li>
+                    <li  class="nav-item {{ \Illuminate\Support\Facades\Request::is('discounts') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{url('discounts')}}">
+                            <ion-icon name="aperture"></ion-icon>
+                            <p>Orders</p>
+                        </a>
+                    </li>
                     <li>
                         <a class="nav-link" href="">
                             <ion-icon name="send"></ion-icon>

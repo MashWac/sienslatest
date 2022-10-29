@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DiscountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -103,6 +104,15 @@ Route::middleware(['conAdmin'])->group(function(){
     Route::post('insert-prod', [ProductController::class,'insert']);
     Route::put('update-prod/{id}', [ProductController::class,'update']);
     Route::get('delete-prod/{id}', [ProductController::class,'delete']);
+
+
+
+    Route::get('discounts',[DiscountController::class,'index']);
+    Route::get('add-discount', [DiscountController::class,'add']);
+    Route::get('edit-discount/{id}', [DiscountController::class,'edit']);
+    Route::post('insert-discount', [DiscountController::class,'insert']);
+    Route::put('update-discount/{id}', [DiscountController::class,'update']);
+    Route::get('delete-discount/{id}', [DiscountController::class,'delete']);
     
     
     Route::get('users', [UserController::class,'index']);
