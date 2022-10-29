@@ -40,6 +40,7 @@
 
 
             <div class="prodsectionprodpage container-fluid">
+                    <div class="row">
                     @foreach($data['products'] as $item)
                             <div class="card productsprofile h-100 " style="width: 16rem; " >
                                 <img src="{{ $item['product_image']}}"  class="card-img-top" height="300px"alt="...">
@@ -55,6 +56,7 @@
                                 </div>
                             </div>
                         @endforeach
+                    </div>
             </div>
 
         </div>
