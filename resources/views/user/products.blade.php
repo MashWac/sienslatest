@@ -49,7 +49,11 @@
                                     <h5 class="card-title producttitle">{{$item->product_name}}</h5>
                                     
                                     <div class="detailssection" style="">
-                                        <h6 class="text-center pricetext">{{($item->unit_price)-(($item->unit_price)*($data['discount']))}} KSH<h6>
+                                        @if($data['user_role']==3)
+                                            <h6 class="text-center pricetext"style="margin-top: 30%;">{{($item->unit_price)-(($item->unit_price)*($data['discount']))}} KSH<h6>
+                                        @else
+                                            <h6 class="text-center pricetext"style="margin-top: 30%;">{{$item->unit_price}} KSH<h6>
+                                        @endif
                                         <div class="prodbuttons">
                                             <a href="{{url('viewproduct/'.$item->product_id)}}" class="btn btn-warning "id="btnpurch" style="color:white;"> View Details</a>
                                             <a href="{{url('addtocart/'.$item->product_id)}}" class="btn btn-primary"> Add To Cart</a>

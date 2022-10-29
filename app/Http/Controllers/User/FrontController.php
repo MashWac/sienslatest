@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\File;
 class FrontController extends Controller
 {
     public function index(){
-
+        session();
+        $data['user_role']=session('role');    
         $markerterdiscount=Discounts::find(2);
         $discount=$markerterdiscount->discount_percentage;
         $data['discount']=$discount/100;
@@ -30,6 +31,8 @@ class FrontController extends Controller
         return view('user/homepage', compact('data'));
     }
     public function products(){
+        session();
+        $data['user_role']=session('role'); 
         $markerterdiscount=Discounts::find(2);
         $discount=$markerterdiscount->discount_percentage;
         $data['discount']=$discount/100;
@@ -75,6 +78,11 @@ class FrontController extends Controller
         return view('user/checkout',compact('productcart','transaction_code'));
     }
     public function filterprodcategory($id){
+        session();
+        $data['user_role']=session('role');    
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
         $data['categories']=Category::where('category_id',$id)->get();
         $data['categorieslist']=Category::all()->where('is_deleted',0);
         $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id', $id)->paginate(6);
@@ -82,6 +90,8 @@ class FrontController extends Controller
 
     }
     public function viewproduct($id){
+        session();
+        $data['user_role']=session('role'); 
         $markerterdiscount=Discounts::find(2);
         $discount=$markerterdiscount->discount_percentage;
         $data['discount']=$discount/100;
