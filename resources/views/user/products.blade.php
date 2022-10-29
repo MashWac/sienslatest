@@ -42,7 +42,7 @@
             <div class="prodsectionprodpage container-fluid">
                     <div class="row justify-content-center">
                     @foreach($data['products'] as $item)
-                            <div class="card productsprofile me-auto" style="width: 18rem;  height:520px" >
+                            <div class="card productsprofile" style="width: 18rem;  height:520px" >
                                 <img src="{{ $item['product_image']}}"  class="card-img-top" height="300px"alt="...">
                                 <div class="card-body proddetails">
 
