@@ -31,7 +31,7 @@ class DiscountController extends Controller
     }
     public function edit($id){
         $data['formtype']="edit";
-        $data['product']=Discounts::find($id);
+        $data['discount']=Discounts::find($id);
 
         return view('admin.discounts.add',compact('data'));
     }
