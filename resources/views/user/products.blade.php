@@ -48,7 +48,7 @@
 
                                     <h5 class="card-title">{{$item->product_name}}</h5>
                                     
-                                    <div class="">
+                                    <div class="" style="margin-top: 10%;">
                                         <h6 class="text-center pricetext">{{$item->unit_price}} KSH<h6>
                                         <div class="prodbuttons">
                                             <a href="{{url('viewproduct/'.$item->product_id)}}" class="btn btn-warning "id="btnpurch" style="color:white;"> View Details</a>
