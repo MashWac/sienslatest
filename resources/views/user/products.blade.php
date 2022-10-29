@@ -44,11 +44,11 @@
                     @foreach($data['products'] as $item)
                             <div class="card productsprofile" style="width: 18rem;  height:520px" >
                                 <img src="{{ $item['product_image']}}"  class="card-img-top" height="300px"alt="...">
-                                <div class="card-body details">
+                                <div class="card-body proddetails">
 
                                     <h5 class="card-title">{{$item->product_name}}</h5>
                                     
-                                    <div class="" style="margin-top: 10%;">
+                                    <div class="detailssection" style="">
                                         <h6 class="text-center pricetext">{{$item->unit_price}} KSH<h6>
                                         <div class="prodbuttons">
                                             <a href="{{url('viewproduct/'.$item->product_id)}}" class="btn btn-warning "id="btnpurch" style="color:white;"> View Details</a>

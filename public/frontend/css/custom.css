@@ -70,6 +70,7 @@ top:30%;
   color: rgb(190, 179, 18);
  
 }
+
 #cartdetails{
 color: rgb(190, 179, 18);
 text-decoration: none;
@@ -153,7 +154,13 @@ margin-left: 8%;
 margin-right: 8%;
 }
 
-
+.proddetails{
+  position: relative;
+}
+.detailssection{
+  position: absolute;
+  bottom: 5%;
+}
 .productsprofile{
   border-radius: 0.6rem;
   box-shadow: 5px 5px 5px 5px rgb(195, 202, 204) ;
