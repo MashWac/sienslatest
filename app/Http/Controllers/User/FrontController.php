@@ -28,7 +28,8 @@ class FrontController extends Controller
     }
     public function products(){
         $markerterdiscount=Discounts::find(2);
-        $data['discount']=$markerterdiscount->discount_percentage;
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
         $data['categories']=Category::all()->where('is_deleted',0)->take(3);
         $data['categorieslist']=Category::all()->where('is_deleted',0);
         $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(6);
