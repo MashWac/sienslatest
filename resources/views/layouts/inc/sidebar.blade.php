@@ -45,7 +45,7 @@
                     <li  class="nav-item {{ \Illuminate\Support\Facades\Request::is('discounts') ? 'active' : ''}}">
                         <a class="nav-link" href="{{url('discounts')}}">
                             <ion-icon name="aperture"></ion-icon>
-                            <p>Orders</p>
+                            <p>Discounts</p>
                         </a>
                     </li>
                     <li>
