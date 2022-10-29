@@ -191,6 +191,9 @@ margin-right: 8%;
   width:80%;
   margin-right: 10%;
 }
+.social-links{
+  text-decoration: none;
+}
 .productsprofile:hover{
   background-color: rgb(233, 233, 233);  
 }
