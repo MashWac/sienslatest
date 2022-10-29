@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
     public function index(){
-        $product=Product::all();
+        $product=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(6);
         return view('admin.product.index',compact('product'));
     }
     public function add(){
