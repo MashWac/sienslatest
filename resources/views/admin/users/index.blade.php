@@ -39,7 +39,7 @@
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
                         <td>
-                            @if($item->role_as==2)
+                            @if(($item->role_as==2)||($item->role_as==3))
                             <a href="{{url('view-user/'.$item->user_id)}}">
                                 <button type="submit" class="btn btn-success">View</button>
                             </a>
