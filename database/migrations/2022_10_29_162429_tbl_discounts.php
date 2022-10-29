@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orderdetails', function (Blueprint $table) {
-            $table->increments('orderdetails_id');
-            $table->integer('order_id');
-            $table->integer('product_id');
-            $table->integer('product_price');
-            $table->integer('order_quantity');
-            $table->string('order_subtotal');
+        Schema::create('tbl_discounts', function (Blueprint $table) {
+            $table->increments('discount_id');
+            $table->text('discount_code');
+            $table->integer('discount_percentage');
             $table->timestamp('created_at');
             $table->dateTime('updated_at');
             $table->integer('is_deleted')->default(0);
+            
         });
     }
 
@@ -33,5 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('tbl_discounts');
     }
 };
