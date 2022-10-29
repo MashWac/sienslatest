@@ -32,7 +32,7 @@
                     @foreach($discount as $item)
                     <tr>
                         <td>{{$item->discount_id}}</td>
-                        <td>{{item->discount_code}}</td>
+                        <td>{{$item->discount_code}}</td>
                         <td>{{$item->discount_percentage}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
