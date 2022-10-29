@@ -164,6 +164,7 @@ margin-right: 8%;
 .prodsectionprodpage{
   width:100%;
   height: 100vh;
+  overflow: hidden;
 }
 .productsprofile:hover{
   background-color: rgb(233, 233, 233);  
