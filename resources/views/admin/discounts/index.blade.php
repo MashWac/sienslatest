@@ -52,7 +52,7 @@
           
         </div>
         <div class="text-center d-flex justify-content-center">
-            {{ $product->links('pagination::bootstrap-4') }}
+            {{ $discount->links('pagination::bootstrap-4') }}
         </div>
     </div>
 @endsection
