@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
     public function index(){
-        $markerterdiscount=Discounts::find(2);
-        $discount=$markerterdiscount->discount_percentage;
+
         $product=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(10);
         return view('admin.product.index',compact('product'));
     }

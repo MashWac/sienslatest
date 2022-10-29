@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Discounts;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
@@ -26,6 +27,8 @@ class FrontController extends Controller
         return view('user/homepage', compact('data'));
     }
     public function products(){
+        $markerterdiscount=Discounts::find(2);
+        $data['discount']=$markerterdiscount->discount_percentage;
         $data['categories']=Category::all()->where('is_deleted',0)->take(3);
         $data['categorieslist']=Category::all()->where('is_deleted',0);
         $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(6);
