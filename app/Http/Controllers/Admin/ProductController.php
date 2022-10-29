@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
     public function index(){
-        $product=Product::paginate(10);
+        $product=Product::paginate(12);
         return view('admin.product.index',compact('product'));
     }
     public function add(){
