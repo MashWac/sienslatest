@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Discounts;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
     public function index(){
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
         $product=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(10);
         return view('admin.product.index',compact('product'));
     }
