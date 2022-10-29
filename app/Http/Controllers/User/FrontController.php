@@ -23,6 +23,9 @@ class FrontController extends Controller
 {
     public function index(){
 
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
         $data['topprods']=Product::where('is_deleted',0)->orderBy('prodpriority','DESC')->paginate(3);
         return view('user/homepage', compact('data'));
     }
@@ -79,8 +82,11 @@ class FrontController extends Controller
 
     }
     public function viewproduct($id){
-        $product=Product::find($id);
-        return view('user/viewproduct', compact('product'));
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
+        $data['product']=Product::find($id);
+        return view('user/viewproduct', compact('data'));
     }
     public function addtocart($id){
         session();
