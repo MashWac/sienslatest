@@ -14,8 +14,12 @@
             </div>
             <div id="socials">
                 <h6 class="condets">OUR SOCIALS</h6>
-                <ion-icon class="socialicons" name="logo-facebook"></ion-icon>
-                <ion-icon class="socialicons" name="logo-instagram"></ion-icon>
+                <a href="https://web.facebook.com/siensafrica.page/">
+                    <ion-icon class="socialicons" name="logo-facebook"></ion-icon>
+                </a>
+                <a href="https://instagram.com/siensafrica?igshid=YmMyMTA2M2Y=">
+                    <ion-icon class="socialicons" name="logo-instagram"></ion-icon>
+                </a>
                 <ion-icon class="socialicons" name="logo-whatsapp"></ion-icon>
             </div>
         </div>
