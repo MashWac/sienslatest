@@ -91,13 +91,20 @@ class FrontController extends Controller
     public function addtocart($id){
         session();
         $product=Product::find($id);
-        
-        
+        $user_role=session('role');    
+        $prodprice=$product->unit_price; 
+   
+        if($user_role==3){
+            $markerterdiscount=Discounts::find(2);
+            $discount=$markerterdiscount->discount_percentage;
+            $newdiscount=$discount/100; 
+            $prodprice=$prodprice-($prodprice*$newdiscount);
+        }
         if(Session::has('cart')){
             $item_array_id=array_column(session('cart'),"product_ID");
             if(!in_array($id,$item_array_id)){
                 $count=count(session('cart'));
-                $item_array=array('product_ID'=>$id,'Quantity'=>1,'stock'=>$product->stock_available,'price'=>$product->unit_price,'productname'=>$product->product_name,'subtotal'=>$product->unit_price);
+                $item_array=array('product_ID'=>$id,'Quantity'=>1,'stock'=>$product->stock_available,'price'=>$prodprice,'productname'=>$product->product_name,'subtotal'=>$product->$prodprice);
                 Session::push('cart', $item_array);
                 return redirect('prodpage')->with('status','Item Has Been Added To Cart.');
 
@@ -106,7 +113,7 @@ class FrontController extends Controller
                 return redirect('prodpage')->with('status','Item Is Already In Cart.');
             }
         }else{
-            $item_array=array('product_ID'=>$id,'Quantity'=>1,'stock'=>$product->stock_available,'price'=>$product->unit_price,'productname'=>$product->product_name,'subtotal'=>$product->unit_price);
+            $item_array=array('product_ID'=>$id,'Quantity'=>1,'stock'=>$product->stock_available,'price'=>$prodprice,'productname'=>$product->product_name,'subtotal'=>$prodprice);
             $productdata[0]=$item_array;
             Session::put('cart', $productdata);
             return redirect('prodpage')->with('status','Item Has Been Added To Cart.');
