@@ -39,10 +39,8 @@
 
 
 
-            <div class="card-body">
-                <div class="row"> 
+            <div class="container-fluid">
                     @foreach($data['products'] as $item)
-                        <div class="col">
                             <div class="card productsprofile h-100 " style="width: 16rem; " >
                                 <img src="{{ $item['product_image']}}"  class="card-img-top" height="300px"alt="...">
                                 <div class="card-body details" style="position: relative; height: 150px; ">
@@ -56,12 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                        
                         @endforeach
-                </div>
-
             </div>
 
         </div>
