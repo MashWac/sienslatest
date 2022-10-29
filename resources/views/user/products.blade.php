@@ -17,7 +17,7 @@
                                 More Categories
                             </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <ul class="dropdown-menu dropping-menu" aria-labelledby="dropdownMenuLink">
                                 @foreach($data['categorieslist'] as $things)
                                     <li><a class="dropdown-item" href="{{url('filterbycate/'.$things->category_id)}}" >{{$things->category_name}}</a></li>
                                 @endforeach
