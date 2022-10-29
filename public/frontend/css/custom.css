@@ -155,7 +155,7 @@ margin-right: 8%;
 }
 
 .producttitle{
-  text-transform: capitalize;
+  text-transform: uppercase;
     /* font-family: 'Abril Fatface', cursive;
     font-family: 'Acme', sans-serif;
     font-family: 'Goldman', cursive;
@@ -170,6 +170,7 @@ margin-right: 8%;
     font-family: 'Secular One', sans-serif;
     font-family: 'Varela Round', sans-serif;
     font-family: 'Vollkorn', serif; */
+    font-size: 20px;
 }
 .proddetails{
   position: relative;
