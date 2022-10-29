@@ -40,13 +40,13 @@
 
 
             <div class="prodsectionprodpage container-fluid">
-                    <div class="row">
+                    <div class="row justify-content-center">
                     @foreach($data['products'] as $item)
                             <div class="card productsprofile" style="width: 18rem;  height:520px" >
                                 <img src="{{ $item['product_image']}}"  class="card-img-top" height="300px"alt="...">
                                 <div class="card-body proddetails">
 
-                                    <h5 class="card-title">{{$item->product_name}}</h5>
+                                    <h5 class="card-title producttitle">{{$item->product_name}}</h5>
                                     
                                     <div class="detailssection" style="">
                                         <h6 class="text-center pricetext">{{$item->unit_price}} KSH<h6>

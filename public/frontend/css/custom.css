@@ -154,6 +154,23 @@ margin-left: 8%;
 margin-right: 8%;
 }
 
+.producttitle{
+  text-transform: capitalize;
+    /* font-family: 'Abril Fatface', cursive;
+    font-family: 'Acme', sans-serif;
+    font-family: 'Goldman', cursive;
+    font-family: 'Kanit', sans-serif; */
+    /* font-family: 'Lobster', cursive; */
+    font-family: 'Merriweather', serif;
+    /* font-family: 'Patua One', cursive; */
+    /* font-family: 'Prompt', sans-serif;
+    font-family: 'Righteous', cursive;
+    font-family: 'Roboto Slab', serif;
+    font-family: 'Russo One', sans-serif;
+    font-family: 'Secular One', sans-serif;
+    font-family: 'Varela Round', sans-serif;
+    font-family: 'Vollkorn', serif; */
+}
 .proddetails{
   position: relative;
 }

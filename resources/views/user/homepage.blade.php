@@ -103,7 +103,7 @@
                                 <img src="{{ $item['product_image']}}"  class="card-img-top" height="300px" width="200px" alt="...">
                                 <div class="card-body details" style="position: relative; height: 150px; ">
 
-                                    <h5 class="card-title">{{$item->product_name}}</h5>
+                                    <h5 class="card-title producttitle">{{$item->product_name}}</h5>
                                     
                                     <div class="d-grid gap-2 d-md-block" style="position: absolute; bottom: 10%; height: 150px;">
                                         <h6 class="text-center pricetext"style="margin-top: 30%;">{{$item->unit_price}} KSH<h6>
