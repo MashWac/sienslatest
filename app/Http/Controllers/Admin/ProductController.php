@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     public function index(){
 
-        $product=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(10);
+        $product=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(10);
         return view('admin.product.index',compact('product'));
     }
     public function add(){

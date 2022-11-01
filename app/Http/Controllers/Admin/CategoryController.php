@@ -56,7 +56,7 @@ class CategoryController extends Controller
         return redirect('categories')->with('status','Category Deleted Successfully.');
     }
     public function view(Request $request,$id){
-        $products=Product::where('category',$id)->paginate(10);
+        $products=Product::where('category',$id)->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')->paginate(10);
         return view('admin.category.view',compact('products'));
     }
 }
