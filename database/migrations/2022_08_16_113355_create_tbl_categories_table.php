@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('category_id');
             $table->string('category_name');
             $table->integer('popularity');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->nullable();
             $table->dateTime('updated_at');
             $table->integer('is_deleted')->default(0);
         });

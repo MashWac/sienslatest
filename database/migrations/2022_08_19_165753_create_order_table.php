@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('order_amount');
             $table->integer('payment_id');
             $table->string('order_status');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->nullable();
             $table->dateTime('updated_at');
             $table->integer('is_deleted')->default(0);
         });

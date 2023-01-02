@@ -46,7 +46,7 @@ class ProductController extends Controller
             $filepath='public/assets/uploads/products/'.$filename;
             $newpath=$request->file('prodimage')->storeAs($filepath,$filename);
             $path = Storage::disk('s3')->put($filepath,file_get_contents($file));
-            $path = Storage::disk('s3')->url($filepath);
+            $path = Storage::url($filepath);
             $product->product_image=$path;
         }
         $product->product_name=$request->input('prodname');
@@ -94,7 +94,7 @@ class ProductController extends Controller
             $filepath='public/assets/uploads/products/'.$filename;
             $newpath=$request->file('prodimage')->storeAs($filepath,$filename);
             $path = Storage::disk('s3')->put($filepath,file_get_contents($file));
-            $path = Storage::disk('s3')->url($filepath);
+            $path = Storage::url($filepath);
             $product->product_image=$path;
         }
         $product->product_name=$request->input('prodname');

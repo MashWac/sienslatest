@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('discount_id');
             $table->text('discount_code');
             $table->integer('discount_percentage');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->nullable();
             $table->dateTime('updated_at');
             $table->integer('is_deleted')->default(0);
             

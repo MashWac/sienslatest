@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('stock_available');
             $table->integer('prodpriority');
             $table->string('product_image');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->nullable();
             $table->dateTime('updated_at');
             $table->integer('is_deleted')->default(0);
         });

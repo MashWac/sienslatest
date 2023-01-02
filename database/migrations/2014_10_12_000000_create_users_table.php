@@ -17,14 +17,14 @@ return new class extends Migration
             $table->increments('user_id');
             $table->string('firstname');
             $table->string('surname');
-            $table->string('email')->unique()->nullable();;
+            $table->string('email')->unique()->nullable();
             $table->string('country');
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('telephone')->unique();
             $table->integer('role_as')->default(2);
             $table->string('password');
             $table->rememberToken();
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->nullable();
             $table->dateTime('updated_at');
             $table->integer('is_deleted')->default(0);
         });

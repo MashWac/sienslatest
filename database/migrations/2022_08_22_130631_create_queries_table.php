@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('query_id');
             $table->integer('user_id');
             $table->text('question');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->nullable();
             $table->dateTime('updated_at');
             $table->integer('is_deleted')->default(0);
             

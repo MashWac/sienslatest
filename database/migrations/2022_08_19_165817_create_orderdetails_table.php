@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('product_price');
             $table->integer('order_quantity');
             $table->string('order_subtotal');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->nullable();;
             $table->dateTime('updated_at');
             $table->integer('is_deleted')->default(0);
         });
