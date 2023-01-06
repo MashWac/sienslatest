@@ -18,6 +18,8 @@
                     <p class="card-text pricetext">Price:{{$data['product']->unit_price}} KSH</p>
                     @endif
                     <a href="{{url('addtocart/'.$data['product']->product_id)}}" class="btn btn-primary">Add To Cart</a>
+                    <a href="{{url('prodpage')}}" class="btn btn-warning" style="color: white;">Back</a>
+
                 </div>
             </div>
         
