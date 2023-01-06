@@ -1,4 +1,5 @@
-@extends('layouts.user')
+@extends('layouts.authtemplate')
+
 @section('content')
 
         <div id="productshome" class="py-4">
@@ -6,9 +7,9 @@
             <hr>
             <div id="filterbar">
                 <ul id="filters">
-                <li class="filteropts"><a href="{{url('prodpage')}}" >All</a></li>
+                <li class="filteropts"><a href="{{url('productspreview')}}" >All</a></li>
                     @foreach($data['categories'] as $things)
-                        <li class="filteropts"><a href="{{url('filterbycate/'.$things->category_id)}}" >{{$things->category_name}}</a></li>
+                        <li class="filteropts"><a href="{{url('filterbycateprev/'.$things->category_id)}}" >{{$things->category_name}}</a></li>
                     @endforeach
 
                     <li class="filteropts">
@@ -19,7 +20,7 @@
 
                             <ul class="dropdown-menu dropping-menu" aria-labelledby="dropdownMenuLink">
                                 @foreach($data['categorieslist'] as $things)
-                                    <li><a class="dropdown-item" href="{{url('filterbycate/'.$things->category_id)}}" >{{$things->category_name}}</a></li>
+                                    <li><a class="dropdown-item" href="{{url('filterbycateprev/'.$things->category_id)}}" >{{$things->category_name}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -28,7 +29,7 @@
 
 
                     <li class="filteropts">  
-                        <form action="{{url('searchproduct')}}" method="POST">
+                        <form action="{{url('searchproductprev')}}" method="POST">
                             @csrf
                             <div class="search-box">
                                 <button type="submit" class="btn-search"><i class="fas fa-search"></i></button>
@@ -46,7 +47,7 @@
 
                             <ul class="dropdown-menu dropping-menu" aria-labelledby="dropdownMenuLink12">
                                 <li>
-                                    <form method="POST" class="dropdown-item" action="{{url('filterbysort')}}">
+                                    <form method="POST" class="dropdown-item" action="{{url('filterbysortprev')}}">
                                         @csrf
                                         <input type="hidden" value="dateasc" name="order">
                                         <input type="hidden" value="{{$data['cateid']}}" name="cateid">
@@ -54,7 +55,7 @@
                                     </form>
                                 </li>
                                 <li>
-                                    <form method="POST" class="dropdown-item" action="{{url('filterbysort')}}">
+                                    <form method="POST" class="dropdown-item" action="{{url('filterbysortprev')}}">
                                         @csrf
                                         <input type="hidden" value="datedesc" name="order">
                                         <input type="hidden" value="{{$data['cateid']}}" name="cateid">
@@ -62,7 +63,7 @@
                                     </form>
                                 </li>
                                 <li>
-                                    <form method="POST" class="dropdown-item" action="{{url('filterbysort')}}">
+                                    <form method="POST" class="dropdown-item" action="{{url('filterbysortprev')}}">
                                         @csrf
                                         <input type="hidden" value="priceasc" name="order">
                                         <input type="hidden" value="{{$data['cateid']}}" name="cateid">
@@ -70,7 +71,7 @@
                                     </form>
                                 </li>
                                 <li>
-                                    <form method="POST" class="dropdown-item" action="{{url('filterbysort')}}">
+                                    <form method="POST" class="dropdown-item" action="{{url('filterbysortprev')}}">
                                         @csrf
                                         <input type="hidden" value="pricedesc" name="order">
                                         <input type="hidden" value="{{$data['cateid']}}" name="cateid">
@@ -78,7 +79,7 @@
                                     </form>
                                 </li>
                                 <li>
-                                    <form method="POST" class="dropdown-item" action="{{url('filterbysort')}}">
+                                    <form method="POST" class="dropdown-item" action="{{url('filterbysortprev')}}">
                                         @csrf
                                         <input type="hidden" value="nameasc" name="order">
                                         <input type="hidden" value="{{$data['cateid']}}" name="cateid">
@@ -86,7 +87,7 @@
                                     </form>
                                 </li>
                                 <li>
-                                    <form method="POST" class="dropdown-item" action="{{url('filterbysort')}}">
+                                    <form method="POST" class="dropdown-item" action="{{url('filterbysortprev')}}">
                                         @csrf
                                         <input type="hidden" value="namedesc" name="order">
                                         <input type="hidden" value="{{$data['cateid']}}" name="cateid">
@@ -118,7 +119,7 @@
                                             <h6 class="text-center pricetext"style="margin-top: 30%;">{{$item->unit_price}} KSH<h6>
                                         @endif
                                         <div class="prodbuttons">
-                                            <a href="{{url('viewproduct/'.$item->product_id)}}" class="btn btn-warning "id="btnpurch" style="color:white;"> View Details</a>
+                                            <a href="{{url('viewproductprev/'.$item->product_id)}}" class="btn btn-warning "id="btnpurch" style="color:white;"> View Details</a>
                                             <a href="{{url('addtocart/'.$item->product_id)}}" class="btn btn-primary"> Add To Cart</a>
                                         </div>
                                     </div>

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Countries;
+use App\Models\Discounts;
+use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
@@ -128,5 +131,101 @@ class Registration extends Controller
 
         return redirect('login');
     }
+    public function productspreview(){
+        session();
+        $data['cateid']=NULL;
+        $data['user_role']=session('role'); 
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
+        $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
+        $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
+        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(6);
+        return view('productspreview',compact('data'));
+    }
+    public function searchproducts(Request $request){
+        session();
+        $data['cateid']=NULL;
+        $data['user_role']=session('role'); 
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
+        $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
+        $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
+        $product=$request->input('searchfield');
+        $data['products']=Product::where('tbl_products.product_name', 'like', '%' .$product . '%')->where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->paginate(6);
+        return view('productspreview',compact('data'));
 
+
+    }
+    public function filterbysort(Request $request){
+        session();
+        $str=$request->input('order');
+        if($str=='nameasc'||$str=='priceasc'||$str=='dateasc'){
+            $orderreal='asc';
+            if($str=='nameasc'){
+                $orderby='tbl_products.product_name';
+
+            }elseif($str=='priceasc'){
+                $orderby='tbl_products.unit_price';
+            }else{
+                $orderby='tbl_products.created_at';
+            }
+        }else{
+            $orderreal='desc';
+            if($str=='namedesc'){
+                $orderby='tbl_products.product_name';
+            }elseif($str=='pricedesc'){
+                $orderby='tbl_products.unit_price';
+            }else{
+                $orderby='tbl_products.created_at';                
+            }
+        }
+        $data['cateid']=$request->input('cateid');
+        $data['user_role']=session('role'); 
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
+        $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
+        $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
+        // if($data['cateid']==NULL){
+        //     echo 'null';
+        //     echo $orderby;
+        //     echo $orderreal;
+
+        // }else{
+        //     echo $orderby;
+        //     echo $orderreal;
+        //     echo $data['cateid'];
+        // }
+        if($data['cateid']==NULL){
+            $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy($orderby,$orderreal)->paginate(6);
+        }else{
+            $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id',$data['cateid'])->orderBy($orderby,$orderreal)->paginate(6);
+
+        }
+        return view('productspreview',compact('data'));
+    }
+    public function filterprodcategory($id){
+        session();
+        $data['user_role']=session('role');    
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
+        $data['cateid']=$id;
+        $data['categories']=Category::where('category_id',$id)->get();
+        $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
+        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id', $id)->paginate(6);
+        return view('productspreview',compact('data'));
+
+    }
+    public function viewproduct($id){
+        session();
+        $data['user_role']=session('role'); 
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
+        $data['product']=Product::find($id);
+        return view('viewproductpreview', compact('data'));
+    }
 }

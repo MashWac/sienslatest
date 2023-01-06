@@ -33,7 +33,6 @@ Route::middleware(['mustbelogged'])->group(function(){
     Route::get('cart',[FrontController::class,'cartpage']);
     Route::post('checkout',[FrontController::class,'checkout']);
 
-    Route::get('addtocart/{id}',[FrontController::class,'addtocart']);
     Route::get('viewproduct/{id}',[FrontController::class,'viewproduct']);
     Route::post('updatecart',[FrontController::class,'updatequantity']);
     Route::get('deletefromcart/{id}',[FrontController::class,'deletefromcart']);
@@ -41,6 +40,8 @@ Route::middleware(['mustbelogged'])->group(function(){
     Route::post('subquery',[FrontController::class,'submitquery']);
     Route::post('updateaccount',[FrontController::class,'updateuserprofile']);
     Route::get('filterbycate/{id}',[FrontController::class,'filterprodcategory']);
+    Route::post('searchproduct', [FrontController::class,'searchproducts']);
+    Route::post('filterbysort', [FrontController::class,'filterbysort']);
     Route::get('viewreceipt/{id}',[FrontController::class,'viewreceipt']);
 
 
@@ -78,6 +79,19 @@ Route::post('reg-user',[Registration::class,'storeuser']);
 Route::post('authenticate-user',[Registration::class,'signin']);
 Route::get('/',[Registration::class,'landingpage'])->middleware('alreadylogged');
 Route::get('logout',[Registration::class,'logout']);
+
+Route::get('productspreview',[Registration::class,'productspreview']);
+Route::post('filterbysortprev', [Registration::class,'filterbysort']);
+Route::get('filterbycateprev/{id}',[Registration::class,'filterprodcategory']);
+Route::post('searchproductprev', [Registration::class,'searchproducts']);
+Route::get('addtocart/{id}',[FrontController::class,'addtocart']);
+Route::get('viewproductprev/{id}',[Registration::class,'viewproduct']);
+
+
+
+
+
+
 
 
 

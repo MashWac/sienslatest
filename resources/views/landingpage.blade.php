@@ -6,7 +6,7 @@
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                    <img src="/staticimg/home2.png" class="d-block w-100" height="20%" alt="...">
+                    <img src="/staticimg/home2.png" class="d-block w-100 bannerimg" height="20%" alt="...">
                     <div class="carousel-caption">
                         <p class="proddesc">JOIN THE HEALTHY LIFESTYLE.</p>
                         <a href="{{url('login')}}" class="btn btn-warning "id="btnpurch" style="color:white;"> LOGIN</a>

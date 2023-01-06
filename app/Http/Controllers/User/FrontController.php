@@ -32,14 +32,80 @@ class FrontController extends Controller
     }
     public function products(){
         session();
+        $data['cateid']=NULL;
         $data['user_role']=session('role'); 
         $markerterdiscount=Discounts::find(2);
         $discount=$markerterdiscount->discount_percentage;
         $data['discount']=$discount/100;
         $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
-        $data['categorieslist']=Category::all()->where('is_deleted',0);
+        $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
         $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(6);
         return view('user/products',compact('data'));
+    }
+    public function searchproducts(Request $request){
+        session();
+        $data['cateid']=NULL;
+        $data['user_role']=session('role'); 
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
+        $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
+        $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
+        $product=$request->input('searchfield');
+        $data['products']=Product::where('tbl_products.product_name', 'like', '%' .$product . '%')->where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->paginate(6);
+        return view('user/products',compact('data'));
+
+
+    }
+    public function filterbysort(Request $request){
+        session();
+        $str=$request->input('order');
+        if($str=='nameasc'||$str=='priceasc'||$str=='dateasc'){
+            $orderreal='asc';
+            if($str=='nameasc'){
+                $orderby='tbl_products.product_name';
+
+            }elseif($str=='priceasc'){
+                $orderby='tbl_products.unit_price';
+            }else{
+                $orderby='tbl_products.created_at';
+            }
+        }else{
+            $orderreal='desc';
+            if($str=='namedesc'){
+                $orderby='tbl_products.product_name';
+            }elseif($str=='pricedesc'){
+                $orderby='tbl_products.unit_price';
+            }else{
+                $orderby='tbl_products.created_at';                
+            }
+        }
+        $data['cateid']=$request->input('cateid');
+        $data['user_role']=session('role'); 
+        $markerterdiscount=Discounts::find(2);
+        $discount=$markerterdiscount->discount_percentage;
+        $data['discount']=$discount/100;
+        $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
+        $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
+        // if($data['cateid']==NULL){
+        //     echo 'null';
+        //     echo $orderby;
+        //     echo $orderreal;
+
+        // }else{
+        //     echo $orderby;
+        //     echo $orderreal;
+        //     echo $data['cateid'];
+        // }
+        if($data['cateid']==NULL){
+            $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy($orderby,$orderreal)->paginate(6);
+        }else{
+            $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id',$data['cateid'])->orderBy($orderby,$orderreal)->paginate(6);
+
+        }
+        return view('user/products',compact('data'));
+
+
     }
     public function cartpage(){
         $productcart=[];
@@ -83,8 +149,9 @@ class FrontController extends Controller
         $markerterdiscount=Discounts::find(2);
         $discount=$markerterdiscount->discount_percentage;
         $data['discount']=$discount/100;
+        $data['cateid']=$id;
         $data['categories']=Category::where('category_id',$id)->get();
-        $data['categorieslist']=Category::all()->where('is_deleted',0);
+        $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
         $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id', $id)->paginate(6);
         return view('user/products',compact('data'));
 
@@ -116,17 +183,17 @@ class FrontController extends Controller
                 $count=count(session('cart'));
                 $item_array=array('product_ID'=>$id,'Quantity'=>1,'stock'=>$product->stock_available,'price'=>$prodprice,'productname'=>$product->product_name,'subtotal'=>$product->$prodprice);
                 Session::push('cart', $item_array);
-                return redirect('prodpage')->with('status','Item Has Been Added To Cart.');
+                return redirect()->back()->with('status','Item Has Been Added To Cart.');
 
             }
             else{
-                return redirect('prodpage')->with('status','Item Is Already In Cart.');
+                return redirect()->back()->with('status','Item Is Already In Cart.');
             }
         }else{
             $item_array=array('product_ID'=>$id,'Quantity'=>1,'stock'=>$product->stock_available,'price'=>$prodprice,'productname'=>$product->product_name,'subtotal'=>$prodprice);
             $productdata[0]=$item_array;
             Session::put('cart', $productdata);
-            return redirect('prodpage')->with('status','Item Has Been Added To Cart.');
+            return redirect()->back()->with('status','Item Has Been Added To Cart.');
         }
 
     }

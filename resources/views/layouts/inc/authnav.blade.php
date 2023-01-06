@@ -26,6 +26,22 @@
                     {{ __('Register') }}
                 </li>
                 </a>
+                <a class=" navlinks" href="{{url('productspreview')}}">
+                <li class="nav-item navopts">
+                    {{ __('products') }}
+                </li>
+                </a>
+                <a class=" navlinks" href="{{url('register')}}">
+                <li class="navopts"> 
+                <span id="cartdetails">Cart<ion-icon name="cart" size="medium"></ion-icon></span>
+                    <?php if(Session::has('cart')){
+                    $count=count(session('cart'));
+                    echo"<span id=cartCount>$count</span>";
+                    }else
+                    echo"<span id=cartCount>0</span>"
+                    ?>
+                </li>
+                </a>
             </ul>
         </div>
     </div>

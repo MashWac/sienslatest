@@ -10,26 +10,32 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                    <img src="/staticimg/home1.png" class="d-block w-100" height="20%" alt="...">
+                    <img src="/staticimg/home1.png" class="d-block w-100 bannerimg" height="20%" alt="...">
                     <div class="carousel-caption">
                         <p class="proddesc">WELCOME TO OUR HEALTHY LIFESTYLE PLATFORM.</p>
-                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> View Products</a>
+                        
+                        <div class="d-none d-lg-block">
+                            <a href="{{url('prodpage')}}" class="btn btn-warning  " style="color:white;width:fit-content;"> View Products</a>
+                        </div>
                     </div>
                     </div>
                     <div class="carousel-item">
-                    <img src="/staticimg/home3.png" class="d-block w-100" height="20%"alt="...">
-                    <div class="carousel-caption" id="on-de-right" >
-                        <p class="proddesc">GREAT NATURAL DETOXIFIER.</p>
-                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;"> View Products</a>
-                    </div>
+                    <img src="/staticimg/home3.png" class="d-block w-100 bannerimg" height="20%"alt="...">
+                        <div class="carousel-caption" id="on-de-right" >
+                            <p class="proddesc">GREAT NATURAL DETOXIFIER.</p>
+                            <div class="d-none d-lg-block">
+                                <a href="{{url('prodpage')}}" class="btn btn-warning  " style="color:white;width:fit-content;"> View Products</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="carousel-item">
-                    <img src="/staticimg/home5.png"  class="d-block w-100" height="20%"alt="...">
-                    <div class="carousel-caption" id="on-de-right">
-                        <p class="proddesc">REJUVINATE AND ENHANCE VITAL MINERALS AND OIL.</p>
-                        <a href="{{url('prodpage')}}" class="btn btn-warning " style="color:white;">View Products</a>
-
-                    </div>
+                    <img src="/staticimg/home5.png"  class="d-block d-sm-none d-md-block  w-100 bannerimg" height="20%"alt="...">
+                        <div class="carousel-caption" id="on-de-right">
+                            <p class="proddesc" style="margin-left: 30%;">REJUVINATE AND ENHANCE VITAL MINERALS AND OIL.</p>
+                            <div class="d-none d-lg-block">
+                                <a href="{{url('prodpage')}}" class="btn btn-warning  " style="color:white;width:fit-content;"> View Products</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">

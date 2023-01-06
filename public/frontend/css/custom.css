@@ -1,3 +1,6 @@
+body{
+  font-family: 'Lora', serif;
+}
 .navbar{
   background-color: rgb(245, 245, 245);
 
@@ -9,6 +12,9 @@ width: 100%;
 background-image: url(/staticimg/home3.png);
 background-size: cover;
 height: 100vh;
+}
+.bannerimg{
+  max-height: 700px;
 }
 #welcomemessage{
 font-size: xx-large;
