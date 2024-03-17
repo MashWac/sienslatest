@@ -25,7 +25,7 @@
 
                                     
                                 </datalist></div>
-                    <div class="col-md-12"><label class="labels">Phone Number</label><input type="number" class="form-control" name="phone" placeholder="Phone" value="{{$data['user']->telephone}}"></div>
+                    <div class="col-md-12"><label class="labels">Phone Number</label><input type="number" style="width: 100%;height:50px; border:1px solid #ddd" class="form-control" name="phone" placeholder="Phone" value="{{$data['user']->telephone}}"></div>
                     <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control" placeholder="Password" name="password" value=""></div>
                     <div class="col-md-12"><label class="labels">Confirm Password</label><input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password" value=""></div>
                     <div class="col-md-12"><label class="labels">Last Update</label><input readonly type="datetime-local" class="form-control" placeholder="enter address line 2" value="{{$data['user']->updated_at}}"></div>

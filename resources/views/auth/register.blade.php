@@ -1,9 +1,9 @@
 @extends('layouts.authtemplate')
 
 @section('content')
-<main class="py-4" id="regpage" style="background-image: url(/staticimg/regback2.jpg);">
-<div class="container">
-    <div class="row justify-content-center">
+<main class="py-4" id="regpage"  >
+<div class="container" >
+    <div class="row justify-content-center "style="padding-bottom: 50px;" >
         <div class="col-md-6">
             <div class="card" >
                 <div class="card-header">{{ __('Register') }}</div>

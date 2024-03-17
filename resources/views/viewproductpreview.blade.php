@@ -1,8 +1,8 @@
-@extends('layouts.user')
+@extends('layouts.authtemplate')
 @section('content')
 
-<div class="card py-4">
-    <div class="card mb-3" style="max-width:90%;">
+<div class="card py-4" style="border: 0px;">
+    <div class="card mb-3" style="max-width:90%;border:0px;">
         <div class="row g-0">
         
             <div class="col-md-4">

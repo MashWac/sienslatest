@@ -8,7 +8,7 @@
 				<div class="col-md-12">
 					<div class="wrap d-md-flex">
                         <!--image-->
-						<div class="img" style="background-image: url(/staticimg/health1.jpg);">
+						<div class="img" style="background-image: url(/staticimg/healthy1.png);">
 			            </div>
 						<div class="login-wrap p-4 p-md-5">
 			      	<div class="d-flex">

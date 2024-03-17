@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use App\Http\Middleware\adminonly;
 use App\Http\Middleware\AlreadyLogged;
 use App\Http\Middleware\MustbeLogged;
+use App\Http\Middleware\TrackUsers;
 
 class Kernel extends HttpKernel
 {
@@ -70,7 +71,7 @@ class Kernel extends HttpKernel
         'conAdmin'=> adminonly::class,
         'alreadylogged'=>AlreadyLogged::class,
         'mustbelogged'=>MustbeLogged::class,
-
+        'visitor'=>TrackUsers::class,
         
     ];
 }

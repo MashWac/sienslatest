@@ -24,7 +24,7 @@
                         <div class="carousel-caption" id="on-de-right" >
                             <p class="proddesc">GREAT NATURAL DETOXIFIER.</p>
                             <div class="d-none d-lg-block">
-                                <a href="{{url('prodpage')}}" class="btn btn-warning  " style="color:white;width:fit-content;"> View Products</a>
+                                <a href="{{url('prodpage')}}" class="btn btn-warning right_button " style="color:white;width:fit-content;"> View Products</a>
                             </div>
                         </div>
                     </div>
@@ -33,19 +33,12 @@
                         <div class="carousel-caption" id="on-de-right">
                             <p class="proddesc" style="margin-left: 30%;">REJUVINATE AND ENHANCE VITAL MINERALS AND OIL.</p>
                             <div class="d-none d-lg-block">
-                                <a href="{{url('prodpage')}}" class="btn btn-warning  " style="color:white;width:fit-content;"> View Products</a>
+                                <a href="{{url('prodpage')}}" class="btn btn-warning  right_button" style="color:white;width:fit-content;"> View Products</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+
             </div>
         </div>
         <div class="firstcont">
@@ -102,38 +95,42 @@
         </div>
         <div id="productshome">
             <h2 id="productttitleend">OUR PRODUCTS</h2>
-            <hr>
+            <div class="section_divider_home"> 
+                <div class="section_divider_line"> </div>
+            </div>
             <div id="supplements">
                 @foreach($data['topprods'] as $item)
-                            <div class="card productsprofile " style="width: 18rem; height:520px " >
-                                <img src="{{ $item['product_image']}}"  class="card-img-top" height="300px" width="200px" alt="...">
-                                <div class="card-body details" style="position: relative; height: 150px; ">
+                <div class="card productsprofile" style="width: 17rem;  height:350px" >
+                    <img src="{{ $item['product_image']}}"  class="card-img-top" height="180px"alt="...">
+                    <div class="card-body proddetails text-center">
 
-                                    <h5 class="card-title producttitle">{{$item->product_name}}</h5>
-                                    
-                                    <div class="d-grid gap-2 d-md-block" style="position: absolute; bottom: 10%; height: 150px;">
-                                        @if($data['user_role']==3)
-                                            <h6 class="text-center pricetext"style="margin-top: 30%;">{{($item->unit_price)-(($item->unit_price)*($data['discount']))}} KSH<h6>
-                                        @else
-                                            <h6 class="text-center pricetext"style="margin-top: 30%;">{{$item->unit_price}} KSH<h6>
-                                        @endif
-                                        <a href="{{url('viewproduct/'.$item->product_id)}}" class="btn btn-warning "id="btnpurch" style="color:white;"> View Details</a>
-                                        <a href="{{url('addtocart/'.$item->product_id)}}" class="btn btn-primary"> Add To Cart</a>
-                                    </div>
-                                </div>
+                        <h5 class="card-title producttitle" style="font-size: 18px;">{{$item->product_name}}</h5>
+                        
+                        <div class="detailssection" style="margin-top:10px">
+                            @if($data['user_role']==3)
+                                <h6 class="text-center pricetext"style="margin-top: 5px;">{{($item->unit_price)-(($item->unit_price)*($data['discount']))}} KSH<h6>
+                            @else
+                                <h6 class="text-center pricetext"style="margin-top: 5px;">{{$item->unit_price}} KSH<h6>
+                            @endif
+                            <div class="prodbuttons">
+                                <a href="{{url('viewproduct/'.$item->product_id)}}" class="btn btn-warning btn-sm "id="btnpurch" style="color:white;"> View Details</a>
+                                <a href="{{url('addtocart/'.$item->product_id)}}" class="btn btn-primary btn-sm"> Add To Cart</a>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
                 @endforeach
                 <a href="{{url('prodpage')}}">
-                <div class="card productsprofile" style="width: 11rem; margin-top:15%;">
+                <button class="btn btn-primary productsprofile" id="view_more_btn" style="width: 11rem; margin-top:15%;">
                 
                     <div>
-                        <h3 class="callactmore">VIEW MORE</h3>
+                        <h3 class="callactmore" style="color: whitesmoke;">VIEW MORE</h3>
                     </div>
                     <div>
-                    <ion-icon id="arrowcall" name="arrow-round-forward"></ion-icon>
+                    <ion-icon id="arrowcall" name="arrow-round-forward" style="color: whitesmoke;"></ion-icon>
                     </div>
-                </div>
+                </button>
                 </a>
             </div>
         </div>

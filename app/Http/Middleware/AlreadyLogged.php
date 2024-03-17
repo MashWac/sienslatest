@@ -16,7 +16,7 @@ class AlreadyLogged
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->has('logged')&&(url('login')==$request->url()||url('register')==$request->url())){
+        if(session()->has('logged')&&(url('login')==$request->url()||url('register')==$request->url()||url('/')==$request->url()||url('productspreview')==$request->url())){
             return back();
         }
         return $next($request);

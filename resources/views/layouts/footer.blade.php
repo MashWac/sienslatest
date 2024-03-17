@@ -2,7 +2,7 @@
     <div id="footer">
         <div>
         <div class="footerinfo">
-            <h5>CONTACTS</h5>
+            <h5 class="footer_titles">CONTACTS</h5>
             <div id="location">
                 <h6 class="condets">OFFICE</h6>
                 <p>VICTORY PLAZA 3RD FLOOR, Thika.</p>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div id="middlefooter" class="footerinfo">
-            <h5>INFORMATION</h5>
+            <h5 class="footer_titles">INFORMATION</h5>
             <div>
                 <ul id="infolinks">
                     <li class="footerlinks">
@@ -43,7 +43,7 @@
 
         </div>
         <div class="footerinfo">
-            <h5>Subscribe</h5>
+            <h5 class="footer_titles">Subscribe</h5>
             <p>Sign up to get the latest on sales, new releases and more...</p>
             <form>
                 <input type="text" placeholder="Enter email address">

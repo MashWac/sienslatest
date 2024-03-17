@@ -1,5 +1,9 @@
 body{
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+}
+body, h5,h6,h3,h4,h2,h1,p,li,a{
+  font-family: 'Kanit', sans-serif;
+
 }
 .navbar{
   background-color: rgb(245, 245, 245);
@@ -14,12 +18,34 @@ background-size: cover;
 height: 100vh;
 }
 .bannerimg{
-  max-height: 700px;
+  height: 70vh;
+  min-height:300px;
+  /* max-height: 600px;   */
+}
+.default_buttons{
+  color:white;
+  background-color:#cf8e02;
+
+}
+.secondary_buttons{
+  color: whitesmoke;
+  background-color: #1f85d8;
+}
+.section_divider_home{
+  width: 100%;
+}
+.section_divider_line{
+  width: 5%;
+  height: 1px;
+  margin: 0 auto;
+  border-bottom: #F49F28 5px solid;
 }
 #welcomemessage{
 font-size: xx-large;
 color: rgb(245, 245, 245);
-font-family: 'Kaushan Script', cursive;
+font-family: 'Kanit', sans-serif;
+
+/* font-family: 'Kaushan Script', cursive; */
 /* font-family: 'Lobster', cursive; */
 /* font-family: 'Lora', serif; */
 }
@@ -30,11 +56,19 @@ padding-top: 10%;
 }
 .proddesc{
 color: rgb(246, 247, 247);
-font-size: 3vw;
+font-size: 2.5vw;
 font-family: 'Kanit', sans-serif;
 }
+#courasel{
+  height: 70vh;
+  min-height:300px;
+  display: block;
+  overflow: hidden;
+  /* max-height: 600px; */
+
+}
 .carousel-caption {
-left: 10%;
+left: 2%;
 text-align: left;
 max-width: 30%;
 right: auto;
@@ -42,7 +76,7 @@ padding:5px;
 top:30%;
 }
 #on-de-right{
-right: 10%;
+right: 2%;
 text-align: right;
 max-width: 30%;
 left: auto;
@@ -50,22 +84,61 @@ padding:5px;
 top:30%;
 }
 
+.landing_carousel_items>.carousel-item{
+  transition: all 0.5s ease-in;
+
+}
+
+#importrews{
+  display: flex;
+  width:100%;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.loginsign{
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+}
+.become_a_member{
+  width: 50%;
+  min-width: 250px;
+  float:left;
+  background-color: #f1a815;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.already_a_member{
+  width: 50%;
+  min-width: 250px;
+  float: left;
+  background-color: #1f85d8;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .navopts{
   margin-right: 15px;
-  margin-left: 15px;
   margin-top: 20px;
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 20px;
+  margin-bottom: 10px;
 }
-.navopts:hover{
- 
-  background-color: rgba(0, 212, 250, 0.418);
-  border-radius: 3px;
+.nav-item:hover{
+  border-bottom: #cf8e02 2px solid;
 }
 .navlinks{
-  font-family: 'Oxygen', sans-serif;
+  /* font-family: 'Oxygen', sans-serif; */
+  font-family: 'Kanit', sans-serif;
+
   font-size: 14px;
   text-decoration: none;
   color:black;
@@ -115,14 +188,20 @@ color: black;
   color: rgb(0, 0, 0);
   padding-top:10% ;
   font-size: 45px;
-  font-family: 'Concert One', cursive;
+  font-family: 'Kanit', sans-serif;
+
+  /* font-family: 'Concert One', cursive; */
 }
 #companyname{
   color: rgb(64, 130, 230);
-  font-family: 'League Gothic', sans-serif;
+  font-family: 'Kanit', sans-serif;
+
+  /* font-family: 'League Gothic', sans-serif; */
   padding-top:10%;
   font-size: 60px;
 }
+
+
 
 
 #logowel{
@@ -167,7 +246,7 @@ margin-right: 8%;
     font-family: 'Goldman', cursive;
     font-family: 'Kanit', sans-serif; */
     /* font-family: 'Lobster', cursive; */
-    font-family: 'Merriweather', serif;
+    /* font-family: 'Merriweather', serif; */
     /* font-family: 'Patua One', cursive; */
     /* font-family: 'Prompt', sans-serif;
     font-family: 'Righteous', cursive;
@@ -176,7 +255,9 @@ margin-right: 8%;
     font-family: 'Secular One', sans-serif;
     font-family: 'Varela Round', sans-serif;
     font-family: 'Vollkorn', serif; */
-    font-size: 20px;
+    font-family: 'Kanit', sans-serif;
+
+    font-size: 15px;
 }
 .proddetails{
   position: relative;
@@ -192,6 +273,12 @@ margin-right: 8%;
   margin: 20px;
   height:fit-content;
 }
+
+#view_more_btn:hover{
+  background-color: #f1a815;
+  color: whitesmoke;
+  border: 1px solid #f1a815;
+}
 .prodsectionprodpage{
   display: block;
   width:80%;
@@ -199,13 +286,16 @@ margin-right: 8%;
 }
 .social-links{
   text-decoration: none;
+  color: black;
 }
 .productsprofile:hover{
   background-color: rgb(233, 233, 233);  
 }
 .callactmore{
   color: rgb(64, 130, 230);
-  font-family: 'Concert One', cursive;
+  font-family: 'Kanit', sans-serif;
+
+  /* font-family: 'Concert One', cursive; */
 }
 #arrowcall{
   font-size: 40px;
@@ -219,15 +309,21 @@ margin-right: 8%;
 }
 #footer{
 
-  font-family: 'Vollkorn', serif;
+  /* font-family: 'Vollkorn', serif; */
+  font-family: 'Kanit', sans-serif;
   display:grid;
   justify-content: center;
-  background-color: rgb(233, 198, 0);
+  background-color: #f1a815;
   position: sticky;
   top: 100%;
-  margin-top: 5%;
+  margin-top: 20px;
   padding-top: 20px;
+  width: 100%;
  
+}
+.footer_titles{
+  font-family: 'Kanit', sans-serif;
+
 }
 .footerinfo{
   color: black;
@@ -255,7 +351,9 @@ margin-right: 8%;
   margin-left: 4%;
   margin-top: 30px;
   margin-bottom: 10px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Kanit', sans-serif;
+
+  /* font-family: 'Roboto', sans-serif; */
 }
 
 
@@ -263,7 +361,9 @@ margin-right: 8%;
   color: rgb(0, 0, 0);
   margin-left: 6%;
   margin-right: 20%;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Kanit', sans-serif;
+
+  /* font-family: 'Ubuntu', sans-serif; */
 
 }
 #aboutlogo{
@@ -292,7 +392,9 @@ margin-right: 8%;
 .contactlabels{
   width:190px;
   display: inline-block;
-  font-family: 'Oxygen', sans-serif;
+  font-family: 'Kanit', sans-serif;
+
+  /* font-family: 'Oxygen', sans-serif; */
 }
 #findus{
   height: fit-content;
@@ -307,7 +409,16 @@ margin-right: 8%;
   justify-content: center;
   margin: auto;  
 }
+#filterbar{
+  display:flex;  
+  width: 100%;
+  overflow: visible;
+  justify-content: end;
+  align-items: end;
+
+}
 #filters{
+  width: 80%;
   list-style: none;
 }
 .filteropts{
@@ -318,7 +429,9 @@ margin-right: 8%;
 .filteropts>a{
   text-decoration: none;
   color: black;
-  font-family: 'Oxygen', sans-serif;
+  font-family: 'Kanit', sans-serif;
+
+  /* font-family: 'Oxygen', sans-serif; */
 
 }
 .filteropts>a:hover{
@@ -327,6 +440,37 @@ margin-right: 8%;
   border-radius: 0.5rem;
   color: white;
   background-color: rgb(64, 130, 230);
+}
+
+.floating_side_bar{
+  border-radius: 0.4rem;
+  box-shadow: 5px 5px 5px 5px #ddd;
+  max-width: 250px;
+  position: fixed;
+  top:30vh;
+  left:5px;
+  border-radius: 0.4rem;
+
+}
+.floating_side_bar_content{
+  display: block;
+  overflow: auto;
+  max-height: 60vh;
+  margin-bottom: 10px;
+}
+
+
+.floating_icon{
+  font-size: 40px;
+  color: #1f85d8;
+}
+
+#regpage{
+  width: 100%;
+  background-image: url(/staticimg/running4.png);
+  background-size: cover;
+  margin-bottom: -50px;
+  padding-bottom: 80px;
 }
 
 @media print {
@@ -376,7 +520,9 @@ h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
   line-height: 1.5;
   font-weight: 400;
-  font-family: "Lato", Arial, sans-serif;
+  font-family: 'Kanit', sans-serif;
+
+  /* font-family: "Lato", Arial, sans-serif; */
   color: #000; }
 
 .bg-primary {
@@ -691,7 +837,9 @@ position: absolute;
 top: -48px;
 left: 0;
 z-index: 1;
-font-family: sans-serif, serif;
+font-family: 'Kanit', sans-serif;
+
+/* font-family: sans-serif, serif; */
 color: #ccc;
 opacity: 0.9;
 }
@@ -733,9 +881,7 @@ left: 19px;
 }
 
 .frebo{
-font-family: 'Kanit', sans-serif;
-
-margin: 20%;
+  font-family: 'Kanit', sans-serif;
 
 }
 
@@ -799,3 +945,8 @@ margin: 20%;
   overflow-y:auto;
 }
 
+.section_divider_div{
+  border-bottom: #cf8e02 5px solid;
+  width:40px;
+  height:2px;
+}

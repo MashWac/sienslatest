@@ -51,6 +51,14 @@
 }
 
 /*           Font Smoothing      */
+.quickdata{
+    float: left;
+    width:18rem;
+    margin: 30px;
+}
+.dashbody{
+    width: 100%;
+}
 
 body,
 h1,

@@ -13,6 +13,8 @@ use App\Models\Orderdetails;
 use Illuminate\Support\Facades\Session;
 use App\Models\QueryModel;
 use App\Models\Countries;
+use App\Models\DiseaseModel;
+use App\Models\MessagesModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,16 +32,19 @@ class FrontController extends Controller
         $data['topprods']=Product::where('is_deleted',0)->orderBy('prodpriority','DESC')->paginate(3);
         return view('user/homepage', compact('data'));
     }
-    public function products(){
+    public function products(Request $request){
         session();
         $data['cateid']=NULL;
         $data['user_role']=session('role'); 
         $markerterdiscount=Discounts::find(2);
+        $data['product_max_price']=Product::max('unit_price');
         $discount=$markerterdiscount->discount_percentage;
         $data['discount']=$discount/100;
         $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
         $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
-        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(6);
+        $data['diseases']=DiseaseModel::select('disease_id','disease_name',)->get();
+        $data['product_max_price']=Product::max('unit_price');
+        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(6)->appends($request->all());
         return view('user/products',compact('data'));
     }
     public function searchproducts(Request $request){
@@ -52,14 +57,14 @@ class FrontController extends Controller
         $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
         $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
         $product=$request->input('searchfield');
-        $data['products']=Product::where('tbl_products.product_name', 'like', '%' .$product . '%')->where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->paginate(6);
+        $data['products']=Product::where('tbl_products.product_name', 'like', '%' .$product . '%')->where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->paginate(6)->appends($request->all());
         return view('user/products',compact('data'));
 
 
     }
     public function filterbysort(Request $request){
-        session();
-        $str=$request->input('order');
+        $str=$request->input('product_order');
+
         if($str=='nameasc'||$str=='priceasc'||$str=='dateasc'){
             $orderreal='asc';
             if($str=='nameasc'){
@@ -87,23 +92,444 @@ class FrontController extends Controller
         $data['discount']=$discount/100;
         $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
         $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
-        // if($data['cateid']==NULL){
-        //     echo 'null';
-        //     echo $orderby;
-        //     echo $orderreal;
+        $data['search_product']=$request->input('search_product');
 
-        // }else{
-        //     echo $orderby;
-        //     echo $orderreal;
-        //     echo $data['cateid'];
-        // }
-        if($data['cateid']==NULL){
-            $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy($orderby,$orderreal)->paginate(6);
+        $data['ailment']=$request->input('ailment');
+        $data['min_price']=intval($request->input('minimum_price'));
+        $data['max_price']=intval($request->input('max_price'));
+        $product_max_price=Product::max('unit_price');
+        $data['in_stock']=$request->input("in_stock");
+        $data['discounted']=$request->input('discounted'); 
+        if($data["search_product"]!=null){
+            if($data['cateid']==NULL){
+                if($data['ailment']!="all"){
+                    if($data['in_stock']!='in_stock'){
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+    
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->whereNotNull('tbl_products.discounted')
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());          
+                          }
+                    }else{
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }
+                    }
+    
+                }else{
+    
+                    if($data['in_stock']!='in_stock'){
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }else{
+                            $data['products']=Product::
+                            where('tbl_products.is_deleted',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                   
+                         }
+                    }else{
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                   
+                         }else{
+                            $data['products']=Product::
+                            where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }
+                    }
+                }
+            }
+            else{
+                if($data['ailment']!="all"){
+                    if($data['in_stock']!='in_stock'){
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                    
+                        }
+                    }else{
+                        if($data['discounted']!='discounted'){
+    
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+    
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                    
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+    
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all()); 
+                        }
+                    }
+    
+                }else{
+                    if($data['in_stock']!='in_stock'){
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+    
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+    
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }
+                    }else{
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
+
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.stock_available','>',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }
+                    }
+                }
+            }
+
         }else{
-            $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id',$data['cateid'])->orderBy($orderby,$orderreal)->paginate(6);
+            if($data['cateid']==NULL){
+                if($data['ailment']!="all"){
+                    if($data['in_stock']!='in_stock'){
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+    
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->whereNotNull('tbl_products.discounted')
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());          
+                          }
+                    }else{
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }
+                    }
+    
+                }else{
+    
+                    if($data['in_stock']!='in_stock'){
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }else{
+                            $data['products']=Product::
+                            where('tbl_products.is_deleted',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                   
+                         }
+                    }else{
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                   
+                         }else{
+                            $data['products']=Product::
+                            where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }
+                    }
+                }
+            }
+            else{
+                if($data['ailment']!="all"){
+                    if($data['in_stock']!='in_stock'){
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+    
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                    
+                        }
+                    }else{
+                        if($data['discounted']!='discounted'){
+    
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+    
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                    
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
+                            ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
+                            ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+                            ->whereNotNull('tbl_products.discounted')
+    
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_diseases.disease_name',$data['ailment'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+    
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all()); 
+                        }
+                    }
+    
+                }else{
+                    if($data['in_stock']!='in_stock'){
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+    
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->whereNotNull('tbl_products.discounted')
+    
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+    
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }
+                    }else{
+                        if($data['discounted']!='discounted'){
+                            $data['products']=Product::
+                            join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->where('tbl_products.stock_available','>',0)
+    
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }else{
+                            $data['products']=Product::
+                            join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
+                            ->where('tbl_products.is_deleted',0)
+                            ->whereNotNull('tbl_products.discounted')
+                            ->where('tbl_products.stock_available','>',0)
+                            ->where('tbl_products.unit_price','>=', $data['min_price'])
+                            ->where('tbl_products.unit_price','<=',$data['max_price'])
+                            ->where('tbl_categories.category_id',$data['cateid'])
+                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                        }
+                    }
+                }
+            }
 
         }
-        return view('user/products',compact('data'));
+
+        if ($data['products']->isEmpty()){ 
+            return response()->json(['error' => 'No products'],404);
+        }else{
+            return view('user.productsearch_view', compact('data'))->render();
+        }
 
 
     }
@@ -143,7 +569,7 @@ class FrontController extends Controller
 
         return view('user/checkout',compact('productcart','transaction_code'));
     }
-    public function filterprodcategory($id){
+    public function filterprodcategory(Request $request,$id){
         session();
         $data['user_role']=session('role');    
         $markerterdiscount=Discounts::find(2);
@@ -152,7 +578,7 @@ class FrontController extends Controller
         $data['cateid']=$id;
         $data['categories']=Category::where('category_id',$id)->get();
         $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
-        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id', $id)->paginate(6);
+        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id', $id)->paginate(6)->appends($request->all());
         return view('user/products',compact('data'));
 
     }
@@ -161,6 +587,8 @@ class FrontController extends Controller
         $data['user_role']=session('role'); 
         $markerterdiscount=Discounts::find(2);
         $discount=$markerterdiscount->discount_percentage;
+
+
         $data['discount']=$discount/100;
         $data['product']=Product::find($id);
         return view('user/viewproduct', compact('data'));
@@ -278,8 +706,9 @@ class FrontController extends Controller
     }
 
     public function submitquery(Request $request){
-        $enquery=new QueryModel();
-        $enquery->user_id=1;
+        $enquery=new MessagesModel();
+        $enquery->user_id=session('user_id');
+        $enquery->serviced='pending';
         $enquery->question=$request->input('subquest');
         if($enquery->save()){
             return redirect('home')->with('status','Query Submitted Successfully.');
@@ -288,5 +717,13 @@ class FrontController extends Controller
             return redirect('home')->with('status','Query Submission Unsuccessful.');
         }
 
+    }
+    public function AutoCompleteProductList(Request $request)
+    {
+        $search_part=preg_replace('/[^\p{L}\p{N}]/u', '',$request->input('query'));
+        $data=Product::where('product_name', 'like', '%'.$search_part. '%')
+        ->select('product_name')->take(5)->get();
+     
+        return response()->json($data);
     }
 }

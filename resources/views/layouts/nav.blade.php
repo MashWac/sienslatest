@@ -48,7 +48,7 @@
             <ul class="navbar-nav ms-auto">
                 <?php if(session('logged')):?>
                 <!-- Authentication Links -->
-                    <li class="nav-item navlinks dropdown">
+                    <li class="navlinks dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family: 'Oxygen', sans-serif; font-size:17px; text-transform: capitalize;" v-pre>
                             <ion-icon size="large" name="contact" style="  vertical-align: middle;"></ion-icon>
                              {{ session('surname') }}

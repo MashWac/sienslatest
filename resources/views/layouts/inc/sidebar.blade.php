@@ -32,32 +32,32 @@
                     </li>
                     <li class="nav-item {{ \Illuminate\Support\Facades\Request::is('products') ? 'active' : ''}}">
                         <a class="nav-link" href="{{url('products')}}">
-                            <ion-icon name="rose"></ion-icon>
-                           <p>Products</p>
+                        <ion-icon name="rose-outline"></ion-icon>
+                        <p>Products</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ \Illuminate\Support\Facades\Request::is('diseases') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{url('diseases')}}">
+                        <ion-icon name="warning-outline"></ion-icon>
+                        <p>Diseases</p>
                         </a>
                     </li>
                     <li  class="nav-item {{ \Illuminate\Support\Facades\Request::is('orders') ? 'active' : ''}}">
                         <a class="nav-link" href="{{url('orders')}}">
-                            <ion-icon name="bicycle"></ion-icon>
-                            <p>Orders</p>
+                        <ion-icon name="list-circle-outline"></ion-icon>
+                        <p>Orders</p>
                         </a>
                     </li>
-                    <li  class="nav-item {{ \Illuminate\Support\Facades\Request::is('discounts') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{url('discounts')}}">
-                            <ion-icon name="aperture"></ion-icon>
-                            <p>Discounts</p>
+                    <li  class="nav-item {{ \Illuminate\Support\Facades\Request::is('marketers') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{url('marketers')}}">
+                        <ion-icon name="cash-outline"></ion-icon>
+                        <p>Promoters</p>
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="">
+                    <li class="nav-item {{ \Illuminate\Support\Facades\Request::is('messages') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{url('messages')}}">
                             <ion-icon name="send"></ion-icon>
                             <p>Message</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">
-                            <ion-icon name="help"></ion-icon>
-                            <p>Queries</p>
                         </a>
                     </li>
                 </ul>

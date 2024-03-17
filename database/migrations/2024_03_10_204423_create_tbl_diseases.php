@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_queries', function (Blueprint $table) {
-            $table->increments('query_id');
-            $table->integer('user_id');
-            $table->text('question');
+        Schema::create('tbl_diseases', function (Blueprint $table) {
+            $table->increments('disease_id');
+            $table->string('disease_name')->unique();
+            $table->string('short_description');
+            $table->text('information');
             $table->timestamp('created_at')->nullable();
             $table->dateTime('updated_at');
             $table->integer('is_deleted')->default(0);
-            
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        
+        Schema::dropIfExists('tbl_diseases');
     }
 };

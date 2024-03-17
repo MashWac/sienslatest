@@ -4,10 +4,13 @@ use App\Http\Controllers\Admin\DiscountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DiseaseController;
 use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\FrontendController;
+use App\Http\Controllers\Admin\MarketersController;
+use App\Http\Controllers\Admin\MessagesController;
 use App\Http\Controllers\User\FrontController;
 use App\Http\Controllers\User\IpnController;
 use Bryceandy\Laravel_Pesapal\Http\Controllers\PaymentController;
@@ -41,8 +44,11 @@ Route::middleware(['mustbelogged'])->group(function(){
     Route::post('updateaccount',[FrontController::class,'updateuserprofile']);
     Route::get('filterbycate/{id}',[FrontController::class,'filterprodcategory']);
     Route::post('searchproduct', [FrontController::class,'searchproducts']);
-    Route::post('filterbysort', [FrontController::class,'filterbysort']);
+    Route::get('filter_products', [FrontController::class,'filterbysort']);
     Route::get('viewreceipt/{id}',[FrontController::class,'viewreceipt']);
+    Route::get('autocompleteproductlist_main', [FrontController::class,'AutoCompleteProductList']);
+
+    
 
 
     Route::get('aboutus', function(){
@@ -73,22 +79,20 @@ Route::get('pesapal-ipn-listener', IpnController::class,'__invoke');
 
 
 
-Route::get('register',[Registration::class,'registration'])->middleware('alreadylogged');
-Route::get('login',[Registration::class,'login'])->middleware('alreadylogged');
+Route::get('register',[Registration::class,'registration'])->middleware(['alreadylogged','visitor']);
+Route::get('login',[Registration::class,'login'])->middleware(['alreadylogged','visitor']);
 Route::post('reg-user',[Registration::class,'storeuser']);
 Route::post('authenticate-user',[Registration::class,'signin']);
-Route::get('/',[Registration::class,'landingpage'])->middleware('alreadylogged');
+Route::get('/',[Registration::class,'landingpage'])->middleware(['alreadylogged','visitor']);
 Route::get('logout',[Registration::class,'logout']);
 
-Route::get('productspreview',[Registration::class,'productspreview']);
-Route::post('filterbysortprev', [Registration::class,'filterbysort']);
+Route::get('productspreview',[Registration::class,'productspreview'])->middleware(['alreadylogged','visitor']);
+Route::get('filter_products_registration', [Registration::class,'filterbysort']);
 Route::get('filterbycateprev/{id}',[Registration::class,'filterprodcategory']);
 Route::post('searchproductprev', [Registration::class,'searchproducts']);
 Route::get('addtocart/{id}',[FrontController::class,'addtocart']);
 Route::get('viewproductprev/{id}',[Registration::class,'viewproduct']);
-
-
-
+Route::get('autocompleteproductlist_registration', [Registration::class,'AutoCompleteProductList']);
 
 
 
@@ -143,6 +147,39 @@ Route::middleware(['conAdmin'])->group(function(){
     Route::get('orders', [OrderController::class,'orderlist']);
     Route::get('view-orderdetails/{id}', [OrderController::class,'vieworder']);
     Route::get('complete-order/{id}', [OrderController::class,'updateorder']);
+
+    Route::get('messages', [MessagesController::class,'index']);
+    Route::post('sendingquery', [MessagesController::class,'servicemessage']);
+
+    Route::get('marketers', [MarketersController::class,'Index']);
+    Route::get('add_invoice', [MarketersController::class,'AddInvoices']);
+    Route::get('autocompletepromoter', [MarketersController::class,'AutoCompletePromoter']);
+    Route::get('autocompleteproductlist', [MarketersController::class,'AutoCompleteProductList']);
+    Route::get('insert_invoice', [MarketersController::class,'InsertInvoice']);
+    Route::get('view_invoices', [MarketersController::class,'ViewInvoices']);
+    Route::get('edit_invoice/{id}', [MarketersController::class,'EditInvoices']);
+    Route::get('update_invoice', [MarketersController::class,'UpdateInvoice']);
+    Route::get('delete_invoice/{id}', [MarketersController::class,'DeleteInvoice']);
+
+
+    
+    Route::get('add_receipt', [MarketersController::class,'AddReceipt']);
+    Route::get('insert_receipt', [MarketersController::class,'InsertReceipt']);
+    Route::get('view_receipts', [MarketersController::class,'ViewReceipts']);
+    Route::get('edit_receipt/{id}', [MarketersController::class,'EditReceipts']);
+    Route::get('update_receipt', [MarketersController::class,'UpdateReceipt']);
+    Route::get('delete_receipt/{id}', [MarketersController::class,'DeleteReceipt']);
+    
+
+    
+
+    Route::get('diseases', [DiseaseController::class,'index']);
+    Route::get('add-disease', [DiseaseController::class,'AddDisease']);
+    Route::get('insert_disease', [DiseaseController::class,'InsertDisease']);
+    Route::get('edit-disease/{id}', [DiseaseController::class,'Edit_disease']);
+    Route::get('update_disease', [DiseaseController::class,'UpdateDisease']);
+    Route::get('delete_disease/{id}', [DiseaseController::class,'DeleteDisease']);
+
     
 });
 

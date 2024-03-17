@@ -26,23 +26,47 @@
     <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Lora:wght@500&family=Oswald&family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat&family=Open+Sans:ital@0;1&family=Poppins:wght@300;400&family=Raleway:ital,wght@0,400;1,300&family=Red+Hat+Mono&family=Roboto+Condensed&family=Roboto:ital,wght@0,400;1,300&family=Source+Sans+Pro:ital,wght@0,400;1,300&family=Ubuntu:ital@0;1&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js" integrity="sha512-vNrhFyg0jANLJzCuvgtlfTuPR21gf5Uq1uuSs/EcBfVOz6oAHmjqfyPoB5rc9iWGSnVE41iuQU4jmpXMyhBrsw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.tiny.cloud/1/kssr4fuqfumvhklu1ppthrz6l42rwe99sw91ntfumeihua3h/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    
     <!-- Styles -->
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/slider.css') }}" rel="stylesheet">
+
 </head>
 @include('layouts.nav')
 <body>
     <div class="mainbody">
     @yield('content')
 
+        <div class="floating-icons" style="position: fixed; bottom:8%; right:3%;">
+            <a href="" style="">
+                <div class="whatsapp-icon" style="background-color:rgba(255,255,255,0.6); border-radius:0.4rem;margin-bottom: 5px;">
+                    <ion-icon name="logo-whatsapp" class="floating_icon"></ion-icon>
+                </div>
+            </a>
+            <a href=""style="">
+                <div class="facebook-icon" style="background-color:rgba(255,255,255,0.6); border-radius:0.4rem; margin-bottom: 5px;">
+                    <ion-icon name="logo-facebook" class="floating_icon"></ion-icon>
+                </div>
+            </a>
+            <!-- <a href=""style="margin-bottom: 5px;">
+                <div class="mail-icon" style="background-color:rgba(255,255,255,0.6); border-radius:0.4rem">
+                    <ion-icon name="mail-outline" class="floating_icon"></ion-icon>
+                </div>
+            </a> -->
+
+        </div>
+
     </div>
 
 
     <!--- Scripts-->
-    <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}" defer></script>
+    <script src="{{ asset('frontend/js/slider.js') }}" defer></script>
     <!-- <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}" defer></script> -->
 
     <script src="{{ asset('frontend/js/paycalc.js') }}" defer></script>
@@ -51,12 +75,14 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     @if(session('status'))
     <script>
         swal("{{session('status')}}")
     </script>
     @endif
+    @yield('scripts')
     @include('layouts.footer')
 
 </body>
