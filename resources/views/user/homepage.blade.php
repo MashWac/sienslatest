@@ -100,11 +100,11 @@
             </div>
             <div id="supplements">
                 @foreach($data['topprods'] as $item)
-                <div class="card productsprofile" style="width: 17rem;  height:350px" >
+                <div class="card productsprofile" style="width: 16rem;  height:350px" >
                     <img src="{{ $item['product_image']}}"  class="card-img-top" height="180px"alt="...">
                     <div class="card-body proddetails text-center">
 
-                        <h5 class="card-title producttitle" style="font-size: 18px;">{{$item->product_name}}</h5>
+                        <h5 class="card-title producttitle" >{{$item->product_name}}</h5>
                         
                         <div class="detailssection" style="margin-top:10px">
                             @if($data['user_role']==3)

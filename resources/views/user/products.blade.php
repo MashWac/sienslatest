@@ -28,15 +28,17 @@
                     </li>
                 </ul>     
             </div>
+            <div class="productand_filter_area">
+
             @include('user.floating_side_filters')
             <div class="prodsectionprodpage container-fluid">
-                <div class="row justify-content-end">
+                <div class="row justify-content-center">
                 @foreach($data['products'] as $item)
-                        <div class="card productsprofile" style="width: 17rem;  height:350px" >
+                        <div class="card productsprofile" style="width: 16rem;  height:350px" >
                             <img src="{{ $item['product_image']}}"  class="card-img-top" height="180px"alt="...">
                             <div class="card-body proddetails text-center">
 
-                                <h5 class="card-title producttitle" style="font-size: 18px;">{{$item->product_name}}</h5>
+                                <h5 class="card-title producttitle" >{{$item->product_name}}</h5>
                                 
                                 <div class="detailssection" style="margin-top:10px">
                                     @if($data['user_role']==3)
@@ -56,6 +58,7 @@
                 <div class="text-center d-flex justify-content-center">
                         {{ $data['products']->links('pagination::bootstrap-4') }}
                 </div>
+            </div>
             </div>
 
         </div>
