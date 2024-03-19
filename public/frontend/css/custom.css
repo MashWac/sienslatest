@@ -283,8 +283,7 @@ margin-right: 8%;
   border: 1px solid #f1a815;
 }
 .prodsectionprodpage{
-  display: block;
-  width:68%;
+  width:100%;
 }
 .social-links{
   text-decoration: none;
@@ -415,8 +414,8 @@ margin-right: 8%;
   display:flex;  
   width: 100%;
   overflow: visible;
-  justify-content: end;
-  align-items: end;
+  justify-content: center;
+  align-items: center;
 
 }
 #filters{
@@ -450,21 +449,25 @@ margin-right: 8%;
 .productand_filter_area{
   padding: 3%;
 }
+.products_container{
+  width: 100%;
+  display: block;
+  overflow: auto;
+  padding:20px;
+}
+.products_container>.productsprofile{
+  float: left;
+
+}
 
 .floating_side_bar{
   border-radius: 0.4rem;
   box-shadow: 5px 5px 5px 5px #ddd;
-  max-width: 250px;
-  border-radius: 0.4rem;
-  width: 28%;
-  min-width: 280px;
+  width: 80%;
+  padding: 10px;
+  border:#cf8e02 3px solid;
+  margin-top: 20px;
 
-}
-.floating_side_bar_content{
-  display: block;
-  overflow: auto;
-  max-height: 60vh;
-  margin-bottom: 10px;
 }
 
 
@@ -751,10 +754,9 @@ font-size: 15px;
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
 
 .quote-wrapper {
-width: 300px;
-height: 300px;
+width: 150px;
+height: 150px;
 position: relative;
-margin: 10vh auto 0; /*OPTIONAL MARGIN*/
 }
 
 .text {
@@ -838,13 +840,13 @@ text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.3);
 
 .quote-wrapper::before {
 content: "\201C";
-font-size: 270px;
+font-size: 150px;
 height: 82px;
 line-height: 0.78;
 line-height: 1;
 position: absolute;
-top: -48px;
-left: 0;
+top: 0px;
+left: 0px;
 z-index: 1;
 font-family: 'Kanit', sans-serif;
 
@@ -855,12 +857,12 @@ opacity: 0.9;
 
 @media (min-width: 850px) {
 .quote-wrapper {
-  width: 370px;
-  height: 370px;
+  width: 250px;
+  height: 250px;
 }
 
 .quote-wrapper::before {
-  font-size: 300px;
+  font-size: 150px;
 }
 
 .text p {

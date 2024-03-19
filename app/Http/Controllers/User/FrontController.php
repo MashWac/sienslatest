@@ -44,7 +44,7 @@ class FrontController extends Controller
         $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
         $data['diseases']=DiseaseModel::select('disease_id','disease_name',)->get();
         $data['product_max_price']=Product::max('unit_price');
-        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(6)->appends($request->all());
+        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(8)->appends($request->all());
         return view('user/products',compact('data'));
     }
     public function searchproducts(Request $request){
@@ -57,7 +57,7 @@ class FrontController extends Controller
         $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
         $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
         $product=$request->input('searchfield');
-        $data['products']=Product::where('tbl_products.product_name', 'like', '%' .$product . '%')->where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->paginate(6)->appends($request->all());
+        $data['products']=Product::where('tbl_products.product_name', 'like', '%' .$product . '%')->where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->paginate(8)->appends($request->all());
         return view('user/products',compact('data'));
 
 
@@ -85,12 +85,17 @@ class FrontController extends Controller
                 $orderby='tbl_products.created_at';                
             }
         }
-        $data['cateid']=$request->input('cateid');
+
+        $data['cateid']=$request->input('product_category');
+        if($data['cateid']!='all'){
+            $category=Category::where('category_name',$data['cateid'])->first();
+            $data['cateid']=$category->category_id;
+
+        }
         $data['user_role']=session('role'); 
         $markerterdiscount=Discounts::find(2);
         $discount=$markerterdiscount->discount_percentage;
         $data['discount']=$discount/100;
-        $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
         $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
         $data['search_product']=$request->input('search_product');
 
@@ -101,7 +106,7 @@ class FrontController extends Controller
         $data['in_stock']=$request->input("in_stock");
         $data['discounted']=$request->input('discounted'); 
         if($data["search_product"]!=null){
-            if($data['cateid']==NULL){
+            if($data['cateid']=='all'){
                 if($data['ailment']!="all"){
                     if($data['in_stock']!='in_stock'){
                         if($data['discounted']!='discounted'){
@@ -113,7 +118,7 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
     
                         }else{
                             $data['products']=Product::
@@ -122,12 +127,12 @@ class FrontController extends Controller
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_diseases.disease_name',$data['ailment'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->whereNotNull('tbl_products.discounted')
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());          
+                            ->whereNotNull('tbl_products.discount_rate')
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());          
                           }
                     }else{
                         if($data['discounted']!='discounted'){
@@ -141,20 +146,20 @@ class FrontController extends Controller
                             ->where('tbl_diseases.disease_name',$data['ailment'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
                             join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
                             ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.stock_available','>',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }
     
@@ -168,16 +173,16 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
                             where('tbl_products.is_deleted',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                   
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                   
                          }
                     }else{
                         if($data['discounted']!='discounted'){
@@ -188,17 +193,17 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                   
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                   
                          }else{
                             $data['products']=Product::
                             where('tbl_products.is_deleted',0)
                             ->where('tbl_products.stock_available','>',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }
                 }
@@ -218,21 +223,21 @@ class FrontController extends Controller
                             ->where('tbl_categories.category_id',$data['cateid'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
                             join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
                             ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
                             ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
                             ->where('tbl_products.is_deleted',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
                             ->where('tbl_categories.category_id',$data['cateid'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                    
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                    
                         }
                     }else{
                         if($data['discounted']!='discounted'){
@@ -250,7 +255,7 @@ class FrontController extends Controller
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
     
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                    
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                    
                         }else{
                             $data['products']=Product::
                             join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
@@ -258,7 +263,7 @@ class FrontController extends Controller
                             ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.stock_available','>',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
@@ -266,7 +271,7 @@ class FrontController extends Controller
                             ->where('tbl_diseases.disease_name',$data['ailment'])
                             ->where('tbl_categories.category_id',$data['cateid'])
     
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all()); 
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all()); 
                         }
                     }
     
@@ -281,20 +286,20 @@ class FrontController extends Controller
                             ->where('tbl_categories.category_id',$data['cateid'])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
     
                         }else{
                             $data['products']=Product::
                             join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
                             ->where('tbl_products.is_deleted',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_categories.category_id',$data['cateid'])
     
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }else{
                         if($data['discounted']!='discounted'){
@@ -307,26 +312,26 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_categories.category_id',$data['cateid'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
                             join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.stock_available','>',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_categories.category_id',$data['cateid'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }
                 }
             }
 
         }else{
-            if($data['cateid']==NULL){
+            if($data['cateid']=='all'){
                 if($data['ailment']!="all"){
                     if($data['in_stock']!='in_stock'){
                         if($data['discounted']!='discounted'){
@@ -337,7 +342,7 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
     
                         }else{
                             $data['products']=Product::
@@ -346,10 +351,10 @@ class FrontController extends Controller
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->whereNotNull('tbl_products.discounted')
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());          
+                            ->whereNotNull('tbl_products.discount_rate')
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());          
                           }
                     }else{
                         if($data['discounted']!='discounted'){
@@ -361,18 +366,18 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
                             join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
                             ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.stock_available','>',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }
     
@@ -384,14 +389,14 @@ class FrontController extends Controller
                             where('tbl_products.is_deleted',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
                             where('tbl_products.is_deleted',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                   
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                   
                          }
                     }else{
                         if($data['discounted']!='discounted'){
@@ -400,15 +405,15 @@ class FrontController extends Controller
                             ->where('tbl_products.stock_available','>',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                   
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                   
                          }else{
                             $data['products']=Product::
                             where('tbl_products.is_deleted',0)
                             ->where('tbl_products.stock_available','>',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }
                 }
@@ -427,19 +432,19 @@ class FrontController extends Controller
                             ->where('tbl_diseases.disease_name',$data['ailment'])
                             ->where('tbl_categories.category_id',$data['cateid'])
     
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
                             join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
                             ->join('tbl_diseases','tbl_diseases_medications.disease_id','=','tbl_diseases.disease_id')
                             ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
                             ->where('tbl_products.is_deleted',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
                             ->where('tbl_categories.category_id',$data['cateid'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                    
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                    
                         }
                     }else{
                         if($data['discounted']!='discounted'){
@@ -455,7 +460,7 @@ class FrontController extends Controller
                             ->where('tbl_diseases.disease_name',$data['ailment'])
                             ->where('tbl_categories.category_id',$data['cateid'])
     
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());                    
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                    
                         }else{
                             $data['products']=Product::
                             join('tbl_diseases_medications','tbl_products.product_id','=','tbl_diseases_medications.medication_id')
@@ -463,14 +468,14 @@ class FrontController extends Controller
                             ->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.stock_available','>',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
     
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
                             ->where('tbl_categories.category_id',$data['cateid'])
     
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all()); 
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all()); 
                         }
                     }
     
@@ -483,19 +488,19 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_categories.category_id',$data['cateid'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
     
                         }else{
                             $data['products']=Product::
                             join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
                             ->where('tbl_products.is_deleted',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
     
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_categories.category_id',$data['cateid'])
     
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }else{
                         if($data['discounted']!='discounted'){
@@ -507,17 +512,17 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_categories.category_id',$data['cateid'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
                             join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')
                             ->where('tbl_products.is_deleted',0)
-                            ->whereNotNull('tbl_products.discounted')
+                            ->whereNotNull('tbl_products.discount_rate')
                             ->where('tbl_products.stock_available','>',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_categories.category_id',$data['cateid'])
-                            ->orderBy($orderby,$orderreal)->paginate(6)->appends($request->all());
+                            ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }
                 }
@@ -578,7 +583,7 @@ class FrontController extends Controller
         $data['cateid']=$id;
         $data['categories']=Category::where('category_id',$id)->get();
         $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
-        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id', $id)->paginate(6)->appends($request->all());
+        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','category',"=",'tbl_categories.category_id')->where('tbl_categories.category_id', $id)->paginate(8)->appends($request->all());
         return view('user/products',compact('data'));
 
     }

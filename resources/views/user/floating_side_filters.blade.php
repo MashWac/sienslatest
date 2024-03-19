@@ -1,18 +1,27 @@
 <div class="floating_side_bar">
-    <div class="container">
         <div>
             <h4 style="vertical-align: middle;">Product Filter </h4>
         </div>
         <div class="floating_side_bar_content" >
-            <form class="indepth_page_filter" method="GET" id="indepth_page_filter">
-                <div class="col-md-12">
+            <form class="indepth_page_filter row" method="GET" id="indepth_page_filter">
+                <div class="col-sm-3">
                     <label for="datalist_product" class="form-label">Search Product:</label>
                     <input class="form-control product_list_search" list="product_datalist" id="datalist_product" name="search_product" placeholder="Type to search...">
                     <datalist id="product_datalist" class="product_datalist">
 
                     </datalist>
                 </div>
-                <div class="col-md-12">
+                <div class="col-sm-3">
+                    <label for="datalist_product" class="form-label">Category:</label>
+                    <select class="form-select" name="product_category" id="product_category">
+                        <option value="all" selected> Select Category</option>
+                        @foreach($data['categorieslist'] as $things)
+                        <option value="{{$things->category_name}}">{{$things->category_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-sm-3">
                     <label for="disease_type" class="form-label">Ailment:</label>
                     <select class="form-select ailment_select2" name="ailment">
                         <option value="all">Select an Ailment</option>
@@ -21,7 +30,7 @@
                         @endforeach
                     </select>    
                 </div>
-                <div class="col-md-12">
+                <div class="col-sm-3">
                     <label for="inputPassword4" class="form-label">Order By:</label>
                     <select class="form-select" name="product_order">
                         <option value="datedesc">Date Added Descending</option>
@@ -33,7 +42,7 @@
                     </select>
                 </div>
 
-                <div  class="col-md-12">
+                <div  class="col-sm-3">
                     <label for="inputAddress2" class="form-label">Price Range</label>
                     <div class="range_container">
                         <div class="sliders_control">
@@ -50,21 +59,19 @@
                         </div>
                     </div>
                 </div>
-                <div  class="col-md-12">
-                    <label for="inputAddress" class="form-label">In Stock</label>
+                <div  class="col-sm-3">
+                    <label for="inputAddress" class="form-label">In Stock</label><br>
                     <input class="form-check-input" type="checkbox" name="in_stock" value="in_stock" id="flexCheckChecked" checked>
                 </div>
 
-                <div class="col-md-12">
-                    <label for="inputCity" class="form-label">Discounted</label>
+                <div class="col-sm-3">
+                    <label for="inputCity" class="form-label">Discounted</label><br>
                     <input class="form-check-input" type="checkbox" name="discounted" value="discounted" id="flexCheckChecked" checked>
                 </div>
-                <div  class="col-md-12">
+                <div  class="col-sm-12">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
             <button class="btn  btn-warning btn_reset_filters" style="margin-top: 10px;">Reset Filters</button>
         </div>
-    </div>
-
 </div>

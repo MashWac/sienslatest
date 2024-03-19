@@ -42,20 +42,7 @@
             </div>
         </div>
     </div>
-        <!-- <div id="courasel">
-            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                    <img src="/staticimg/home2.png" class="d-block w-100 bannerimg" alt="...">
-                    <div class="carousel-caption">
-                        <p class="proddesc">JOIN THE HEALTHY LIFESTYLE.</p>
-                        <a href="{{url('login')}}" class="btn btn-warning "id="btnpurch" style="color:white;"> LOGIN</a>
-                    </div>
-                    </div>
-                </div>
 
-            </div>
-        </div> -->
         <div class="container">
         <div id="authpages">
 
@@ -111,14 +98,22 @@
                     <div id="mission" style=" margin: 2%;">
                         <div class="quote-wrapper">
                         <blockquote class="text">
-                            <p> <span style="font-size:30px;">OUR VISION</span><br><br> To be a world class health and beauty company of choice. </p>
+                            <p style="font-size: 19px;"> <span style="font-size:22px;">OUR VISION</span><br><br> To be a world class health and beauty company of choice. </p>
                         </blockquote>
                         </div>
                     </div>
                     <div id="concept" style=" margin: 2%;" >
                         <div class="quote-wrapper">
                         <blockquote class="text">
-                            <p> <span style="font-size:30px;">OUR MISSION</span><br><br> Inspire communities to live healthy lifestyles.</p>
+                            <p style="font-size: 19px;"> <span style="font-size:22px;">OUR MISSION</span><br><br> Inspire communities to live healthy lifestyles.</p>
+                        </blockquote>
+                        </div>
+                    </div>
+                    
+                    <div id="concept" style=" margin: 2%;" >
+                        <div class="quote-wrapper">
+                        <blockquote class="text">
+                            <p style="font-size: 19px;"> <span style="font-size:22px;">OUR OBJECTIVE</span><br><br> Promote a healthy lifestyle to over 100,000 people every year.</p>
                         </blockquote>
                         </div>
                     </div>

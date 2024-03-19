@@ -8,31 +8,10 @@
             <div class="section_divider_div"></div>
             </div>
             <div id="filterbar">
-                <ul id="filters">
-                <li class="filteropts"><a href="{{url('productspreview')}}" >All</a></li>
-                    @foreach($data['categories'] as $things)
-                    <li class="filteropts"><a href="{{url('filterbycateprev/'.$things->category_id)}}" >{{$things->category_name}}</a></li>
-                    @endforeach
-
-                    <li class="filteropts">
-                        <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                More Categories
-                            </a>
-
-                            <ul class="dropdown-menu dropping-menu" aria-labelledby="dropdownMenuLink">
-                                @foreach($data['categorieslist'] as $things)
-                                    <li><a class="dropdown-item" href="{{url('filterbycateprev/'.$things->category_id)}}" >{{$things->category_name}}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </li>
-                </ul>     
+                @include('user.floating_side_filters')
             </div>
-            <div class="productand_filter_area">
-            @include('user.floating_side_filters')
             <div class="prodsectionprodpage container-fluid">
-                <div class="row justify-content-center" style="width: 100%;">
+                <div class="products_container" style="width: 100%;">
                     @foreach($data['products'] as $item)
                         <div class="card productsprofile" style="width: 16rem;  height:350px" >
                             <img src="{{ $item['product_image']}}"  class="card-img-top" height="180px"alt="...">
@@ -60,7 +39,6 @@
                 </div>
             </div>
 
-            </div>
 
 
         </div>
