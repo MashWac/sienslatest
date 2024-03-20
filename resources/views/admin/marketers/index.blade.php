@@ -10,10 +10,18 @@
         <div class="card-body">
             <h5>Quick Nav</h5>
             <div class="col-md-8">
-                <a href="{{url('add_receipt')}}" class="btn btn-primary">Add Receipt</a>
-                <a href="{{url('add_invoice')}}" class="btn btn-success">Add Invoices</a>
-                <a href="{{url('view_receipts')}}"class="btn btn-warning">View Receipt</a>
-                <a href="{{url('view_invoices')}}" class="btn btn-danger">View Invoices</a>
+                <div style="float: left;">
+                <a href="{{url('add_receipt')}}" class="btn btn-primary">Add Receipt</a><br>
+                <a href="{{url('view_receipts')}}"class="btn btn-warning" style="margin-top:10px">View Receipt</a>
+
+                </div>
+
+                <div style="float:left; margin-left:30px;">                
+                <a href="{{url('add_invoice')}}" class="btn btn-success">Add Invoices</a><br>
+
+                <a href="{{url('view_invoices')}}" class="btn btn-danger"  style="margin-top:10px">View Invoices</a>
+                </div>
+
             </div>
         </div>
     </div>
