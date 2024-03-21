@@ -157,6 +157,13 @@ class MarketersController extends Controller
      
         return response()->json($data);
     }
+    public function GetPromoter(Request $request)
+    {
+        $search_part=preg_replace('/[^\p{L}\p{N}]/u', '',$request->input('query'));
+        $data=User::find($search_part);
+     
+        return response()->json($data);
+    }
     public function AutoCompleteProductList(Request $request)
     {
         $search_part=preg_replace('/[^\p{L}\p{N}]/u', '',$request->input('query'));

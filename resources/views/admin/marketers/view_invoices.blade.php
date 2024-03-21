@@ -59,7 +59,7 @@
         </div>
         <div class="text-center d-flex justify-content-center">
 
-        {{ $data['diseases']->links('pagination::bootstrap-4') }}
+        {{ $data['invoices']->links('pagination::bootstrap-4') }}
 
         </div>
     </div>

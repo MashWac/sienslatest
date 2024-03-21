@@ -21,7 +21,8 @@
                     </div>
                     <div class="col-md-6">
                         <label for="promoters" class="form-label">Search Promoter:</label>
-                        <input class="form-control promoter_list_search" list="promoters_datalist" name="promoters"  id="promoters" placeholder="Type to search...">
+                        <input class="form-control promoter_list_search" list="promoters_datalist" name="promoters" onfocusout="updateHiddenField(this)"  id="promoters" placeholder="Type to search...">
+                        <input type="text" disabled class="promoter_name" value="">
                         <datalist id="promoters_datalist">
             
                         </datalist>
@@ -38,25 +39,28 @@
                     <div class="col-md-12">
                         <h4>Products</h4>
                         <div class="show_item">
-                            <div class="row">
-                                <div class="col-md-4">
+                            <div class="row product_row">
+                                <div class="col-sm-2 row_count">
+                                    <label for="">Row Count</label>
+                                    <input type="text" style="border: 0px;" value="1" class="row_count_number" disabled>
+                                </div>
+                                <div class="col-md-3">
                                     <label for="">Product Name:</label>
                                     <input class="form-control product_list_search" id="product_detail" list="product_datalist" name="products[]"  placeholder="Type to search...">
                                     <datalist id="product_datalist" class="product_datalist">
                                     </datalist>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="">Product Quantity:</label>
                                     <input type="number" class="form-control" name="quantities[]">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="">Add/Remove</label><br>
                                     <button class="btn btn-success add_item_btn">Add More</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary" id="create_invoice_btn">Create Invoice</button>
                     </div>
@@ -85,9 +89,10 @@
                     </div>
                     <div class="col-md-6">
                         <label for="promoters" class="form-label">Search Promoter:</label>
-                        <input class="form-control promoter_list_search" list="promoters_datalist" name="promoters" value="{{$data['invoice']->promoter_id}}"  id="promoters" placeholder="Type to search...">
+                        <input class="form-control promoter_list_search" list="promoters_datalist" name="promoters" value="{{ $data['invoice']->promoter_id }}"  onfocusout="updateHiddenField(this)" id="promoters" placeholder="Type to search...">
+                        <input type="text" disabled class="promoter_name" value="{{$data['invoice']->firstname}} {{$data['invoice']->surname}}">
                         <datalist id="promoters_datalist">
-                
+            
                         </datalist>
                     </div>
                     <div class="col-md-6">
@@ -103,18 +108,22 @@
                         <h4>Products</h4>
                         <div class="show_item">
                         @foreach($data['invoice']->combined_array as $things=>$values)  
-                            <div class="row">
-                                <div class="col-md-4">
+                            <div class="row product_row">
+                                <div class="col-sm-2 row_count">
+                                    <label for="">Row Count</label>
+                                    <input type="text" style="border: 0px;" value="{{intval($things)+1}}" class="row_count_number" disabled>
+                                </div>
+                                <div class="col-md-3">
                                     <label for="">Product Name:</label>
                                     <input class="form-control product_list_search" id="product_detail" list="product_datalist" name="products[]"   value="{{$values['product_name']}}"  placeholder="Type to search...">
                                     <datalist id="product_datalist" class="product_datalist">
                                     </datalist>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="">Product Quantity:</label>
                                     <input type="number" class="form-control" value="{{$values['invoice_quantity']}}" name="quantities[]">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="">Add/Remove</label><br>
                                     <button class="btn btn-success add_item_btn">Add More</button>
                                     <button class="btn btn-danger remove_item_btn">Delete</button>
@@ -126,7 +135,7 @@
                     </div>
 
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary" id="create_invoice_btn">Create Invoice</button>
+                        <button type="submit" class="btn btn-primary" id="create_invoice_btn">Update Invoice</button>
                     </div>
                 </div>
             </form>
@@ -136,63 +145,75 @@
 @endsection
 @section('scripts')
 <script>
-$(document).ready(function(){
-    // Event delegation to handle click event for dynamically added elements
-    $(document).on("click", ".add_item_btn", function(e){
-        e.preventDefault();
-        var container = $(".show_item");
-        // Change button class and text
-        $(this).removeClass('btn-success add_item_btn').addClass('btn-danger remove_item_btn').text("Remove");
-        container.append(`
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="">Product Name:</label>
-                    <!-- Corrected class name -->
-                    <input class="form-control product_list_search" list="product_datalist" name="products[]"  placeholder="Type to search...">
-                    <datalist id="product_datalist" class="product_datalist">
+    $(document).ready(function(){
+        // Event delegation to handle click event for dynamically added elements
+        $(document).on("click", ".add_item_btn", function(e){
+            e.preventDefault();
+            var container = $(".show_item");
+            // Change button class and text
+            $(this).removeClass('btn-success add_item_btn').addClass('btn-danger remove_item_btn').text("Remove");
+            var lastRow = container.find('.product_row').last();
+            var lastRowCount = lastRow.find('.row_count_number').val();
+            var newRowCount = parseInt(lastRowCount) + 1;
+            container.append(`
+                <div class="row product_row">
+                    <div class="col-sm-2 row_count">
+                        <label for="">Row Count</label>
+                        <input type="text" style="border: 0px;" value="${newRowCount}" class="row_count_number" disabled>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="">Product Name:</label>
+                        <!-- Corrected class name -->
+                        <input class="form-control product_list_search" list="product_datalist" name="products[]"  placeholder="Type to search...">
+                        <datalist id="product_datalist" class="product_datalist">
 
-                    </datalist>
+                        </datalist>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="">Product Quantity:</label>
+                        <input type="number" class="form-control" name="quantities[]">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="">Add/Remove</label><br>
+                        <button class="btn btn-success add_item_btn">Add More</button>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="">Product Quantity:</label>
-                    <input type="number" class="form-control" name="quantities[]">
-                </div>
-                <div class="col-md-4">
-                    <label for="">Add/Remove</label><br>
-                    <button class="btn btn-success add_item_btn">Add More</button>
-                </div>
-            </div>
-        `);
-    });
+            `);
+        });
 
-    // Event delegation to handle click event for dynamically added "Remove" buttons
-    $(document).on("click", ".remove_item_btn", function(e){
-        e.preventDefault();
-        // Handle the removal of the item here
-        $(this).closest('.row').remove(); // Remove the parent row
-    });
-
-    $(document).on("keyup", ".product_list_search", function(e){
-        var query = $(this).val(); // Use $(this) to refer to the current input field
-        console.log(query)
-        if (query != ''){
-            var productDatalist = $(this).closest('.col-md-4').find('.product_datalist');
-            $.ajax({
-                url: "{{url('autocompleteproductlist')}}",
-                method: "GET",
-                data: {query: query},
-                success: function(data){
-                    console.log(data)
-                    $('.product_datalist').empty();
-                    for (var i = 0; i < data.length; i++){
-                        $('.product_datalist').append("<option value='" + 
-                        data[i].product_name + "'>" + data[i].product_name + "</option>");
-                    }
-                }
+        // Event delegation to handle click event for dynamically added "Remove" buttons
+        $(document).on("click", ".remove_item_btn", function(e){
+            e.preventDefault();
+            // Handle the removal of the item here
+            $(this).closest('.row').remove(); // Remove the parent row
+            var rowCount = 1; // Start the count from 1
+            $('.product_row').each(function() {
+                $(this).find('.row_count_number').val(rowCount); // Update the row count number
+                rowCount++; // Increment the count for the next row
             });
-        }
+        });
+
+        $(document).on("keyup", ".product_list_search", function(e){
+            var query = $(this).val(); // Use $(this) to refer to the current input field
+            console.log(query)
+            if (query != ''){
+                var productDatalist = $(this).closest('.col-md-4').find('.product_datalist');
+                $.ajax({
+                    url: "{{url('autocompleteproductlist')}}",
+                    method: "GET",
+                    data: {query: query},
+                    success: function(data){
+                        console.log(data)
+                        $('.product_datalist').empty();
+                        for (var i = 0; i < data.length; i++){
+                            $('.product_datalist').append("<option value='" + 
+                            data[i].product_name + "'>" + data[i].product_name + "</option>");
+                        }
+                    }
+                });
+            }
+        });
     });
-});
 
 </script>
 
@@ -263,5 +284,25 @@ $(document).ready(function(){
         })
     })
 </script>
+<script>
+function updateHiddenField(input) {
+    var inputValue = input.value;
+    console.log(inputValue)
+    if(inputValue !=''){
+        console.log(inputValue)
+        $.ajax({
+            url:"{{url('getpromoter')}}",
+            method:"GET",
+            data:{query:inputValue},
+            success:function(data){
+                $('.promoter_name').val(data.firstname+' '+data.surname )
 
+            },
+            error:function(response){
+                console.log(response)
+            }
+        })
+    }
+}
+</script>
 @endsection

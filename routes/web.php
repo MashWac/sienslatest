@@ -155,6 +155,9 @@ Route::middleware(['conAdmin'])->group(function(){
     Route::get('add_invoice', [MarketersController::class,'AddInvoices']);
     Route::get('autocompletepromoter', [MarketersController::class,'AutoCompletePromoter']);
     Route::get('autocompleteproductlist', [MarketersController::class,'AutoCompleteProductList']);
+    Route::get('getpromoter', [MarketersController::class,'GetPromoter']);
+
+    
     Route::get('insert_invoice', [MarketersController::class,'InsertInvoice']);
     Route::get('view_invoices', [MarketersController::class,'ViewInvoices']);
     Route::get('edit_invoice/{id}', [MarketersController::class,'EditInvoices']);
