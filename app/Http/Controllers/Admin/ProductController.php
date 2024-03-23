@@ -139,7 +139,7 @@ class ProductController extends Controller
             $path = Storage::url($filepath);
             $product->product_image=$path;
         }
-        $product->product_name=$request->input('prodname');
+        $product->product_name=strtoupper($request->input('prodname')) ;
         $product->product_description=$request->input('proddescr');
         $product->category=$product_cate;
         $product->unit_price=$request->input('prodprice');
