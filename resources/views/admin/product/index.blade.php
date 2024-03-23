@@ -34,7 +34,7 @@
                     <tr>
                         <td>{{$item->product_name}}</td>
                         <td>{!!$item->product_description!!}</td>
-                        <td>{{$item->category_name}}</td>
+                        <td>{{$item->category_names}}</td>
                         <td>{{$item->unit_price}}</td>
                         <td>{{$item->stock_available}}</td>
                         <td><img src="{{$item['product_image']}}" height="130px" width="100px" alt='image here'>

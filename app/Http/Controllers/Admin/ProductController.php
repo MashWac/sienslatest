@@ -7,6 +7,7 @@ use App\Models\Discounts;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
@@ -14,7 +15,14 @@ class ProductController extends Controller
 {
     public function index(){
 
-        $product=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')->orderBy('category')->paginate(10);
+        $product=Product::select('tbl_products.*', DB::raw('GROUP_CONCAT(tbl_categories.category_name) as category_names'))
+            ->join('tbl_categories', function ($join) {
+            $join->whereRaw('FIND_IN_SET(tbl_categories.category_id, tbl_products.category) > 0');
+            })
+            ->groupBy('tbl_products.product_id','tbl_products.product_name','product_description'
+            ,'category','unit_price','stock_available','discount_rate','prodpriority','product_image'
+            ,'created_at','updated_at','is_deleted')
+        ->orderBy('category')->paginate(10);
         return view('admin.product.index',compact('product'));
     }
     public function add(){
@@ -24,20 +32,22 @@ class ProductController extends Controller
         return view('admin.product.add',compact('data'));
     }
     public function insert(Request $request){
-        $request->validate([            
-            'prodname' => ['required', 'string', 'max:255'],
-            'proddescr' => ['required', 'string', 'max:2000'],
-            'prodprice' => ['required','min:0','gt:0' ],
-            'prodquan' => ['required','min:0','gt:0'],
-            'prodpriority' => ['required'],
-            'prodcate'=>['exists:App\Models\Category,category_name'],
-            'prodimage'=>['required','image']
+        $cate=$request->input('prodcate');
 
-        ]);
         $category= new Category;
         $cate=$request->input('prodcate');
-        $cateinfo=$category->where('category_name',$cate)->first();
-        $cateid=$cateinfo->category_id;
+        $product_cate='';
+        foreach($cate as $item){
+            $cateinfo=$category->where('category_name',$item)->first();
+            $item_id=$cateinfo->category_id;
+            if($product_cate==''){
+                $product_cate=$product_cate.$item_id;
+
+            }else{
+                $product_cate=$product_cate.','.$item_id;
+
+            }
+        }
         $product=new Product();
         if($request->hasFile('prodimage')){
             $file=$request->file('prodimage');
@@ -49,21 +59,43 @@ class ProductController extends Controller
             $path = Storage::url($filepath);
             $product->product_image=$path;
         }
-        $product->product_name=$request->input('prodname');
+        $product->product_name=strtoupper($request->input('prodname')) ;
         $product->product_description=$request->input('proddescr');
-        $product->category=$cateid;
+        $product->category=$product_cate;
         $product->unit_price=$request->input('prodprice');
         $product->stock_available=$request->input('prodquan');
         $product->prodpriority=$request->input('prodpriority');
 
 
-        $product->save();
-        return redirect('products')->with('status','Product Added Successfully.');
+        if($product->save()){
+            return redirect('products')->with('status','Product Added Successfully.');
+
+        }else{
+            return redirect()->back()->with('status','Product Failed to add.');
+
+        }
     }
     public function edit($id){
         $data['formtype']="edit";
         $data['category']= Category::all();
-        $data['product']=Product::find($id);
+        $data['product'] = Product::select('tbl_products.*', 
+        DB::raw('GROUP_CONCAT(tbl_categories.category_name) as category_names'))
+            ->join('tbl_categories', function ($join) {
+            $join->whereRaw('FIND_IN_SET(tbl_categories.category_id, tbl_products.category) > 0');
+            })
+            ->groupBy('tbl_products.product_id','tbl_products.product_name','product_description','category','unit_price','stock_available','discount_rate','prodpriority','product_image','created_at','updated_at','is_deleted')
+            ->find($id);
+        $category_names = explode(',', $data['product']->category_names);
+        
+        for ($i = 0; $i < count($category_names); $i++) {
+            $combinedArray[] = [
+                'product_name' => $category_names[$i],
+
+            ];
+        }
+
+            // Replace product_names and invoice_quantities with the combined array
+        $data['product']->category_array = $combinedArray;
 
         return view('admin.product.add',compact('data'));
     }
@@ -78,8 +110,18 @@ class ProductController extends Controller
         ]);
         $category= new Category;
         $cate=$request->input('prodcate');
-        $cateinfo=$category->where('category_name',$cate)->first();
-        $cateid=$cateinfo->category_id;
+        $product_cate='';
+        foreach($cate as $item){
+            $cateinfo=$category->where('category_name',$item)->first();
+            $item_id=$cateinfo->category_id;
+            if($product_cate==''){
+                $product_cate=$product_cate.$item_id;
+
+            }else{
+                $product_cate=$product_cate.','.$item_id;
+
+            }
+        }
         $product=Product::find($id);
         if($request->hasFile('prodimage')){
 
@@ -99,14 +141,20 @@ class ProductController extends Controller
         }
         $product->product_name=$request->input('prodname');
         $product->product_description=$request->input('proddescr');
-        $product->category=$cateid;
+        $product->category=$product_cate;
         $product->unit_price=$request->input('prodprice');
         $product->stock_available=$request->input('prodquan');
         $product->prodpriority=$request->input('prodpriority');
 
 
-        $product->update();
-        return redirect('products')->with('status','Product Updated Successfully.');
+        if($product->update()){
+            return redirect('products')->with('status','Product Updated Successfully.');
+
+        }else{
+            return redirect('products')->with('status','Failed to update product.');
+
+
+        }
     }
     public function delete(Request $request,$id){
         $product=Product::find($id);

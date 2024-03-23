@@ -220,7 +220,7 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
@@ -234,7 +234,7 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                    
@@ -251,7 +251,7 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
     
@@ -269,7 +269,7 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all()); 
                         }
@@ -283,7 +283,7 @@ class FrontController extends Controller
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
@@ -297,7 +297,7 @@ class FrontController extends Controller
 
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
@@ -311,7 +311,7 @@ class FrontController extends Controller
 
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
@@ -323,7 +323,7 @@ class FrontController extends Controller
                             ->where('tbl_products.stock_available','>',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }
@@ -430,7 +430,7 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
@@ -443,7 +443,7 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                    
                         }
                     }else{
@@ -458,7 +458,7 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                    
                         }else{
@@ -473,7 +473,7 @@ class FrontController extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all()); 
                         }
@@ -487,7 +487,7 @@ class FrontController extends Controller
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
     
                         }else{
@@ -498,7 +498,7 @@ class FrontController extends Controller
     
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
@@ -511,7 +511,7 @@ class FrontController extends Controller
     
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
@@ -521,7 +521,7 @@ class FrontController extends Controller
                             ->where('tbl_products.stock_available','>',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }

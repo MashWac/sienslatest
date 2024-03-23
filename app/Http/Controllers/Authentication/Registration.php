@@ -11,6 +11,7 @@ use App\Models\Discounts;
 use App\Models\DiseaseModel;
 use App\Models\Product;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 use PHPUnit\Framework\Constraint\IsEmpty;
@@ -142,24 +143,19 @@ class Registration extends Controller
         $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
         $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
         $data['product_max_price']=Product::max('unit_price');
-        $data['products']=Product::where('tbl_products.is_deleted',0)->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')->orderBy('tbl_products.category')->paginate(8)->appends($request->all());
+        $data['products']=Product::
+        select('tbl_products.*', DB::raw('GROUP_CONCAT(tbl_categories.category_name) as category_names'))
+        ->join('tbl_categories', function ($join) {
+        $join->whereRaw('FIND_IN_SET(tbl_categories.category_id, tbl_products.category) > 0');
+        })
+        ->where('tbl_products.is_deleted',0)->
+        orderBy('tbl_products.category')
+        ->groupBy('tbl_products.product_id','tbl_products.product_name','product_description'
+        ,'category','unit_price','stock_available','discount_rate','prodpriority','product_image'
+        ,'created_at','updated_at','is_deleted')
+        ->paginate(8)->appends($request->all());
         $data['diseases']=DiseaseModel::select('disease_id','disease_name',)->get();
         return view('productspreview',compact('data'));
-    }
-    public function searchproducts(Request $request){
-        session();
-        $data['cateid']=NULL;
-        $data['user_role']=session('role'); 
-        $markerterdiscount=Discounts::find(2);
-        $discount=$markerterdiscount->discount_percentage;
-        $data['discount']=$discount/100;
-        $data['categories']=Category::findMany([3,6,5,25])->where('is_deleted',0);
-        $data['categorieslist']=Category::where('is_deleted',0)->orderBy('category_name', 'asc')->get();
-        $product=$request->input('searchfield');
-        $data['products']=Product::where('tbl_products.product_name', 'like', '%' .$product . '%')->where('tbl_products.is_deleted',0)->join('tbl_categories','tbl_products.category',"=",'tbl_categories.category_id')->paginate(8)->appends($request->all());
-        return view('productspreview',compact('data'));
-
-
     }
     public function filterbysort(Request $request){
         $str=$request->input('product_order');
@@ -319,7 +315,7 @@ class Registration extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
@@ -333,7 +329,7 @@ class Registration extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                    
@@ -350,7 +346,7 @@ class Registration extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
     
@@ -368,7 +364,7 @@ class Registration extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all()); 
                         }
@@ -382,7 +378,7 @@ class Registration extends Controller
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->where('tbl_products.product_name','like','%'.$data["search_product"].'%')
 
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
@@ -396,7 +392,7 @@ class Registration extends Controller
 
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
@@ -410,7 +406,7 @@ class Registration extends Controller
 
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
@@ -422,7 +418,7 @@ class Registration extends Controller
                             ->where('tbl_products.stock_available','>',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }
@@ -529,7 +525,7 @@ class Registration extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
@@ -542,7 +538,7 @@ class Registration extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                    
                         }
                     }else{
@@ -557,7 +553,7 @@ class Registration extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());                    
                         }else{
@@ -572,7 +568,7 @@ class Registration extends Controller
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
                             ->where('tbl_diseases.disease_name',$data['ailment'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all()); 
                         }
@@ -586,7 +582,7 @@ class Registration extends Controller
                             ->where('tbl_products.is_deleted',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
     
                         }else{
@@ -597,7 +593,7 @@ class Registration extends Controller
     
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
     
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
@@ -610,7 +606,7 @@ class Registration extends Controller
     
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }else{
                             $data['products']=Product::
@@ -620,7 +616,7 @@ class Registration extends Controller
                             ->where('tbl_products.stock_available','>',0)
                             ->where('tbl_products.unit_price','>=', $data['min_price'])
                             ->where('tbl_products.unit_price','<=',$data['max_price'])
-                            ->where('tbl_categories.category_id',$data['cateid'])
+                             ->whereraw("find_in_set(?, tbl_products.category)", [$data['cateid']])
                             ->orderBy($orderby,$orderreal)->paginate(8)->appends($request->all());
                         }
                     }
