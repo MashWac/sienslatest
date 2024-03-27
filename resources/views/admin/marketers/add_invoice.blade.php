@@ -57,6 +57,8 @@
                                 <div class="col-md-3">
                                     <label for="">Add/Remove</label><br>
                                     <button class="btn btn-success add_item_btn">Add More</button>
+                                    <button class="btn btn-danger remove_item_btn">Delete</button>
+
                                 </div>
                             </div>
                         </div>
@@ -151,7 +153,6 @@
             e.preventDefault();
             var container = $(".show_item");
             // Change button class and text
-            $(this).removeClass('btn-success add_item_btn').addClass('btn-danger remove_item_btn').text("Remove");
             var lastRow = container.find('.product_row').last();
             var lastRowCount = lastRow.find('.row_count_number').val();
             var newRowCount = parseInt(lastRowCount) + 1;
@@ -176,6 +177,7 @@
                     <div class="col-md-3">
                         <label for="">Add/Remove</label><br>
                         <button class="btn btn-success add_item_btn">Add More</button>
+                        <button class="btn btn-danger remove_item_btn">Delete</button>
                     </div>
                 </div>
             `);
@@ -254,9 +256,12 @@
                 data:$(this).serialize(),
                 success:function(response){
                     swal(response.message);
-                    setTimeout(function(){
+                    if(response.status=='success'){
+                        setTimeout(function(){
                         window.location.href = redirect_url;
                     }, 3000)
+                    }
+
                 },error:function(response){
 
                     swal(response.message);
@@ -274,9 +279,11 @@
             data:$(this).serialize(),
             success:function(response){
                 swal(response.message);
-                setTimeout(function(){
-                    window.location.href = redirect_url;
-                }, 3000)
+                if(response.status=='success'){
+                        setTimeout(function(){
+                        window.location.href = redirect_url;
+                    }, 3000)
+                    }
             },error:function(response){
 
                 swal(response.message);

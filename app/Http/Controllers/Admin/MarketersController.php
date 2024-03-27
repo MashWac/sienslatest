@@ -61,6 +61,12 @@ class MarketersController extends Controller
             for($i = 0; $i < $count_products; $i++){
                 $product_entry=$products[$i];
                 $product=Product::where("product_name",$product_entry)->first();
+                if($product==null){
+                    InvoiceDetailsModel::where('invoice_number', $insert_id)->delete();
+                    InvoiceModel::where('invoice_id',$insert_id)->delete();
+                    return response()->json(['status' => 'error', 'message' => 'Failed product "'.$product_entry.'" does not exist']);            
+
+                }
                 $product=$product->product_id;
                 $quantity_entry=$quantities[$i];
                 $invoice_details=new InvoiceDetailsModel();
@@ -113,6 +119,12 @@ class MarketersController extends Controller
             for($i = 0; $i < $count_products; $i++){
                 $product_entry=$products[$i];
                 $product=Product::where("product_name",$product_entry)->first();
+                if(!$product){
+                    ReceiptDetailsModel::where('receipt_number', $insert_id)->delete();
+                    ReceiptModel::where('receipt_id',$insert_id)->delete();
+                    return response()->json(['status' => 'error', 'message' => 'Failed product "'.$product_entry.'" does not exist']);            
+
+                }
                 $product=$product->product_id;
                 $quantity_entry=$quantities[$i];
                 $receipt_details=new ReceiptDetailsModel();
@@ -246,11 +258,15 @@ class MarketersController extends Controller
         $receipt->receipt_date=date($receipt_date);
         $count_products=count($products);
         if($receipt->save()){
-            ReceiptDetailsModel::where('receipt_number', $receipt_id)->delete();
             $insert_id=$receipt_id;
             for($i = 0; $i < $count_products; $i++){
                 $product_entry=$products[$i];
                 $product=Product::where("product_name",$product_entry)->first();
+                if(!$product){
+                    ReceiptDetailsModel::where('receipt_number', $insert_id)->delete();
+                    return response()->json(['status' => 'error', 'message' => 'Failed product "'.$product_entry.'" does not exist']);            
+
+                }
                 $product=$product->product_id;
                 $quantity_entry=$quantities[$i];
                 $receipt_details=new ReceiptDetailsModel();
@@ -351,6 +367,11 @@ class MarketersController extends Controller
             for($i = 0; $i < $count_products; $i++){
                 $product_entry=$products[$i];
                 $product=Product::where("product_name",$product_entry)->first();
+                if(!$product){
+                    InvoiceDetailsModel::where('invoice_number', $insert_id)->delete();
+                    return response()->json(['status' => 'error', 'message' => 'Failed product "'.$product_entry.'" does not exist']);            
+
+                }
                 $product=$product->product_id;
                 $quantity_entry=$quantities[$i];
                 $invoice_details=new InvoiceDetailsModel();
